@@ -1,0 +1,42 @@
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# Local configuration
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+
+# Log files
+*.log
+
+# Generated files
+captures/
+.externalNativeBuild/
+
+# Keystore files
+*.jks
+*.keystore
+
+# Build artifacts
+*.apk
+*.aab
+output.json
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Kotlin/Java
+*.class
+out/
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# Cache
+.cxx/
