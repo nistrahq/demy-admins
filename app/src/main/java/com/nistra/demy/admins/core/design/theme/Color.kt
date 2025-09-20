@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.ui.theme
+package com.nistra.demy.admins.core.design.theme
 
 import androidx.compose.ui.graphics.Color
 

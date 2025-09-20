@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.ui.theme
+package com.nistra.demy.admins.core.design.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
