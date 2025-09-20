@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nistra.demy"
+    namespace = "com.nistra.demy.admins"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.nistra.demy"
+        applicationId = "com.nistra.demy.admins"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
