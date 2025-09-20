@@ -1,4 +1,4 @@
-package com.nistra.demy.admins
+package com.nistra.demy.admins.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
