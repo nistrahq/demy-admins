@@ -1,7 +1,10 @@
 package com.nistra.demy.admins.core.design.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
@@ -14,17 +17,28 @@ val provider = GoogleFont.Provider(
 )
 
 val bodyFontFamily = FontFamily(
+    // Google Fonts (runtime download)
     Font(
         googleFont = GoogleFont("Poppins"),
         fontProvider = provider,
-    )
+    ),
+    // Local fallback
+    Font(R.font.poppins_regular, weight = FontWeight.Normal),
+    Font(R.font.poppins_medium, weight = FontWeight.Medium),
+    Font(R.font.poppins_semibold, weight = FontWeight.SemiBold),
+    Font(R.font.poppins_bold, weight = FontWeight.Bold),
+    Font(R.font.poppins_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
+    Font(R.font.poppins_bolditalic, weight = FontWeight.Bold, style = FontStyle.Italic)
 )
 
 val displayFontFamily = FontFamily(
+    // Google Fonts (runtime download)
     Font(
         googleFont = GoogleFont("Montserrat"),
         fontProvider = provider,
-    )
+    ),
+    // Local fallback
+    Font(R.font.montserrat_variable, weight = FontWeight.Normal)
 )
 
 // Default Material 3 typography values
