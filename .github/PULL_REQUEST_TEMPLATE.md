@@ -19,7 +19,10 @@ Closes #(issue number)
 - [ ] Other (please describe):
 
 ## Checklist
+- [ ] My branch is up to date with `origin/develop`
 - [ ] The project builds successfully (`./gradlew clean build`)
+- [ ] All unit tests pass locally, if applicable (`./gradlew test`)
+- [ ] All instrumented tests pass locally, if applicable (`./gradlew connectedAndroidTest`)
 - [ ] Commit messages follow the **Conventional Commits** standard
 - [ ] UI changes have been manually tested on emulator/device
 - [ ] No sensitive data (keys, tokens, credentials) are committed
