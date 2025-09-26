@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nistra.demy"
+    namespace = "com.nistra.demy.admins"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.nistra.demy"
+        applicationId = "com.nistra.demy.admins"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -49,6 +49,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.androidx.compose.ui.text)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
