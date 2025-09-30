@@ -15,6 +15,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+/**
+ * NetworkModule is a Dagger Hilt module that provides network-related dependencies such as
+ * Retrofit, OkHttpClient, and Moshi.
+ * @author Salim Ramirez
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -65,4 +70,12 @@ object NetworkModule {
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
+
+    /**
+     * This is just an example of how to provide an ApiService.
+     * You can create your own ApiService interface and provide it here.
+     */
+    // @Provides @Singleton
+    // fun provideApiService(retrofit: Retrofit): ApiService =
+    //    retrofit.create(ApiService::class.java)
 }
