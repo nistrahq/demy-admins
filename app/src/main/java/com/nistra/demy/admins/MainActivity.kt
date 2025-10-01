@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.design.theme.DemyTheme
 import com.nistra.demy.admins.core.navigation.RootNavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
