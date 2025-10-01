@@ -80,7 +80,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-
     // Retrofit / OkHttp / Moshi
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
@@ -88,6 +87,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
     // Room (KSP)
     implementation(libs.room.runtime)
