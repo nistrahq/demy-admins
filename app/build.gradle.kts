@@ -75,14 +75,21 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Material Icons
+    implementation(libs.androidx.compose.material.icons.extended)
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    // Retrofit / OkHttp / Moshi
+    // Retrofit / Coil / OkHttp / Moshi
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.gif)
+    implementation(libs.coil.svg)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
