@@ -43,6 +43,18 @@ fun AppShell() {
         DrawerSection(
             header = "Academy",
             items = listOf(MainDestination.Teachers, MainDestination.Students)
+        ),
+        DrawerSection(
+            header = "Classes",
+            items = listOf(MainDestination.Periods, MainDestination.Courses, MainDestination.Classrooms, MainDestination.Schedules)
+        ),
+        DrawerSection(
+            header = "Management",
+            items = listOf(MainDestination.Enrollments, MainDestination.Scheduling, MainDestination.Billing, MainDestination.Invoices, MainDestination.Finance)
+        ),
+        DrawerSection(
+            header = "General",
+            items = listOf(MainDestination.Settings, MainDestination.Help, MainDestination.LogOut)
         )
     )
 
