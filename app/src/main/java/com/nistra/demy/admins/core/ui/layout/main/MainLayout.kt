@@ -28,6 +28,7 @@ import com.nistra.demy.admins.core.design.theme.DemyTheme
 import com.nistra.demy.admins.core.ui.components.UserChip
 import com.nistra.demy.admins.core.ui.layout.model.DrawerSection
 import com.nistra.demy.admins.core.ui.layout.model.UserUi
+import com.nistra.demy.admins.core.ui.preview.TabletPreviewDark
 import com.nistra.demy.admins.core.ui.preview.TabletPreviewLight
 
 /**
@@ -120,6 +121,7 @@ fun MainLayout(
  * @author Salim Ramirez
  */
 @TabletPreviewLight
+@TabletPreviewDark
 @Composable
 fun MainLayoutPreview() {
     val sections = listOf(

@@ -56,6 +56,8 @@ fun DrawerContent(
                 modifier = Modifier.padding(horizontal = 12.dp),
                 colors = NavigationDrawerItemDefaults.colors(
                     selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f),
+                    selectedIconColor = MaterialTheme.colorScheme.secondary,
+                    selectedTextColor = MaterialTheme.colorScheme.secondary,
                 )
             )
         }
