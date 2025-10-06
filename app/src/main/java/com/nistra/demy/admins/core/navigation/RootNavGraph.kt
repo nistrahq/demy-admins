@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.nistra.demy.admins.features.auth.navigation.authGraph
 import com.nistra.demy.admins.features.dashboard.navigation.dashboardGraph
+import com.nistra.demy.admins.features.teachers.navigation.teachersGraph
 
 /**
  * Root navigation graph that includes all other navigation graphs.
@@ -33,5 +34,6 @@ fun RootNavGraph(
             }
         )
         dashboardGraph(navController)
+        teachersGraph(navController)
     }
 }
