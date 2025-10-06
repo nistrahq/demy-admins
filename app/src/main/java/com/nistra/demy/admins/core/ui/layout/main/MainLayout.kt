@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.ui.layout.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -19,6 +21,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.design.theme.DemyTheme
@@ -76,6 +79,8 @@ fun MainLayout(
                     title = {
                         Text(
                             text = title,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.SemiBold,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -98,7 +103,9 @@ fun MainLayout(
         ) { innerPadding ->
             Box(
                 modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surfaceContainer)
                     .padding(innerPadding)
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
                     .fillMaxSize()
             ) {
                 content()
