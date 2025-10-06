@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.dashboard.navigation
+package com.nistra.demy.admins.features.dashboard.presentation.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
