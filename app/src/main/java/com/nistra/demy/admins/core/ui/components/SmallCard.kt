@@ -1,12 +1,13 @@
 package com.nistra.demy.admins.core.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,17 +40,18 @@ fun SmallCard(
     value: String,
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surface,
+    borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
     valueColor: Color = MaterialTheme.colorScheme.onSurface,
     labelColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     minWidthDp: Int = 120,
     minHeightDp: Int = 80,
 ) {
-    Card(
+    OutlinedCard(
         modifier = modifier
             .sizeIn(minWidth = minWidthDp.dp, minHeight = minHeightDp.dp)
             .padding(4.dp),
-        colors = CardDefaults.cardColors(containerColor = containerColor),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        colors = CardDefaults.outlinedCardColors(containerColor = containerColor),
+        border = BorderStroke(1.dp, borderColor),
         shape = MaterialTheme.shapes.medium
     ) {
         Column(
