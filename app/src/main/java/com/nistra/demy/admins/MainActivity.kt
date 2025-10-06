@@ -5,9 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.design.theme.DemyTheme
-import com.nistra.demy.admins.core.navigation.RootNavGraph
+import com.nistra.demy.admins.core.navigation.AppShell
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -44,8 +43,7 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 private fun Demy() {
-    val navController = rememberNavController()
     DemyTheme {
-        RootNavGraph(navController = navController)
+        AppShell()
     }
 }
