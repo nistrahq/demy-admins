@@ -12,10 +12,10 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 interface ClassroomRepositoryModule {
 
-    @Binds
-    fun provideClassroomRepository(impl: ClassroomRepositoryImpl): ClassroomRepository
-
 //    @Binds
-//    fun provideClassroomRepository(impl: FakeClassroomRepository): ClassroomRepository
+//    fun provideClassroomRepository(impl: ClassroomRepositoryImpl): ClassroomRepository
+
+    @Binds
+    fun provideClassroomRepository(impl: FakeClassroomRepository): ClassroomRepository
 
 }
