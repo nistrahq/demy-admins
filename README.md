@@ -5,7 +5,7 @@ The goal is to provide a modern and accessible Android app for the **target segm
 
 ---
 
-## Features
+## Features  
 
 - **Modern UI with Jetpack Compose**
 - **Persistence with Room** for local offline storage
@@ -37,7 +37,7 @@ app/
 
 ---
 
-## Installation / Setup
+## Installation / Setup  
 
 ### Prerequisites
 - **Android Studio (latest stable)**
@@ -127,6 +127,14 @@ See the complete list of contributors in [AUTHORS.md](./AUTHORS.md).
 
 ---
 
+
 ## Project status
 This is an **academic and private** project, developed by the Software Engineering team – UPC.  
 External contributions are **not accepted**.
+
+
+
+
+
+
+

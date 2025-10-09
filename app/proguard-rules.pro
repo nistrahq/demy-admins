@@ -19,3 +19,19 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Hilt / Dagger
+-keep class dagger.hilt.** { *; }
+-keep class * extends dagger.hilt.android.internal.lifecycle.HiltViewModelFactory { *; }
+-keep class * extends androidx.lifecycle.ViewModel
+
+# Retrofit / OkHttp / Moshi
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.squareup.moshi.** { *; }
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+
+# Room
+-keep class androidx.room.** { *; }
+-keep @androidx.room.* class * { *; }

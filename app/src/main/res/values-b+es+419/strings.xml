@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Demy</string>
+    <string name="tablet_only_message">Esta aplicación está diseñada solo para tablets en orientación horizontal.</string>
+</resources>
