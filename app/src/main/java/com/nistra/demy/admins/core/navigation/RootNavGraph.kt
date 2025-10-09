@@ -4,7 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.nistra.demy.admins.features.auth.navigation.authGraph
+import com.nistra.demy.admins.features.classrooms.navigation.classroomsGraph
+import com.nistra.demy.admins.features.courses.navigation.coursesGraph
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
+import com.nistra.demy.admins.features.schedules.navigation.schedulesGraph
+import com.nistra.demy.admins.features.schedules.navigation.schedulesViewerGraph
 import com.nistra.demy.admins.features.teachers.navigation.teachersGraph
 
 /**
@@ -35,5 +39,9 @@ fun RootNavGraph(
         )
         dashboardGraph(navController)
         teachersGraph(navController)
+        coursesGraph(navController)
+        classroomsGraph(navController)
+        schedulesGraph(navController)
+        schedulesViewerGraph(navController)
     }
 }

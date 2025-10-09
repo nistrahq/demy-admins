@@ -68,6 +68,10 @@ fun AppShell() {
                 Destination.Dashboard.route -> "Dashboard"
                 Destination.Teachers.route -> "Teachers"
                 Destination.Students.route -> "Students"
+                Destination.Courses.route -> "Courses"
+                Destination.Classrooms.route -> "Classrooms"
+                Destination.Schedules.route -> "Schedules"
+                Destination.SchedulesViewer.route -> "Schedules Viewer"
                 else -> ""
             },
             appName = "Demy Admins",
