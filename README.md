@@ -37,7 +37,7 @@ app/
 
 ---
 
-## Installation / Setup
+## Installation / Setup  
 
 ### Prerequisites
 - **Android Studio (latest stable)**
