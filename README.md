@@ -5,7 +5,7 @@ The goal is to provide a modern and accessible Android app for the **target segm
 
 ---
 
-## Features
+## Features  
 
 - **Modern UI with Jetpack Compose**
 - **Persistence with Room** for local offline storage
