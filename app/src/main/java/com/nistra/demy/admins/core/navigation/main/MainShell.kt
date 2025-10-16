@@ -1,14 +1,15 @@
-package com.nistra.demy.admins.core.navigation
+package com.nistra.demy.admins.core.navigation.main
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.nistra.demy.admins.core.ui.layout.main.MainDestination
-import com.nistra.demy.admins.core.ui.layout.main.MainLayout
-import com.nistra.demy.admins.core.ui.layout.model.DrawerSection
-import com.nistra.demy.admins.core.ui.layout.model.UserUi
+import com.nistra.demy.admins.core.ui.components.MainDestination
+import com.nistra.demy.admins.core.ui.layout.MainLayout
+import com.nistra.demy.admins.core.model.DrawerSection
+import com.nistra.demy.admins.core.model.UserUi
+import com.nistra.demy.admins.core.navigation.navigateOnce
 
 @Composable
-fun MainLayoutFor(
+fun MainShell(
     navController: NavHostController,
     title: String,
     content: @Composable () -> Unit) {

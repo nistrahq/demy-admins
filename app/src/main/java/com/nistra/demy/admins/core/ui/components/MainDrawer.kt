@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.ui.layout.main
+package com.nistra.demy.admins.core.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,9 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nistra.demy.admins.core.ui.components.BottomEdgeFade
-import com.nistra.demy.admins.core.ui.components.TopEdgeFade
-import com.nistra.demy.admins.core.ui.layout.model.DrawerSection
+import com.nistra.demy.admins.core.model.DrawerSection
+import com.nistra.demy.admins.core.ui.components.MainDestination
 
 @Composable
 fun DrawerHeader(appName: String) {

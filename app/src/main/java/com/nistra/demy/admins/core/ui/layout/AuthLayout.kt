@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.ui.layout.auth
+package com.nistra.demy.admins.core.ui.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

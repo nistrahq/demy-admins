@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun AppShell() {
+fun AppNavigator() {
     val navController = rememberNavController()
     RootNavGraph(navController = navController)
 }

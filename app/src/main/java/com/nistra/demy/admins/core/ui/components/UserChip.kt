@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nistra.demy.admins.core.ui.layout.model.UserUi
+import com.nistra.demy.admins.core.model.UserUi
 
 @Composable
 fun UserChip(user: UserUi) {

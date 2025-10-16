@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.ui.layout.main
+package com.nistra.demy.admins.core.ui.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,8 +26,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.design.theme.DemyTheme
 import com.nistra.demy.admins.core.ui.components.UserChip
-import com.nistra.demy.admins.core.ui.layout.model.DrawerSection
-import com.nistra.demy.admins.core.ui.layout.model.UserUi
+import com.nistra.demy.admins.core.ui.components.DrawerContent
+import com.nistra.demy.admins.core.ui.components.DrawerHeader
+import com.nistra.demy.admins.core.ui.components.MainDestination
+import com.nistra.demy.admins.core.model.DrawerSection
+import com.nistra.demy.admins.core.model.UserUi
 import com.nistra.demy.admins.core.ui.preview.TabletPreviewDark
 import com.nistra.demy.admins.core.ui.preview.TabletPreviewLight
 

@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.ui.layout.main
+package com.nistra.demy.admins.core.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp

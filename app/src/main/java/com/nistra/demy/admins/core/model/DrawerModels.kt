@@ -1,6 +1,6 @@
-package com.nistra.demy.admins.core.ui.layout.model
+package com.nistra.demy.admins.core.model
 
-import com.nistra.demy.admins.core.ui.layout.main.MainDestination
+import com.nistra.demy.admins.core.ui.components.MainDestination
 
 data class UserUi(
     val name: String,

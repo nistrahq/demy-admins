@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.navigation
+package com.nistra.demy.admins.core.navigation.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -7,14 +7,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.nistra.demy.admins.core.navigation.Destination
 import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
 import com.nistra.demy.admins.features.teachers.presentation.ui.TeachersScreen
 
 @Composable
-fun MainGraph() {
+fun MainNavHost() {
     val innerNavController = rememberNavController()
 
-    MainLayoutFor(
+    MainShell(
         navController = innerNavController,
         title = currentTitle(innerNavController)
     ) {
