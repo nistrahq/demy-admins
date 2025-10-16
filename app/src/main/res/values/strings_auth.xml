@@ -1,0 +1,13 @@
+<resources>
+    <string name="sign_in_label_email">Email</string>
+    <string name="sign_in_icon_email">Email Icon</string>
+    <string name="sign_in_label_password">Password</string>
+    <string name="sign_in_icon_password">Password Icon</string>
+    <string name="sign_in_text_btn_forgot_password">Forgot password?</string>
+    <string name="sign_in_btn_sign_in">Sign In</string>
+    <string name="sign_in_icon_sign_in">Sign In Icon</string>
+    <string name="sign_in_header_title">Welcome back</string>
+    <string name="sign_in_header_subtitle">Sign in to continue</string>
+    <string name="sign_in_footer_text">"Don't have an account? "</string>
+    <string name="sign_in_footer_action_text">Sign up</string>
+</resources>
