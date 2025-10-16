@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.nistra.demy.admins.core.navigation.Destination
+import com.nistra.demy.admins.core.navigation.MainLayoutFor
 import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
 
 fun NavGraphBuilder.dashboardGraph(navController: NavHostController) {

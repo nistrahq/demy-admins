@@ -19,8 +19,8 @@ package com.nistra.demy.admins.core.navigation
 sealed interface Destination {
     val route: String
 
-    data object Auth : Destination {
-        override val route = "auth"
+    data object AuthGraph : Destination {
+        override val route = "auth_graph"
         fun toRoute() = route
     }
 

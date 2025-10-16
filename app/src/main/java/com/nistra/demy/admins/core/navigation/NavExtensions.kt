@@ -7,6 +7,8 @@ fun NavController.navigateOnce(
     popUpToRoute: String? = null,
     inclusive: Boolean = false
 ) {
+    val currentRoute = currentBackStackEntry?.destination?.route
+    if (currentRoute == route) return
     this.navigate(route) {
         launchSingleTop = true
         restoreState = true
