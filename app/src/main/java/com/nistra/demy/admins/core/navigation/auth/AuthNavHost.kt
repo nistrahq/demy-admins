@@ -6,7 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.ui.layout.AuthLayout
 import com.nistra.demy.admins.features.auth.navigation.AuthDestination
-import com.nistra.demy.admins.features.auth.presentation.ui.AuthScreen
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignInScreen
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignUpScreen
 
 @Composable
 fun AuthNavHost(onLoggedIn: () -> Unit) {
@@ -18,9 +19,13 @@ fun AuthNavHost(onLoggedIn: () -> Unit) {
             startDestination = AuthDestination.Login.route
         ) {
             composable(AuthDestination.Login.route) {
-                AuthScreen(
-                    onLoggedIn = onLoggedIn
+                SignInScreen(
+                    onLoggedIn = onLoggedIn,
+                    onGoToSignUp = { innerNavController.navigate(AuthDestination.Signup.route) }
                 )
+            }
+            composable(route = AuthDestination.Signup.toRoute()) {
+                SignUpScreen()
             }
         }
     }
