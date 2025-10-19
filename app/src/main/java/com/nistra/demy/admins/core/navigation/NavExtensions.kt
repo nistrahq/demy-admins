@@ -21,7 +21,7 @@ fun NavController.navigateOnce(
     }
 }
 
-fun NavController.navigateOnce(destination: Destination) {
+fun NavController.navigateOnce(destination: RootDestination) {
     navigateOnce(destination.route)
 }
 

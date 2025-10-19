@@ -8,24 +8,38 @@ import com.nistra.demy.admins.core.ui.layout.AuthLayout
 import com.nistra.demy.admins.features.auth.navigation.AuthDestination
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignInScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignUpScreen
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.VerifyEmailScreen
 
 @Composable
-fun AuthNavHost(onLoggedIn: () -> Unit) {
+fun AuthNavHost(
+    onLoggedIn: () -> Unit
+) {
     val innerNavController = rememberNavController()
 
     AuthLayout {
         NavHost(
             navController = innerNavController,
-            startDestination = AuthDestination.Login.route
+            startDestination = AuthDestination.SignIn.route
         ) {
-            composable(AuthDestination.Login.route) {
+            composable(AuthDestination.SignIn.route) {
                 SignInScreen(
                     onLoggedIn = onLoggedIn,
-                    onGoToSignUp = { innerNavController.navigate(AuthDestination.Signup.route) }
+                    onGoToSignUp = { innerNavController.navigate(AuthDestination.SignUp.toRoute()) }
                 )
             }
-            composable(route = AuthDestination.Signup.toRoute()) {
-                SignUpScreen()
+            composable(route = AuthDestination.SignUp.route) {
+                SignUpScreen(
+                    onSignUpSuccess = { email ->
+                        innerNavController.navigate(AuthDestination.VerifyEmail.toRoute(email))
+                    },
+                    onGoToSignIn = {
+                        innerNavController.navigate(AuthDestination.SignIn.toRoute())
+                    }
+                )
+            }
+            composable(route = AuthDestination.VerifyEmail.route) { backStackEntry ->
+                val email = backStackEntry.arguments?.getString("email")
+                VerifyEmailScreen()
             }
         }
     }

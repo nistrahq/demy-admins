@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.nistra.demy.admins.core.navigation.Destination
+import com.nistra.demy.admins.core.navigation.RootDestination
 import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
 import com.nistra.demy.admins.features.teachers.presentation.ui.TeachersScreen
 
@@ -21,10 +21,10 @@ fun MainNavHost() {
     ) {
         NavHost(
             navController = innerNavController,
-            startDestination = Destination.Dashboard.route
+            startDestination = RootDestination.Dashboard.route
         ) {
-            composable(Destination.Dashboard.route) { DashboardScreen() }
-            composable(Destination.Teachers.route) { TeachersScreen() }
+            composable(RootDestination.Dashboard.toRoute()) { DashboardScreen() }
+            composable(RootDestination.Teachers.toRoute()) { TeachersScreen() }
         }
     }
 }
@@ -35,9 +35,9 @@ private fun currentTitle(navController: NavHostController): String {
     val currentRoute = currentBackStackEntry?.destination?.route
 
     return when (currentRoute) {
-        Destination.Dashboard.route -> "Dashboard"
-        Destination.Teachers.route -> "Teachers"
-        Destination.Students.route -> "Students"
+        RootDestination.Dashboard.route -> "Dashboard"
+        RootDestination.Teachers.route -> "Teachers"
+        RootDestination.Students.route -> "Students"
         else -> ""
     }
 }

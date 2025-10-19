@@ -16,25 +16,25 @@ package com.nistra.demy.admins.core.navigation
  * @see androidx.navigation.compose.NavHost
  * @author Salim Ramirez
  */
-sealed interface Destination {
+sealed interface RootDestination {
     val route: String
 
-    data object AuthGraph : Destination {
-        override val route = "auth_graph"
+    data object AuthGraph : RootDestination {
+        override val route = "auth-graph"
         fun toRoute() = route
     }
 
-    data object Dashboard : Destination {
+    data object Dashboard : RootDestination {
         override val route = "dashboard"
         fun toRoute() = route
     }
 
-    data object Teachers : Destination {
+    data object Teachers : RootDestination {
         override val route = "teachers"
         fun toRoute() = route
     }
 
-    data object Students : Destination {
+    data object Students : RootDestination {
         override val route = "students"
         fun toRoute() = route
     }

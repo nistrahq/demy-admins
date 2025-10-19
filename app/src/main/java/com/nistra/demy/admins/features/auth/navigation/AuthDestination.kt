@@ -3,18 +3,18 @@ package com.nistra.demy.admins.features.auth.navigation
 sealed interface AuthDestination {
     val route: String
 
-    data object Login : AuthDestination {
-        override val route = "auth/login"
+    data object SignIn : AuthDestination {
+        override val route = "auth/sign-in"
         fun toRoute() = route
     }
 
-    data object Signup : AuthDestination {
-        override val route = "auth/signup"
+    data object SignUp : AuthDestination {
+        override val route = "auth/sign-up"
         fun toRoute() = route
     }
 
-    data object Activate : AuthDestination {
-        override val route = "auth/activate/{email}"
-        fun toRoute(email: String) = "auth/activate/$email"
+    data object VerifyEmail : AuthDestination {
+        override val route = "auth/verify-email/{email}"
+        fun toRoute(email: String) = "auth/verify-email/$email"
     }
 }

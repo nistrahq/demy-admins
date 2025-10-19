@@ -10,21 +10,22 @@ import com.nistra.demy.admins.core.navigation.main.MainNavHost
 @Composable
 fun RootNavGraph(
     navController: NavHostController,
-    startDestination: String = Destination.AuthGraph.toRoute()
+    startDestination: String = RootDestination.AuthGraph.route
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(Destination.AuthGraph.route) {
-            AuthNavHost(onLoggedIn = {
-                navController.navigate(Destination.Dashboard.route) {
-                    popUpTo(Destination.AuthGraph.route) { inclusive = true }
+        composable(RootDestination.AuthGraph.route) {
+            AuthNavHost(
+                onLoggedIn = {
+                navController.navigate(RootDestination.Dashboard.toRoute()) {
+                    popUpTo(RootDestination.AuthGraph.route) { inclusive = true }
                 }
             })
         }
 
-        composable(Destination.Dashboard.route) {
+        composable(RootDestination.Dashboard.route) {
             MainNavHost()
         }
     }
