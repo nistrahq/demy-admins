@@ -1,8 +1,8 @@
 <resources>
-    <string name="sign_in_label_email">Correo</string>
-    <string name="sign_in_icon_email">Ícono de Correo</string>
-    <string name="sign_in_label_password">Contraseña</string>
-    <string name="sign_in_icon_password">Ícono de Contraseña</string>
+    <string name="auth_label_email">Correo</string>
+    <string name="auth_icon_email">Ícono de Correo</string>
+    <string name="auth_label_password">Contraseña</string>
+    <string name="auth_icon_password">Ícono de Contraseña</string>
     <string name="sign_in_text_btn_forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="sign_in_btn_sign_in">Iniciar Sesión</string>
     <string name="sign_in_icon_sign_in">Ícono de Iniciar Sesión</string>
@@ -10,4 +10,10 @@
     <string name="sign_in_header_subtitle">Inicia sesión para continuar</string>
     <string name="sign_in_footer_text">"¿No tienes una cuenta? "</string>
     <string name="sign_in_footer_action_text">Regístrate</string>
+    <string name="sign_up_header_title">Empieza ahora</string>
+    <string name="sign_up_header_subtitle">Crea una nueva cuenta</string>
+    <string name="sign_up_footer_text">¿Ya tienes una cuenta?</string>
+    <string name="sign_up_footer_action_text">Inicia Sesión</string>
+    <string name="sign_up_btn_sign_up">Registrarse</string>
+    <string name="sign_up_icon_sign_up">Ícono de Registrarse</string>
 </resources>
