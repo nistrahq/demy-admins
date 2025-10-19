@@ -48,11 +48,11 @@ fun SignInForm(
         OutlinedTextField(
             value = username,
             onValueChange = onUsernameChange,
-            label = { Text(stringResource(R.string.sign_in_label_email)) },
+            label = { Text(stringResource(R.string.auth_label_email)) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Email,
-                    contentDescription = stringResource(R.string.sign_in_icon_email)
+                    contentDescription = stringResource(R.string.auth_icon_email)
                 )
             },
             singleLine = true,
@@ -64,11 +64,11 @@ fun SignInForm(
         OutlinedTextField(
             value = password,
             onValueChange = onPasswordChange,
-            label = { Text(stringResource(R.string.sign_in_label_password)) },
+            label = { Text(stringResource(R.string.auth_label_password)) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
-                    contentDescription = stringResource(R.string.sign_in_icon_password)
+                    contentDescription = stringResource(R.string.auth_icon_password)
                 )
             },
             singleLine = true,

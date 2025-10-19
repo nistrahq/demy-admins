@@ -26,7 +26,7 @@ class SignUpViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(password = value)
     }
 
-    fun signUp(onSuccess: () -> Unit) {
+    fun signUp(onSignUpSuccess: (String) -> Unit) {
         val fixedRole = listOf(BuildConfig.APP_ROLE)
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, errorMessage = null)
@@ -34,7 +34,7 @@ class SignUpViewModel @Inject constructor(
             signUpUseCase(_uiState.value.email, _uiState.value.password, fixedRole)
                 .onSuccess {
                     _uiState.value = _uiState.value.copy(isLoading = false)
-                    onSuccess()
+                    onSignUpSuccess(_uiState.value.email)
                 }
                 .onFailure { exception ->
                     _uiState.value = _uiState.value.copy(isLoading = false, errorMessage = exception.message)
