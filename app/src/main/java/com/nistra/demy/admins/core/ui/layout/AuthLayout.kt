@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.ui.layout
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,7 +58,9 @@ fun AuthLayout(
                 Spacer(modifier = Modifier.weight(1f))
 
                 Box(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .animateContentSize(),
                     contentAlignment = Alignment.Center
                 ) {
                     content()
