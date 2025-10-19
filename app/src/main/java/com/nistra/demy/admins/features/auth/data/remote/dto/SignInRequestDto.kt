@@ -1,6 +1,6 @@
 package com.nistra.demy.admins.features.auth.data.remote.dto
 
 data class SignInRequestDto(
-    val email: String,
+    val emailAddress: String,
     val password: String
 )

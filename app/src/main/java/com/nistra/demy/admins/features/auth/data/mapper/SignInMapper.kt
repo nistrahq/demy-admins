@@ -6,7 +6,7 @@ import com.nistra.demy.admins.features.auth.domain.model.UserSession
 fun SignInResponseDto.toDomain(): UserSession {
     return UserSession(
         id = this.id,
-        email = this.email,
+        email = this.emailAddress,
         token = this.token
     )
 }
