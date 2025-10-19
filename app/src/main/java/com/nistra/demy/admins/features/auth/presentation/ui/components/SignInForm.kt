@@ -21,10 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,10 +29,14 @@ import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.R
 
 @Composable
-fun SignInForm(onLoggedIn: () -> Unit) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
+fun SignInForm(
+    username: String,
+    password: String,
+    isLoading: Boolean,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onSignInClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,7 +47,7 @@ fun SignInForm(onLoggedIn: () -> Unit) {
     ) {
         OutlinedTextField(
             value = username,
-            onValueChange = { username = it },
+            onValueChange = onUsernameChange,
             label = { Text(stringResource(R.string.sign_in_label_email)) },
             leadingIcon = {
                 Icon(
@@ -63,7 +63,7 @@ fun SignInForm(onLoggedIn: () -> Unit) {
 
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = onPasswordChange,
             label = { Text(stringResource(R.string.sign_in_label_password)) },
             leadingIcon = {
                 Icon(
@@ -93,7 +93,8 @@ fun SignInForm(onLoggedIn: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = onLoggedIn,
+            onClick = onSignInClick,
+            enabled = !isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
