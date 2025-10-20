@@ -8,7 +8,7 @@ import com.nistra.demy.admins.core.ui.layout.AuthLayout
 import com.nistra.demy.admins.features.auth.navigation.AuthDestination
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignInScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignUpScreen
-import com.nistra.demy.admins.features.auth.presentation.ui.screens.VerifyEmailScreen
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.VerifyAccountScreen
 
 @Composable
 fun AuthNavHost(
@@ -38,8 +38,13 @@ fun AuthNavHost(
                 )
             }
             composable(route = AuthDestination.VerifyEmail.route) { backStackEntry ->
-                val email = backStackEntry.arguments?.getString("email")
-                VerifyEmailScreen()
+                val email = backStackEntry.arguments?.getString("email") ?: ""
+                VerifyAccountScreen(
+                    email = email,
+                    onVerifiedSuccess = {
+                        innerNavController.navigate(AuthDestination.CompleteAccount.toRoute())
+                    }
+                )
             }
         }
     }

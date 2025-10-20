@@ -17,4 +17,9 @@ sealed interface AuthDestination {
         override val route = "auth/verify-email/{email}"
         fun toRoute(email: String) = "auth/verify-email/$email"
     }
+
+    data object CompleteAccount : AuthDestination {
+        override val route = "auth/complete-account"
+        fun toRoute() = route
+    }
 }
