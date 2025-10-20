@@ -10,4 +10,6 @@ interface AuthRepository {
         password: String,
         roles: List<String>
     ): UserSession
+
+    suspend fun verifyAccount(email: String, code: String): String
 }

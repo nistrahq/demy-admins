@@ -18,4 +18,8 @@ class AuthRepositoryImpl @Inject constructor(
         val response = remoteDataSource.signUp(emailAddress, password, roles)
         return response.toDomain()
     }
+
+    override suspend fun verifyAccount(email: String, code: String): String {
+        return remoteDataSource.verifyAccount(email, code).message
+    }
 }
