@@ -5,33 +5,57 @@ import java.io.IOException
 import android.util.Log
 
 /**
- * Executes a suspend API call safely, capturing and formatting any thrown exceptions.
+ * Safely executes a suspend API call and provides detailed logging when exceptions occur.
  *
- * This helper centralizes network error handling by parsing known exceptions
- * (such as [IOException] or [HttpException]) into user-friendly messages
- * through [ErrorHandler]. Any unexpected errors are also caught and logged.
+ * This utility centralizes network error handling by interpreting known exceptions
+ * such as [IOException] and [HttpException] through [ErrorHandler].
+ * Any unexpected exceptions are caught and logged with contextual information
+ * for easier debugging.
  *
  * **Usage example:**
  * ```
- * val result = safeApiCall { api.getUserProfile() }
+ * safeApiCall(endpoint = "authentication/sign-in") {
+ *     api.signIn(request)
+ * }
  * ```
  *
- * If the API call fails, this function logs the error and rethrows an [Exception]
- * containing a descriptive message produced by [ErrorHandler].
+ * When the call fails, this function logs contextual information — including
+ * the provided endpoint, the calling class (origin), and the stack trace —
+ * before throwing an [Exception] containing a user-friendly message derived from [ErrorHandler].
  *
  * @param T The expected return type of the API call.
- * @param apiCall A suspend lambda representing the API request to execute.
+ * @param endpoint Optional name or path of the API endpoint (for clearer logs).
+ *                 Defaults to `"Unknown endpoint"` if not provided.
+ * @param apiCall The suspend lambda representing the network request to execute.
  * @return The successful result of [apiCall] if no exception occurs.
- * @throws Exception Re-throws a formatted [Exception] when the call fails.
+ * @throws Exception When the call fails, containing a parsed user-friendly message.
  * @see ErrorHandler For detailed parsing of HTTP and network exceptions.
  * @author Salim Ramirez
  */
-suspend fun <T> safeApiCall(apiCall: suspend () -> T): T {
+suspend inline fun <reified C, T> C.safeApiCall(
+    endpoint: String? = null,
+    crossinline apiCall: suspend C.() -> T
+): T {
     return try {
-        apiCall()
+        apiCall(this)
     } catch (e: Exception) {
-        val message = ErrorHandler.parseException(e)
-        Log.e("safeApiCall", message, e)
-        throw Exception(message)
+        val origin = this::class.simpleName ?: "UnknownOrigin"
+        val userMessage = ErrorHandler.parseException(e)
+        val safeEndpoint = endpoint ?: "Unknown endpoint"
+
+        val detailedLog = """
+            safeApiCall Exception
+            ───────────────────────────────
+            • Origin: $origin
+            • Endpoint: $safeEndpoint
+            • Exception: ${e::class.qualifiedName}
+            • RawMessage: ${e.message ?: "No message"}
+            • UserMessage: $userMessage
+            • StackTrace:
+            ${e.stackTraceToString()}
+        """.trimIndent()
+
+        Log.e(origin, detailedLog)
+        throw Exception(userMessage, e)
     }
 }
