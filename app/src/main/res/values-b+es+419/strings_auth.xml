@@ -12,8 +12,12 @@
     <string name="sign_in_footer_action_text">Regístrate</string>
     <string name="sign_up_header_title">Empieza ahora</string>
     <string name="sign_up_header_subtitle">Crea una nueva cuenta</string>
-    <string name="sign_up_footer_text">¿Ya tienes una cuenta?</string>
+    <string name="sign_up_footer_text">¿Ya tienes una cuenta? </string>
     <string name="sign_up_footer_action_text">Inicia Sesión</string>
     <string name="sign_up_btn_sign_up">Registrarse</string>
     <string name="sign_up_icon_sign_up">Ícono de Registrarse</string>
+    <string name="verify_account_header_title">Verifica tu cuenta</string>
+    <string name="verify_account_header_subtitle">Revisa tu bandeja de entrada</string>
+    <string name="verify_account_btn_verify">Verificar</string>
+    <string name="verify_account_icon_verify">Ícono de Verificar</string>
 </resources>

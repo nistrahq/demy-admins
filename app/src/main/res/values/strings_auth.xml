@@ -12,8 +12,12 @@
     <string name="sign_in_footer_action_text">Sign up</string>
     <string name="sign_up_header_title">Get started now</string>
     <string name="sign_up_header_subtitle">Create a new account</string>
-    <string name="sign_up_footer_text">Already have an account?</string>
+    <string name="sign_up_footer_text">"Already have an account? "</string>
     <string name="sign_up_footer_action_text">Sign in</string>
     <string name="sign_up_btn_sign_up">Sign Up</string>
     <string name="sign_up_icon_sign_up">Sign Up Icon</string>
+    <string name="verify_account_header_title">Verify your account</string>
+    <string name="verify_account_header_subtitle">Check your email</string>
+    <string name="verify_account_btn_verify">Verify</string>
+    <string name="verify_account_icon_verify">Verify Icon</string>
 </resources>
