@@ -16,14 +16,14 @@ fun NavHostController.currentTitle(): String {
 }
 
 /**
- * Versión Composable que observa reactivamente los cambios de navegación.
+ * Composable version that reactively observes navigation changes.
  *
- * Esta es la versión que debe usarse en @Composable functions para asegurar
- * que se recompone correctamente cuando cambia la ruta.
+ * This is the version that should be used in @Composable functions to ensure
+ * it recomposes correctly when the route changes.
  *
- * Usa el mismo sistema de mapeo centralizado que `currentParentRoute()`, por lo
- * que agregar un nuevo módulo en `moduleToParentRouteMap` funcionará automáticamente
- * en ambas funciones.
+ * Uses the same centralized mapping system as `currentParentRoute()`, so
+ * adding a new module to `moduleToParentRouteMap` will automatically work
+ * in both functions.
  *
  * @see currentParentRoute
  * @see moduleToParentRouteMap
@@ -34,16 +34,16 @@ fun NavHostController.currentParentRouteAsState(): String {
     val childRoute = navBackStackEntry?.destination?.route
     val parentRoute = navBackStackEntry?.destination?.parent?.route
 
-    // Si hay una ruta padre disponible en el grafo, usarla directamente
+    // If a parent route is available in the graph, use it directly
     if (parentRoute != null) {
         return parentRoute
     }
 
-    // Si no hay ruta padre, extraer el módulo desde la ruta hija
+    // If no parent route, extract the module from the child route
     if (childRoute != null) {
         val moduleName = childRoute.split("/").firstOrNull()
 
-        // Buscar en el mapa centralizado
+        // Search in the centralized map
         val mappedParentRoute = moduleName?.let { moduleToParentRouteMap[it] }
 
         if (mappedParentRoute != null) {
@@ -55,18 +55,18 @@ fun NavHostController.currentParentRouteAsState(): String {
 }
 
 /**
- * Mapa centralizado de módulos a sus rutas padre.
+ * Centralized map of modules to their parent routes.
  *
- * Este mapa define la relación entre el nombre del módulo (primer segmento de la ruta)
- * y su ruta de grafo padre completa.
+ * This map defines the relationship between the module name (first segment of the route)
+ * and its complete parent graph route.
  *
- * **IMPORTANTE AL AGREGAR NUEVOS MÓDULOS:**
- * Cuando agregues un nuevo módulo, solo añade una entrada aquí:
+ * **IMPORTANT WHEN ADDING NEW MODULES:**
+ * When you add a new module, just add one entry here:
  * ```
  * "courses" to MainDestination.Courses.route
  * ```
  *
- * Esto funcionará automáticamente para todos los destinos del módulo:
+ * This will automatically work for all destinations in the module:
  * - courses/list -> main/courses
  * - courses/create -> main/courses
  * - courses/edit/{id} -> main/courses
@@ -77,33 +77,33 @@ private val moduleToParentRouteMap = mapOf(
     "dashboard" to MainDestination.Dashboard.route,
     "teachers" to MainDestination.Teachers.route,
     "students" to MainDestination.Students.route
-    // Agregar nuevos módulos aquí
+    // Add new modules here
 )
 
 /**
- * Obtiene la ruta del grafo padre actual.
+ * Gets the current parent graph route.
  *
- * Esta función es esencial para la selección correcta del Drawer en una
- * arquitectura de navegación con grafos anidados.
+ * This function is essential for correct Drawer selection in a navigation
+ * architecture with nested graphs.
  *
- * Ejemplo de estructura de navegación:
+ * Example of navigation structure:
  * ```
- * main/teachers (grafo padre)
- *   ├─ teachers/register (destino hijo)
- *   ├─ teachers/list (destino hijo)
- *   ├─ teachers/edit/{id} (destino hijo con parámetros)
- *   └─ teachers/details/{id} (destino hijo con parámetros)
+ * main/teachers (parent graph)
+ *   ├─ teachers/register (child destination)
+ *   ├─ teachers/list (child destination)
+ *   ├─ teachers/edit/{id} (child destination with parameters)
+ *   └─ teachers/details/{id} (child destination with parameters)
  * ```
  *
- * Cuando estás en cualquiera de estos destinos, esta función devuelve "main/teachers"
- * para que el Drawer pueda marcar correctamente la opción "Teachers" como seleccionada.
+ * When you're on any of these destinations, this function returns "main/teachers"
+ * so the Drawer can correctly mark the "Teachers" option as selected.
  *
- * **ESCALABILIDAD:**
- * Esta función está diseñada para funcionar con múltiples destinos dentro de un módulo.
- * Solo necesitas agregar el módulo una vez en `moduleToParentRouteMap` y funcionará
- * para todos sus destinos presentes y futuros.
+ * **SCALABILITY:**
+ * This function is designed to work with multiple destinations within a module.
+ * You only need to add the module once in `moduleToParentRouteMap` and it will work
+ * for all its present and future destinations.
  *
- * @return La ruta del grafo padre, o la ruta actual si no está en un grafo anidado
+ * @return The parent graph route, or the current route if not in a nested graph
  * @author Salim Ramirez
  */
 fun NavHostController.currentParentRoute(): String {
@@ -111,17 +111,17 @@ fun NavHostController.currentParentRoute(): String {
     val childRoute = entry.destination.route
     val parentRoute = entry.destination.parent?.route
 
-    // Si hay una ruta padre disponible en el grafo, usarla directamente
+    // If a parent route is available in the graph, use it directly
     if (parentRoute != null) {
         return parentRoute
     }
 
-    // Si no hay ruta padre, extraer el módulo desde la ruta hija
-    // Formato esperado: "{modulo}/{destino}[/{params}]"
+    // If no parent route, extract the module from the child route
+    // Expected format: "{module}/{destination}[/{params}]"
     if (childRoute != null) {
         val moduleName = childRoute.split("/").firstOrNull()
 
-        // Buscar en el mapa centralizado
+        // Search in the centralized map
         val mappedParentRoute = moduleName?.let { moduleToParentRouteMap[it] }
 
         if (mappedParentRoute != null) {

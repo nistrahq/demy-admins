@@ -3,22 +3,22 @@ package com.nistra.demy.admins.core.navigation
 import androidx.navigation.NavController
 
 /**
- * Navega a una ruta solo si no estás ya en ella.
+ * Navigates to a route only if you're not already on it.
  *
- * Esta función previene navegaciones duplicadas que causan parpadeos y problemas
- * de UI. Compara tanto la ruta actual como la ruta del grafo padre para manejar
- * correctamente grafos de navegación anidados.
+ * This function prevents duplicate navigations that cause flickering and UI issues.
+ * It compares both the current route and the parent graph route to correctly handle
+ * nested navigation graphs.
  *
- * Ejemplo de grafo anidado:
- * - Grafo padre: "main/teachers"
- * - Ruta hija: "teachers/register"
+ * Example of nested graph:
+ * - Parent graph: "main/teachers"
+ * - Child route: "teachers/register"
  *
- * Si estás en "teachers/register" y navegas a "main/teachers", la función
- * detectará que ya estás en ese grafo y bloqueará la navegación.
+ * If you're on "teachers/register" and navigate to "main/teachers", the function
+ * will detect that you're already in that graph and block the navigation.
  *
- * @param route La ruta destino a navegar
- * @param popUpToRoute Ruta opcional hasta donde hacer pop en el back stack
- * @param inclusive Si true, incluye la ruta popUpToRoute en el pop
+ * @param route The destination route to navigate to
+ * @param popUpToRoute Optional route to pop up to in the back stack
+ * @param inclusive If true, includes the popUpToRoute in the pop operation
  *
  * @author Salim Ramirez
  */
@@ -31,8 +31,8 @@ fun NavController.navigateOnce(
     val currentRoute = currentEntry?.destination?.route
     val currentParentRoute = currentEntry?.destination?.parent?.route
 
-    // Comparar tanto con la ruta actual como con la ruta del grafo padre
-    // para evitar navegaciones duplicadas en grafos anidados
+    // Compare both current route and parent graph route
+    // to avoid duplicate navigations in nested graphs
     if (currentRoute == route || currentParentRoute == route) {
         return
     }
