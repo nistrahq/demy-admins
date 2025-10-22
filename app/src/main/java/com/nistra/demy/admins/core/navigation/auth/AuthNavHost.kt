@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.nistra.demy.admins.core.ui.layout.AuthLayout
+import com.nistra.demy.admins.core.designsystem.layout.AuthLayout
 import com.nistra.demy.admins.features.auth.navigation.AuthDestination
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.AcademySetupScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.CompleteAccountScreen

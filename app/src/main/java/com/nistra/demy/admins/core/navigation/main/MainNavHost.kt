@@ -8,15 +8,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.nistra.demy.admins.core.data.local.SessionPreferences
+import com.nistra.demy.admins.core.designsystem.layout.MainShell
+import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.core.navigation.RootDestination
 import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
+import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
 import com.nistra.demy.admins.features.teachers.presentation.ui.TeachersScreen
 
 @Composable
 fun MainNavHost(
     rootNavController: NavHostController,
-    sessionPreferences: SessionPreferences = hiltViewModel<MainNavViewModel>().sessionPreferences
+    sessionPreferences: SessionPreferences = hiltViewModel<MainViewModel>().sessionPreferences
 ) {
     val innerNavController = rememberNavController()
 

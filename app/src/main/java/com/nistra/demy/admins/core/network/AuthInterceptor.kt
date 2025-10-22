@@ -1,6 +1,6 @@
 package com.nistra.demy.admins.core.network
 
-import com.nistra.demy.admins.core.data.local.SessionPreferences
+import com.nistra.demy.admins.core.storage.SessionPreferences
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -2,7 +2,7 @@ package com.nistra.demy.admins.features.auth.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nistra.demy.admins.core.data.local.SessionPreferences
+import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.features.auth.domain.usecase.SetUpAcademyUseCase
 import com.nistra.demy.admins.features.auth.presentation.model.AcademySetupFormData
 import com.nistra.demy.admins.features.auth.presentation.state.AcademySetupUiState

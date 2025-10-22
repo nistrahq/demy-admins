@@ -1,6 +1,6 @@
 package com.nistra.demy.admins.features.auth.data.datasource.remote
 
-import com.nistra.demy.admins.core.common.MessageResponseDto
+import com.nistra.demy.admins.core.network.dto.MessageResponseDto
 import com.nistra.demy.admins.features.auth.data.remote.dto.CompleteAccountResponseDto
 import com.nistra.demy.admins.features.auth.data.remote.dto.SetUpAcademyResponseDto
 import com.nistra.demy.admins.features.auth.data.remote.dto.SignInResponseDto

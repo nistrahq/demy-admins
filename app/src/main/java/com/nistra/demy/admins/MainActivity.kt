@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import com.nistra.demy.admins.core.design.theme.DemyTheme
+import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
 import com.nistra.demy.admins.core.navigation.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,6 +1,6 @@
 package com.nistra.demy.admins.features.auth.presentation.state
 
-import com.nistra.demy.admins.core.ui.state.BaseUiState
+import com.nistra.demy.admins.core.common.BaseUiState
 
 data class CompleteAccountUiState(
     val isSuccess: Boolean = false,

@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.nistra.demy.admins.core.navigation.auth.AuthNavHost
 import com.nistra.demy.admins.core.navigation.main.MainNavHost
+import com.nistra.demy.admins.features.splash.presentation.ui.screens.SplashScreen
 
 @Composable
 fun RootNavGraph(

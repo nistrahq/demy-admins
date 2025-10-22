@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nistra.demy.admins.core.design.theme.DemyTheme
-import com.nistra.demy.admins.core.design.theme.extendedColors
-import com.nistra.demy.admins.core.ui.preview.MainLayoutPreviewContainer
-import com.nistra.demy.admins.core.ui.preview.TabletPreviewLight
+import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
+import com.nistra.demy.admins.core.designsystem.theme.extendedColors
+import com.nistra.demy.admins.core.designsystem.preview.MainLayoutPreviewContainer
+import com.nistra.demy.admins.core.designsystem.preview.TabletPreviewLight
 import com.nistra.demy.admins.features.dashboard.presentation.model.DashboardUiState
-import com.nistra.demy.admins.core.ui.components.SmallCard
+import com.nistra.demy.admins.core.designsystem.components.SmallCard
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.AcademicPeriodDetailsCard
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.ClassroomsAndCoursesCard
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.InfoCardTwoColumn
