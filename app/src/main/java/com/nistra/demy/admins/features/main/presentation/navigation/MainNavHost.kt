@@ -9,8 +9,8 @@ import com.nistra.demy.admins.core.designsystem.layout.MainShell
 import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
 import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
-import com.nistra.demy.admins.features.students.navigation.studentsGraph
-import com.nistra.demy.admins.features.teachers.navigation.teachersGraph
+import com.nistra.demy.admins.features.students.presentation.navigation.studentsGraph
+import com.nistra.demy.admins.features.teachers.presentation.navigation.teachersGraph
 
 @Composable
 fun MainNavHost(

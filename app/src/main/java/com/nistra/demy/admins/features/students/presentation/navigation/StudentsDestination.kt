@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.students.navigation
+package com.nistra.demy.admins.features.students.presentation.navigation
 
 sealed interface StudentsDestination {
     val route: String

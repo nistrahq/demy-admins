@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.dashboard.di
+package com.nistra.demy.admins.features.dashboard.data.di
 
 import com.nistra.demy.admins.features.dashboard.data.repository.DashboardRepositoryImpl
 import com.nistra.demy.admins.features.dashboard.domain.repository.DashboardRepository
