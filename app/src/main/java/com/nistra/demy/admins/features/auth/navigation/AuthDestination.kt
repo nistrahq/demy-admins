@@ -22,4 +22,9 @@ sealed interface AuthDestination {
         override val route = "auth/complete-account"
         fun toRoute() = route
     }
+
+    data object SetUpAcademy : AuthDestination {
+        override val route = "auth/set-up-academy"
+        fun toRoute() = route
+    }
 }
