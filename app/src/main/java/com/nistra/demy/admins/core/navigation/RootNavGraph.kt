@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.nistra.demy.admins.core.navigation.auth.AuthNavHost
-import com.nistra.demy.admins.core.navigation.main.MainNavHost
+import com.nistra.demy.admins.features.auth.presentation.navigation.AuthNavHost
+import com.nistra.demy.admins.features.main.presentation.navigation.MainNavHost
 import com.nistra.demy.admins.features.splash.presentation.ui.screens.SplashScreen
 
 @Composable
@@ -20,7 +20,7 @@ fun RootNavGraph(
         composable(RootDestination.Splash.route) {
             SplashScreen(
                 onSessionActive = {
-                    navController.navigate(RootDestination.Dashboard.toRoute()) {
+                    navController.navigate(RootDestination.MainGraph.toRoute()) {
                         popUpTo(RootDestination.Splash.route) { inclusive = true }
                     }
                 },
@@ -35,13 +35,13 @@ fun RootNavGraph(
         composable(RootDestination.AuthGraph.route) {
             AuthNavHost(
                 onLoggedIn = {
-                navController.navigate(RootDestination.Dashboard.toRoute()) {
+                navController.navigate(RootDestination.MainGraph.toRoute()) {
                     popUpTo(RootDestination.AuthGraph.route) { inclusive = true }
                 }
             })
         }
 
-        composable(RootDestination.Dashboard.route) {
+        composable(RootDestination.MainGraph.route) {
             MainNavHost(rootNavController = navController)
         }
     }

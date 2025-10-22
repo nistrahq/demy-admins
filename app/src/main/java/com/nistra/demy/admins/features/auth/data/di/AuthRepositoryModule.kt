@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.auth.di
+package com.nistra.demy.admins.features.auth.data.di
 
 import com.nistra.demy.admins.features.auth.data.repository.AuthRepositoryImpl
 import com.nistra.demy.admins.features.auth.domain.repository.AuthRepository

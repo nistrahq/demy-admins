@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.auth.navigation
+package com.nistra.demy.admins.features.auth.presentation.navigation
 
 sealed interface AuthDestination {
     val route: String

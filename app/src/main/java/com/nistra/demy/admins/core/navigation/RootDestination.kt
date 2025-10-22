@@ -29,18 +29,8 @@ sealed interface RootDestination {
         fun toRoute() = route
     }
 
-    data object Dashboard : RootDestination {
-        override val route = "dashboard"
-        fun toRoute() = route
-    }
-
-    data object Teachers : RootDestination {
-        override val route = "teachers"
-        fun toRoute() = route
-    }
-
-    data object Students : RootDestination {
-        override val route = "students"
+    data object MainGraph : RootDestination {
+        override val route = "main-graph"
         fun toRoute() = route
     }
 }

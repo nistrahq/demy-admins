@@ -2,7 +2,7 @@ package com.nistra.demy.admins.core.designsystem.samples
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.nistra.demy.admins.core.navigation.model.MainDestination
+import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 import com.nistra.demy.admins.core.designsystem.layout.MainLayout
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.designsystem.model.UserUi
@@ -30,14 +30,14 @@ fun TabletLightPreviewSample() {
         drawerSections = listOf(
             DrawerSection(
                 header = "Overview",
-                items = listOf(MainDestination.Dashboard)
+                items = listOf(DrawerDestination.Dashboard)
             ),
             DrawerSection(
                 header = "Academy",
-                items = listOf(MainDestination.Teachers, MainDestination.Students)
+                items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
             )
         ),
-        selectedDestinationId = MainDestination.Dashboard.id,
+        selectedDestinationId = DrawerDestination.Dashboard.id,
         onDestinationClick = { }
     ) {
         Text("Preview in Light Mode 🌞")
@@ -65,14 +65,14 @@ fun TabletDarkPreviewSample() {
         drawerSections = listOf(
             DrawerSection(
                 header = "Overview",
-                items = listOf(MainDestination.Dashboard)
+                items = listOf(DrawerDestination.Dashboard)
             ),
             DrawerSection(
                 header = "Academy",
-                items = listOf(MainDestination.Teachers, MainDestination.Students)
+                items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
             )
         ),
-        selectedDestinationId = MainDestination.Dashboard.id,
+        selectedDestinationId = DrawerDestination.Dashboard.id,
         onDestinationClick = { }
     ) {
         Text("Preview in Dark Mode 🌙")

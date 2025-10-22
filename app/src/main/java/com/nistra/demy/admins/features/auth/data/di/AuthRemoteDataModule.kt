@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.auth.di
+package com.nistra.demy.admins.features.auth.data.di
 
 import com.nistra.demy.admins.features.auth.data.remote.api.AuthApi
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.auth.di
+package com.nistra.demy.admins.features.auth.data.di
 
 import com.nistra.demy.admins.features.auth.data.datasource.remote.AuthRemoteDataSource
 import com.nistra.demy.admins.features.auth.data.datasource.remote.AuthRemoteDataSourceImpl

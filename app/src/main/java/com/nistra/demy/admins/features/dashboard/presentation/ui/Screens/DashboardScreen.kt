@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.dashboard.presentation.ui
+package com.nistra.demy.admins.features.dashboard.presentation.ui.Screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

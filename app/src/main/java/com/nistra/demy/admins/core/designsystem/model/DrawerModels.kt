@@ -1,6 +1,6 @@
 package com.nistra.demy.admins.core.designsystem.model
 
-import com.nistra.demy.admins.core.navigation.model.MainDestination
+import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 
 data class UserUi(
     val name: String,
@@ -10,5 +10,5 @@ data class UserUi(
 
 data class DrawerSection(
     val header: String,
-    val items: List<MainDestination>
+    val items: List<DrawerDestination>
 )

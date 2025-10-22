@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
-import com.nistra.demy.admins.core.navigation.model.MainDestination
+import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 
 @Composable
 fun DrawerHeader(appName: String) {
@@ -47,7 +47,7 @@ fun DrawerHeader(appName: String) {
 fun DrawerContent(
     sections: List<DrawerSection>,
     selectedId: String,
-    onDestinationClick: (MainDestination) -> Unit
+    onDestinationClick: (DrawerDestination) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -85,9 +85,10 @@ fun DrawerContent(
                     items = section.items,
                     key = { it.id }
                 ) { destination ->
+                    val isSelected = selectedId == destination.id
                     NavigationDrawerItem(
                         label = { Text(destination.label, style = MaterialTheme.typography.bodyMedium) },
-                        selected = destination.id == selectedId,
+                        selected = isSelected,
                         onClick = { onDestinationClick(destination) },
                         icon = { Icon(destination.icon, contentDescription = null) },
                         modifier = Modifier.padding(horizontal = 12.dp),

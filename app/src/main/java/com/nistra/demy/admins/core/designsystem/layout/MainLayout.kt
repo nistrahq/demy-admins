@@ -28,7 +28,7 @@ import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
 import com.nistra.demy.admins.core.designsystem.components.UserChip
 import com.nistra.demy.admins.core.designsystem.components.DrawerContent
 import com.nistra.demy.admins.core.designsystem.components.DrawerHeader
-import com.nistra.demy.admins.core.navigation.model.MainDestination
+import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.designsystem.model.UserUi
 import com.nistra.demy.admins.core.designsystem.preview.TabletPreviewDark
@@ -61,7 +61,7 @@ fun MainLayout(
     appName: String,
     drawerSections: List<DrawerSection>,
     selectedDestinationId: String,
-    onDestinationClick: (MainDestination) -> Unit,
+    onDestinationClick: (DrawerDestination) -> Unit,
     content: @Composable () -> Unit
 ) {
     PermanentNavigationDrawer(
@@ -130,23 +130,23 @@ fun MainLayoutPreview() {
     val sections = listOf(
         DrawerSection(
             header = "Overview",
-            items = listOf(MainDestination.Dashboard)
+            items = listOf(DrawerDestination.Dashboard)
         ),
         DrawerSection(
             header = "Academy",
-            items = listOf(MainDestination.Teachers, MainDestination.Students)
+            items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
         ),
         DrawerSection(
             header = "Classes",
-            items = listOf(MainDestination.Periods, MainDestination.Courses, MainDestination.Classrooms, MainDestination.Schedules)
+            items = listOf(DrawerDestination.Periods, DrawerDestination.Courses, DrawerDestination.Classrooms, DrawerDestination.Schedules)
         ),
         DrawerSection(
             header = "Management",
-            items = listOf(MainDestination.Enrollments, MainDestination.Scheduling, MainDestination.Billing, MainDestination.Invoices, MainDestination.Finance)
+            items = listOf(DrawerDestination.Enrollments, DrawerDestination.Scheduling, DrawerDestination.Billing, DrawerDestination.Invoices, DrawerDestination.Finance)
         ),
         DrawerSection(
             header = "General",
-            items = listOf(MainDestination.Settings, MainDestination.Help, MainDestination.LogOut)
+            items = listOf(DrawerDestination.Settings, DrawerDestination.Help, DrawerDestination.LogOut)
         )
     )
     DemyTheme {
@@ -161,7 +161,7 @@ fun MainLayoutPreview() {
             onBackClick = null,
             appName = "Demy Admins",
             drawerSections = sections,
-            selectedDestinationId = MainDestination.Dashboard.id,
+            selectedDestinationId = DrawerDestination.Dashboard.id,
             onDestinationClick = { }
         ) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

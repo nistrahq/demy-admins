@@ -4,16 +4,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.nistra.demy.admins.core.navigation.RootDestination
-import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
+import com.nistra.demy.admins.features.dashboard.presentation.ui.Screens.DashboardScreen
+import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
 
 fun NavGraphBuilder.dashboardGraph(navController: NavHostController) {
     navigation(
-        startDestination = RootDestination.Dashboard.route,
-        route = "dashboard_graph"
+        startDestination = DashboardDestination.Overview.route,
+        route = MainDestination.Dashboard.route
     ) {
-        composable(RootDestination.Dashboard.route) {
-            DashboardScreen()
-        }
+        composable(DashboardDestination.Overview.toRoute()) { DashboardScreen() }
     }
 }
