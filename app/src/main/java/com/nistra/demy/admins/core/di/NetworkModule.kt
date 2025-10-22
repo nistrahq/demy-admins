@@ -1,6 +1,7 @@
 package com.nistra.demy.admins.core.di
 
 import com.nistra.demy.admins.BuildConfig
+import com.nistra.demy.admins.core.network.AuthInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -38,20 +39,11 @@ object NetworkModule {
         }
 
     @Provides @Singleton
-    fun provideHeadersInterceptor(): Interceptor = Interceptor { chain ->
-        val request = chain.request().newBuilder()
-            // TODO: Add auth token if needed (.addHeader("Authorization", "Bearer ...")
-            .addHeader("Accept", "application/json")
-            .build()
-        chain.proceed(request)
-    }
-
-    @Provides @Singleton
     fun provideOkHttp(
         logging: HttpLoggingInterceptor,
-        headers: Interceptor
+        authInterceptor: AuthInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(headers)
+        .addInterceptor(authInterceptor)
         .addInterceptor(logging)
         .build()
 

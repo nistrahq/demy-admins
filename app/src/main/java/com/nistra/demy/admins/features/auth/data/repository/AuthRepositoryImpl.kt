@@ -19,7 +19,56 @@ class AuthRepositoryImpl @Inject constructor(
         return response.toDomain()
     }
 
-    override suspend fun verifyAccount(email: String, code: String): String {
-        return remoteDataSource.verifyAccount(email, code).message
+    override suspend fun verifyAccount(email: String, code: String): UserSession {
+        val response = remoteDataSource.verifyAccount(email, code)
+        return response.toDomain()
+    }
+
+    override suspend fun completeAccount(
+        firstName: String,
+        lastName: String,
+        countryCode: String,
+        phoneNumber: String,
+        dniNumber: String,
+        userId: Long
+    ): Long {
+        val response = remoteDataSource.completeAccount(
+            firstName,
+            lastName,
+            countryCode,
+            phoneNumber,
+            dniNumber,
+            userId
+        )
+        return response.id
+    }
+
+    override suspend fun setUpAcademy(
+        academyName: String,
+        academyDescription: String,
+        street: String,
+        district: String,
+        province: String,
+        department: String,
+        emailAddress: String,
+        countryCode: String,
+        phone: String,
+        ruc: String,
+        administratorId: Long
+    ): Long {
+        val response = remoteDataSource.setUpAcademy(
+            academyName,
+            academyDescription,
+            street,
+            district,
+            province,
+            department,
+            emailAddress,
+            countryCode,
+            phone,
+            ruc,
+            administratorId
+        )
+        return response.id
     }
 }
