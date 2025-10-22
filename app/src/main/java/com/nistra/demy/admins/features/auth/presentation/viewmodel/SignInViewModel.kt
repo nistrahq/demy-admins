@@ -2,6 +2,7 @@ package com.nistra.demy.admins.features.auth.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.core.data.local.SessionPreferences
 import com.nistra.demy.admins.features.auth.domain.usecase.SignInUseCase
 import com.nistra.demy.admins.features.auth.presentation.state.SignInUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
+    private val sessionPreferences: SessionPreferences
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SignInUiState())
     val uiState: StateFlow<SignInUiState> = _uiState
@@ -30,7 +32,10 @@ class SignInViewModel @Inject constructor(
             updateState { it.copy(isLoading = true, errorMessage = null) }
 
             signInUseCase(_uiState.value.username, _uiState.value.password)
-                .onSuccess {
+                .onSuccess { userSession ->
+                    sessionPreferences.saveUserId(userSession.id)
+                    userSession.token?.let { sessionPreferences.saveToken(it) }
+
                     updateState { it.copy(isLoading = false) }
                     onLoggedIn()
                 }
