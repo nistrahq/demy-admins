@@ -3,6 +3,7 @@ package com.nistra.demy.admins.core.designsystem.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.CardDefaults
@@ -15,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 /**
  * A small card component displaying a label and a value.
@@ -39,37 +39,36 @@ fun SmallCard(
     label: String,
     value: String,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surface,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
     valueColor: Color = MaterialTheme.colorScheme.onSurface,
     labelColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     minWidthDp: Int = 120,
-    minHeightDp: Int = 80,
+    minHeightDp: Int = 100,
 ) {
     OutlinedCard(
-        modifier = modifier
-            .sizeIn(minWidth = minWidthDp.dp, minHeight = minHeightDp.dp)
-            .padding(4.dp),
+        modifier = modifier.sizeIn(minWidth = minWidthDp.dp, minHeight = minHeightDp.dp),
         colors = CardDefaults.outlinedCardColors(containerColor = containerColor),
         border = BorderStroke(1.dp, borderColor),
         shape = MaterialTheme.shapes.medium
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalAlignment = Alignment.Start
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelSmall.copy(color = labelColor)
+                style = MaterialTheme.typography.labelMedium,
+                color = labelColor
             )
             Text(
                 text = value,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 28.sp,
-                    color = valueColor
-                )
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = valueColor
             )
         }
     }
