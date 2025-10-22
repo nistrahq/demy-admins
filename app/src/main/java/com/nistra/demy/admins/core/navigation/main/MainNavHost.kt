@@ -3,21 +3,28 @@ package com.nistra.demy.admins.core.navigation.main
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.nistra.demy.admins.core.data.local.SessionPreferences
 import com.nistra.demy.admins.core.navigation.RootDestination
 import com.nistra.demy.admins.features.dashboard.presentation.ui.DashboardScreen
 import com.nistra.demy.admins.features.teachers.presentation.ui.TeachersScreen
 
 @Composable
-fun MainNavHost() {
+fun MainNavHost(
+    rootNavController: NavHostController,
+    sessionPreferences: SessionPreferences = hiltViewModel<MainNavViewModel>().sessionPreferences
+) {
     val innerNavController = rememberNavController()
 
     MainShell(
         navController = innerNavController,
-        title = currentTitle(innerNavController)
+        rootNavController = rootNavController,
+        title = currentTitle(innerNavController),
+        sessionPreferences = sessionPreferences
     ) {
         NavHost(
             navController = innerNavController,

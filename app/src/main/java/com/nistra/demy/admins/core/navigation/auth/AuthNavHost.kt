@@ -6,6 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.ui.layout.AuthLayout
 import com.nistra.demy.admins.features.auth.navigation.AuthDestination
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.AcademySetupScreen
+import com.nistra.demy.admins.features.auth.presentation.ui.screens.CompleteAccountScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignInScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.SignUpScreen
 import com.nistra.demy.admins.features.auth.presentation.ui.screens.VerifyAccountScreen
@@ -43,6 +45,20 @@ fun AuthNavHost(
                     email = email,
                     onVerifiedSuccess = {
                         innerNavController.navigate(AuthDestination.CompleteAccount.toRoute())
+                    }
+                )
+            }
+            composable(route = AuthDestination.CompleteAccount.route) {
+                CompleteAccountScreen(
+                    onAccountCompletedSuccess = {
+                        innerNavController.navigate(AuthDestination.SetUpAcademy.toRoute())
+                    }
+                )
+            }
+            composable(route = AuthDestination.SetUpAcademy.route) {
+                AcademySetupScreen(
+                    onAcademyCreated = {
+                        onLoggedIn()
                     }
                 )
             }
