@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nistra.demy.admins.core.design.theme.extendedColors
+import com.nistra.demy.admins.core.designsystem.theme.extendedColors
 
 @Composable
 fun InfoCardTwoColumn(
