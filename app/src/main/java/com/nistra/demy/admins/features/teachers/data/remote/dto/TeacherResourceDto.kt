@@ -8,7 +8,8 @@ data class TeacherResourceDto(
     val id: String,
     val firstName: String,
     val lastName: String,
-    val email: String,
+    @field:Json(name = "emailAddress") val email: String,
+    val countryCode: String,
     @field:Json(name = "phoneNumber") val phone: String,
     val academyId: String
 )
