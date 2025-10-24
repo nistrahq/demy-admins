@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class TeachersDataSourceModule {
+abstract class TeacherDataSourceModule {
     @Binds @Singleton
     abstract fun bindTeachersRemoteDataSource(impl: TeachersRemoteDataSourceImpl): TeachersRemoteDataSource
 }

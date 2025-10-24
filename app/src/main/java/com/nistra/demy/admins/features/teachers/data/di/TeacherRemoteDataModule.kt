@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TeachersRemoteDataModule {
+object TeacherRemoteDataModule {
     @Provides @Singleton
     fun provideTeachersApi(retrofit: Retrofit): TeachersApi {
         return retrofit.create(TeachersApi::class.java)
