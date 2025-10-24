@@ -34,3 +34,22 @@ The team is **closed**; no external contributions are accepted.
 
 This project was developed as part of the academic requirements of the Software Engineering program at UPC.  
 We acknowledge the guidance of our professors and the collaborative effort of the entire team.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
