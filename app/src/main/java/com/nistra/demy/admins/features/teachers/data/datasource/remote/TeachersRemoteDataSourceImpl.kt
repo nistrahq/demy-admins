@@ -13,20 +13,7 @@ class TeachersRemoteDataSourceImpl @Inject constructor(
         return safeApiCall(endpoint = "teachers") { api.getAllTeachers() }
     }
 
-    override suspend fun addTeacher(
-        firstName: String,
-        lastName: String,
-        email: String,
-        countryCode: String,
-        phone: String
-    ): TeacherResourceDto {
-        val request = CreateTeacherRequestDto(
-            firstName = firstName,
-            lastName = lastName,
-            email = email,
-            countryCode = countryCode,
-            phone = phone
-        )
+    override suspend fun addTeacher(request: CreateTeacherRequestDto): TeacherResourceDto {
         return safeApiCall(endpoint = "teachers") { api.createTeacher(request) }
     }
 }
