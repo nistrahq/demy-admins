@@ -6,9 +6,9 @@ import com.nistra.demy.admins.features.teachers.data.remote.dto.CreateTeacherReq
 import com.nistra.demy.admins.features.teachers.data.remote.dto.TeacherResourceDto
 import javax.inject.Inject
 
-class TeachersRemoteDataSourceImpl @Inject constructor(
+class TeacherRemoteDataSourceImpl @Inject constructor(
     private val api : TeachersApi
-) : TeachersRemoteDataSource {
+) : TeacherRemoteDataSource {
     override suspend fun fetchTeachers(): List<TeacherResourceDto> {
         return safeApiCall(endpoint = "teachers") { api.getAllTeachers() }
     }
