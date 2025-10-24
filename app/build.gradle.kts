@@ -21,22 +21,22 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/api/v1/\"")
-        buildConfigField("Boolean", "LOG_HTTP", "true")
         buildConfigField("String", "APP_ROLE", "\"ROLE_ADMINISTRATOR\"")
     }
 
     buildTypes {
         debug {
-
+            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/api/v1/\"")
+            buildConfigField("Boolean", "LOG_HTTP", "true")
         }
         release {
+            buildConfigField("String", "API_BASE_URL", "\"https://nistra-demy.up.railway.app/api/v1/\"")
+            buildConfigField("Boolean", "LOG_HTTP", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("Boolean", "LOG_HTTP", "false")
         }
     }
     compileOptions {
