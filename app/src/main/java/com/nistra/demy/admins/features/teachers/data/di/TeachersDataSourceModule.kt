@@ -1,0 +1,16 @@
+package com.nistra.demy.admins.features.teachers.data.di
+
+import com.nistra.demy.admins.features.teachers.data.datasource.remote.TeachersRemoteDataSource
+import com.nistra.demy.admins.features.teachers.data.datasource.remote.TeachersRemoteDataSourceImpl
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class TeachersDataSourceModule {
+    @Binds @Singleton
+    abstract fun bindTeachersRemoteDataSource(impl: TeachersRemoteDataSourceImpl): TeachersRemoteDataSource
+}
