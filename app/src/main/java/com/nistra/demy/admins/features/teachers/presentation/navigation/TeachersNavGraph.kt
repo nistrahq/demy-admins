@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
 import com.nistra.demy.admins.features.teachers.presentation.ui.screens.TeachersListScreen
-import com.nistra.demy.admins.features.teachers.presentation.ui.screens.TeachersScreen
+import com.nistra.demy.admins.features.teachers.presentation.ui.screens.RegisterTeacherScreen
 
 fun NavGraphBuilder.teachersGraph(navController: NavHostController) {
     navigation(
@@ -14,7 +14,7 @@ fun NavGraphBuilder.teachersGraph(navController: NavHostController) {
         route = MainDestination.Teachers.route
     ) {
         composable(TeachersDestination.Register.toRoute()) {
-            TeachersScreen(
+            RegisterTeacherScreen(
                 onGoToList = { navController.navigate(TeachersDestination.List.toRoute()) }
             )
         }
