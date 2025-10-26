@@ -6,8 +6,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import com.nistra.demy.admins.core.common.LocaleManager
 import com.nistra.demy.admins.core.common.SnackbarMessage
 import com.nistra.demy.admins.core.common.SnackbarType
+import com.nistra.demy.admins.core.localization.AndroidLocaleManager
 
 /**
  * State holder for the Demy Snackbar system.
@@ -49,6 +52,8 @@ fun rememberDemySnackbarState(): DemySnackbarState {
  * with the provided message content. The type is updated BEFORE showing the
  * Snackbar to prevent any color flash.
  *
+ * The message is resolved using [LocaleManager] to support localization.
+ *
  * @param message The message to display, or null if no message should be shown.
  * @param snackbarState The [DemySnackbarState] used to manage the Snackbar.
  * @param onMessageShown Callback invoked after the message is shown to clear the state.
@@ -61,14 +66,23 @@ fun SnackbarEffect(
     snackbarState: DemySnackbarState,
     onMessageShown: () -> Unit
 ) {
+    val context = LocalContext.current
+    val localeManager: LocaleManager = remember { AndroidLocaleManager(context) }
+
     LaunchedEffect(message) {
         message?.let {
-            // Update type BEFORE showing snackbar to prevent flash
+            // Update type BEFORE showing Snackbar to prevent flash
             snackbarState.currentType.value = it.type
 
+            // Resolve localized strings
+            val resolvedMessage = localeManager.getString(it.message)
+            val resolvedActionLabel = it.actionLabel?.let { label ->
+                localeManager.getString(label)
+            }
+
             snackbarState.hostState.showSnackbar(
-                message = it.message,
-                actionLabel = it.actionLabel
+                message = resolvedMessage,
+                actionLabel = resolvedActionLabel
             )
             onMessageShown()
         }

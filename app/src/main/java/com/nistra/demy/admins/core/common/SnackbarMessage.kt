@@ -9,7 +9,9 @@ package com.nistra.demy.admins.core.common
  * This class belongs to the common/presentation layer, not the UI layer,
  * allowing ViewModels to create snackbar messages without depending on UI components.
  *
- * @property message The text content to display in the Snackbar.
+ * The message can be either a localized resource or a raw string (e.g., from server errors).
+ *
+ * @property message The text content to display, either localized or raw.
  * @property type The semantic type of the message (SUCCESS, ERROR, WARNING, INFO).
  * @property actionLabel Optional label for an action button.
  * @property onActionClick Optional callback invoked when the action button is clicked.
@@ -17,9 +19,9 @@ package com.nistra.demy.admins.core.common
  * @author Salim Ramirez
  */
 data class SnackbarMessage(
-    val message: String,
+    val message: LocalizedString,
     val type: SnackbarType = SnackbarType.INFO,
-    val actionLabel: String? = null,
+    val actionLabel: LocalizedString? = null,
     val onActionClick: (() -> Unit)? = null
 )
 
