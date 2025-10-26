@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.designsystem.components.feedback
 
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -53,6 +54,8 @@ fun rememberDemySnackbarState(): DemySnackbarState {
  * Snackbar to prevent any color flash.
  *
  * The message is resolved using [LocaleManager] to support localization.
+ * The Snackbar will automatically dismiss after a short duration (4 seconds),
+ * but can also be dismissed manually by clicking the action button.
  *
  * @param message The message to display, or null if no message should be shown.
  * @param snackbarState The [DemySnackbarState] used to manage the Snackbar.
@@ -82,7 +85,8 @@ fun SnackbarEffect(
 
             snackbarState.hostState.showSnackbar(
                 message = resolvedMessage,
-                actionLabel = resolvedActionLabel
+                actionLabel = resolvedActionLabel,
+                duration = SnackbarDuration.Short
             )
             onMessageShown()
         }

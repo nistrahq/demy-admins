@@ -1,27 +1,45 @@
 package com.nistra.demy.admins.core.designsystem.components.feedback
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.common.SnackbarType
 import com.nistra.demy.admins.core.designsystem.theme.extendedColors
 
 /**
- * A Material Design 3 Snackbar component with semantic color support.
+ * A Material Design 3 Snackbar component with semantic color support and icons.
  *
  * This composable provides a pre-configured Snackbar that automatically applies
- * appropriate colors based on the message type (SUCCESS, ERROR, WARNING, INFO).
+ * appropriate colors and icons based on the message type (SUCCESS, ERROR, WARNING, INFO).
  * It uses Material Design 3 extended colors for consistent visual feedback.
  *
  * The Snackbar ensures proper color contrast for accessibility by using
- * container and onContainer color pairs.
+ * container and onContainer color pairs. Each type has its corresponding icon:
+ * - SUCCESS: CheckCircle icon (green)
+ * - ERROR: Error icon (red)
+ * - WARNING: Warning icon (amber/yellow)
+ * - INFO: Info icon (blue)
  *
  * @param snackbarData The data for the Snackbar, including message and action.
- * @param type The semantic type of the message, determining the color scheme.
+ * @param type The semantic type of the message, determining the color scheme and icon.
  * @param modifier Optional [Modifier] for the Snackbar.
  *
  * @author Salim Ramirez
@@ -33,14 +51,39 @@ fun DemySnackbar(
     modifier: Modifier = Modifier
 ) {
     val (containerColor, contentColor) = getSnackbarColors(type)
+    val icon = getSnackbarIcon(type)
 
     Snackbar(
-        snackbarData = snackbarData,
         modifier = modifier,
         containerColor = containerColor,
         contentColor = contentColor,
-        actionColor = contentColor
-    )
+        actionContentColor = contentColor,
+        action = snackbarData.visuals.actionLabel?.let {
+            {
+                TextButton(onClick = { snackbarData.performAction() }) {
+                    Text(
+                        text = it,
+                        color = contentColor
+                    )
+                }
+            }
+        }
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = contentColor
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = snackbarData.visuals.message,
+                color = contentColor
+            )
+        }
+    }
 }
 
 /**
@@ -130,6 +173,32 @@ private fun getSnackbarColors(type: SnackbarType): Pair<Color, Color> {
             extendedColors.info.colorContainer,
             extendedColors.info.onColorContainer
         )
+    }
+}
+
+/**
+ * Returns the appropriate icon for a Snackbar based on its type.
+ *
+ * This function maps semantic types to Material Icons:
+ * - SUCCESS: CheckCircle icon
+ * - ERROR: Error icon
+ * - WARNING: Warning icon
+ * - INFO: Info icon
+ *
+ * These icons provide visual reinforcement of the message type,
+ * improving accessibility and user comprehension.
+ *
+ * @param type The semantic type of the Snackbar message.
+ * @return An [ImageVector] representing the appropriate icon.
+ *
+ * @author Salim Ramirez
+ */
+private fun getSnackbarIcon(type: SnackbarType): ImageVector {
+    return when (type) {
+        SnackbarType.SUCCESS -> Icons.Filled.CheckCircle
+        SnackbarType.ERROR -> Icons.Filled.Error
+        SnackbarType.WARNING -> Icons.Filled.Warning
+        SnackbarType.INFO -> Icons.Filled.Info
     }
 }
 
