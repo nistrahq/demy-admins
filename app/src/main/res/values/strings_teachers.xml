@@ -26,4 +26,7 @@
     <string name="teachers_screen_title">Manage teaching staff information</string>
     <string name="teachers_screen_description">Manage the registration of new teachers and consult the complete academy directory.</string>
     <string name="teachers_register_success">Teacher registered successfully!</string>
+
+    <!-- Validation Messages -->
+    <string name="teachers_validation_required_fields">Please complete all required fields</string>
 </resources>

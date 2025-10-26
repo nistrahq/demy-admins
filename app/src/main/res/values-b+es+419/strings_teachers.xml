@@ -26,4 +26,7 @@
     <string name="teachers_screen_title">Maneja la información del personal docente</string>
     <string name="teachers_screen_description">Administre el registro de nuevos profesores y consulte el directorio completo de la academia.</string>
     <string name="teachers_register_success">¡Profesor registrado exitosamente!</string>
+
+    <!-- Validation Messages -->
+    <string name="teachers_validation_required_fields">Por favor completa todos los campos requeridos</string>
 </resources>
