@@ -62,7 +62,7 @@ fun TeacherRegistrationForm(
                 Text(
                     text = "Registrar Nuevo Profesor",
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
                     text = "Complete los datos para registrar un nuevo profesor",

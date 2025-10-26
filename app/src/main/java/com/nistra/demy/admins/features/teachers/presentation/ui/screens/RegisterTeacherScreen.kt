@@ -57,7 +57,7 @@ fun RegisterTeacherScreen(
     ) {
         // Header Section
         SectionHeader(
-            title = "Gestión de Profesores",
+            title = "Maneja la información del personal docente",
             description = "Administre el registro de nuevos profesores y consulte el directorio completo de la academia."
         )
 
