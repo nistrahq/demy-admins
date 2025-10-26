@@ -2,17 +2,19 @@ package com.nistra.demy.admins.features.main.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.nistra.demy.admins.R
 
 @Composable
 fun NavHostController.currentTitle(): String {
     val parentRoute = currentParentRouteAsState()
     return when (parentRoute) {
-        MainDestination.Dashboard.route -> "Dashboard"
-        MainDestination.Teachers.route -> "Gestión de Profesores"
-        MainDestination.Students.route -> "Gestión de Estudiantes"
-        else -> "Demy Admins"
+        MainDestination.Dashboard.route -> stringResource(R.string.nav_title_dashboard)
+        MainDestination.Teachers.route -> stringResource(R.string.nav_title_teachers)
+        MainDestination.Students.route -> stringResource(R.string.nav_title_students)
+        else -> stringResource(R.string.nav_title_default)
     }
 }
 

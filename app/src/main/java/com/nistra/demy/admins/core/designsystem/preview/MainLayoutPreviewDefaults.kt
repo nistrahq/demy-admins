@@ -1,6 +1,7 @@
 package com.nistra.demy.admins.core.designsystem.preview
 
 import androidx.compose.runtime.Composable
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 import com.nistra.demy.admins.core.designsystem.layout.MainLayout
@@ -17,8 +18,8 @@ import com.nistra.demy.admins.core.designsystem.model.UserUi
 object MainLayoutPreviewDefaults {
     val user = UserUi(name = "Salim", role = "Administrator", avatarResId = null)
     val sections = listOf(
-        DrawerSection("Overview", listOf(DrawerDestination.Dashboard)),
-        DrawerSection("Academy", listOf(DrawerDestination.Teachers, DrawerDestination.Students))
+        DrawerSection(R.string.drawer_section_overview, listOf(DrawerDestination.Dashboard)),
+        DrawerSection(R.string.drawer_section_academy, listOf(DrawerDestination.Teachers, DrawerDestination.Students))
     )
 }
 

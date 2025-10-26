@@ -115,6 +115,6 @@ private fun handleLogout(
 private fun logUnimplementedNavigation(destination: DrawerDestination) {
     android.util.Log.w(
         "MainShell",
-        "Navigation to ${destination.label} (${destination.id}) not yet implemented"
+        "Navigation to ${destination.id} not yet implemented"
     )
 }

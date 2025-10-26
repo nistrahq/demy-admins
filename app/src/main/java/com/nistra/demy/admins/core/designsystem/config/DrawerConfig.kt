@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.designsystem.config
 
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 
@@ -17,15 +18,15 @@ object DrawerConfig {
      */
     fun getSections(): List<DrawerSection> = listOf(
         DrawerSection(
-            header = "Overview",
+            headerResId = R.string.drawer_section_overview,
             items = listOf(DrawerDestination.Dashboard)
         ),
         DrawerSection(
-            header = "Academy",
+            headerResId = R.string.drawer_section_academy,
             items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
         ),
         DrawerSection(
-            header = "Classes",
+            headerResId = R.string.drawer_section_classes,
             items = listOf(
                 DrawerDestination.Periods,
                 DrawerDestination.Courses,
@@ -34,7 +35,7 @@ object DrawerConfig {
             )
         ),
         DrawerSection(
-            header = "Management",
+            headerResId = R.string.drawer_section_management,
             items = listOf(
                 DrawerDestination.Enrollments,
                 DrawerDestination.Scheduling,
@@ -44,7 +45,7 @@ object DrawerConfig {
             )
         ),
         DrawerSection(
-            header = "General",
+            headerResId = R.string.drawer_section_general,
             items = listOf(
                 DrawerDestination.Settings,
                 DrawerDestination.Help,

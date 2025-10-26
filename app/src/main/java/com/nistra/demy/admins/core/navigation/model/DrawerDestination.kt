@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.navigation.model
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.Help
@@ -17,30 +18,31 @@ import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Work
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
 
 /**
  * Main destinations for the app's top-level navigation.
  *
  * @param id The unique identifier for the destination.
- * @param label The display label for the destination.
+ * @param labelResId The string resource ID for the display label.
  * @param icon The icon representing the destination.
  * @author Salim Ramirez
  */
-sealed class DrawerDestination(val id: String, val label: String, val icon: ImageVector) {
-    data object Dashboard : DrawerDestination(MainDestination.Dashboard.route, "Dashboard", Icons.Filled.Dashboard)
-    data object Teachers : DrawerDestination(MainDestination.Teachers.route, "Teachers", Icons.Filled.Work)
-    data object Students : DrawerDestination(MainDestination.Students.route, "Students", Icons.Filled.People)
-    data object Periods : DrawerDestination("periods", "Periods", Icons.Filled.CalendarMonth)
-    data object Classrooms : DrawerDestination("classrooms", "Classrooms", Icons.Filled.School)
-    data object Courses : DrawerDestination("courses", "Courses", Icons.AutoMirrored.Filled.MenuBook)
-    data object Schedules : DrawerDestination("schedules", "Schedules", Icons.Filled.Schedule)
-    data object Enrollments : DrawerDestination("enrollments", "Enrollments", Icons.Filled.AppRegistration)
-    data object Scheduling : DrawerDestination("scheduling", "Scheduling", Icons.Filled.CalendarToday)
-    data object Billing : DrawerDestination("billing", "Billing", Icons.Filled.Payment)
-    data object Invoices : DrawerDestination("invoices", "Invoices", Icons.Filled.Description)
-    data object Finance : DrawerDestination("finance", "Finance", Icons.Filled.AccountBalance)
-    data object Settings : DrawerDestination("settings", "Settings", Icons.Filled.Settings)
-    data object Help : DrawerDestination("help", "Help", Icons.AutoMirrored.Filled.Help)
-    data object LogOut : DrawerDestination("logout", "Log Out", Icons.AutoMirrored.Filled.ExitToApp)
+sealed class DrawerDestination(val id: String, @param:StringRes val labelResId: Int, val icon: ImageVector) {
+    data object Dashboard : DrawerDestination(MainDestination.Dashboard.route, R.string.drawer_destination_dashboard, Icons.Filled.Dashboard)
+    data object Teachers : DrawerDestination(MainDestination.Teachers.route, R.string.drawer_destination_teachers, Icons.Filled.Work)
+    data object Students : DrawerDestination(MainDestination.Students.route, R.string.drawer_destination_students, Icons.Filled.People)
+    data object Periods : DrawerDestination("periods", R.string.drawer_destination_periods, Icons.Filled.CalendarMonth)
+    data object Classrooms : DrawerDestination("classrooms", R.string.drawer_destination_classrooms, Icons.Filled.School)
+    data object Courses : DrawerDestination("courses", R.string.drawer_destination_courses, Icons.AutoMirrored.Filled.MenuBook)
+    data object Schedules : DrawerDestination("schedules", R.string.drawer_destination_schedules, Icons.Filled.Schedule)
+    data object Enrollments : DrawerDestination("enrollments", R.string.drawer_destination_enrollments, Icons.Filled.AppRegistration)
+    data object Scheduling : DrawerDestination("scheduling", R.string.drawer_destination_scheduling, Icons.Filled.CalendarToday)
+    data object Billing : DrawerDestination("billing", R.string.drawer_destination_billing, Icons.Filled.Payment)
+    data object Invoices : DrawerDestination("invoices", R.string.drawer_destination_invoices, Icons.Filled.Description)
+    data object Finance : DrawerDestination("finance", R.string.drawer_destination_finance, Icons.Filled.AccountBalance)
+    data object Settings : DrawerDestination("settings", R.string.drawer_destination_settings, Icons.Filled.Settings)
+    data object Help : DrawerDestination("help", R.string.drawer_destination_help, Icons.AutoMirrored.Filled.Help)
+    data object LogOut : DrawerDestination("logout", R.string.drawer_destination_logout, Icons.AutoMirrored.Filled.ExitToApp)
 }

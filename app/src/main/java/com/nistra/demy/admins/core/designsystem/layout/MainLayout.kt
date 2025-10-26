@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.components.MainNavigationDrawer
 import com.nistra.demy.admins.core.designsystem.components.MainTopBar
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
@@ -107,11 +108,11 @@ fun MainLayoutPreview() {
             appName = "Demy Admins",
             drawerSections = listOf(
                 DrawerSection(
-                    header = "Overview",
+                    headerResId = R.string.drawer_section_overview,
                     items = listOf(DrawerDestination.Dashboard)
                 ),
                 DrawerSection(
-                    header = "Academy",
+                    headerResId = R.string.drawer_section_academy,
                     items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
                 )
             ),

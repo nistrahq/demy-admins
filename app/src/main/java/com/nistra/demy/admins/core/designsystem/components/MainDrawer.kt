@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
@@ -76,9 +77,9 @@ fun DrawerContent(
             contentPadding = PaddingValues(vertical = 8.dp)
         ) {
             sections.forEach { section ->
-                item(key = "header-${section.header}") {
+                item(key = "header-${section.headerResId}") {
                     Text(
-                        text = section.header,
+                        text = stringResource(section.headerResId),
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.padding(top = 8.dp, start = 20.dp, end = 20.dp, bottom = 4.dp)
                     )
@@ -89,7 +90,7 @@ fun DrawerContent(
                 ) { destination ->
                     val isSelected = selectedId == destination.id
                     NavigationDrawerItem(
-                        label = { Text(destination.label, style = MaterialTheme.typography.bodyMedium) },
+                        label = { Text(stringResource(destination.labelResId), style = MaterialTheme.typography.bodyMedium) },
                         selected = isSelected,
                         onClick = { onDestinationClick(destination) },
                         icon = { Icon(destination.icon, contentDescription = null) },
@@ -101,7 +102,7 @@ fun DrawerContent(
                         )
                     )
                 }
-                item(key = "spacer-${section.header}") { Spacer(Modifier.height(8.dp)) }
+                item(key = "spacer-${section.headerResId}") { Spacer(Modifier.height(8.dp)) }
             }
             item(key = "bottom-padding") { Spacer(Modifier.height(8.dp)) }
         }
