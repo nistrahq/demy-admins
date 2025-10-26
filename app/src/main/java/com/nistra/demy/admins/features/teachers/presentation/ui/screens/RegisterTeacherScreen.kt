@@ -1,10 +1,12 @@
 package com.nistra.demy.admins.features.teachers.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Alignment
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -48,46 +50,50 @@ fun RegisterTeacherScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        // Header Section
-        SectionHeader(
-            title = "Maneja la información del personal docente",
-            description = "Administre el registro de nuevos profesores y consulte el directorio completo de la academia."
-        )
-
-        // Two-column layout: Form (left) and Search (right)
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Left column - Registration Form
-            TeacherRegistrationForm(
-                modifier = Modifier.weight(1f),
-                formData = formData,
-                onFormChange = viewModel::onFieldChange,
-                onSubmit = viewModel::registerTeacher,
-                isLoading = uiState.isLoading
+            // Header Section
+            SectionHeader(
+                title = "Maneja la información del personal docente",
+                description = "Administre el registro de nuevos profesores y consulte el directorio completo de la academia."
             )
 
-            // Right column - Search Panel
-            TeacherSearchPanel(
-                modifier = Modifier.weight(1f),
-                searchQuery = searchQuery,
-                onSearchQueryChange = viewModel::onSearchQueryChange,
-                teachers = uiState.filteredTeachers,
-                isLoading = uiState.isLoadingTeachers
-            )
+            // Two-column layout: Form (left) and Search (right)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Left column - Registration Form
+                TeacherRegistrationForm(
+                    modifier = Modifier.weight(1f),
+                    formData = formData,
+                    onFormChange = viewModel::onFieldChange,
+                    onSubmit = viewModel::registerTeacher,
+                    isLoading = uiState.isLoading
+                )
+
+                // Right column - Search Panel
+                TeacherSearchPanel(
+                    modifier = Modifier.weight(1f),
+                    searchQuery = searchQuery,
+                    onSearchQueryChange = viewModel::onSearchQueryChange,
+                    teachers = uiState.filteredTeachers,
+                    isLoading = uiState.isLoadingTeachers
+                )
+            }
         }
 
-        // Snackbar host for messages
+        // Snackbar host for messages (positioned at bottom, doesn't take space in Column)
         SnackbarHost(
             hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter),
             snackbar = { data ->
                 Snackbar(
                     snackbarData = data,
