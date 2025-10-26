@@ -10,6 +10,7 @@ import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
 import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
 import com.nistra.demy.admins.features.profile.presentation.navigation.profileGraph
+import com.nistra.demy.admins.features.settings.presentation.navigation.settingsGraph
 import com.nistra.demy.admins.features.students.presentation.navigation.studentsGraph
 import com.nistra.demy.admins.features.teachers.presentation.navigation.teachersGraph
 
@@ -34,6 +35,7 @@ fun MainNavHost(
             teachersGraph(innerNavController)
             studentsGraph(innerNavController)
             profileGraph(innerNavController)
+            settingsGraph(innerNavController)
         }
     }
 }

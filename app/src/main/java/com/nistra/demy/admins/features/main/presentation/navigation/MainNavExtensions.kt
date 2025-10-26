@@ -15,6 +15,7 @@ fun NavHostController.currentTitle(): String {
         MainDestination.Teachers.route -> stringResource(R.string.nav_title_teachers)
         MainDestination.Students.route -> stringResource(R.string.nav_title_students)
         MainDestination.Profile.route -> stringResource(R.string.nav_title_profile)
+        MainDestination.Settings.route -> stringResource(R.string.nav_title_settings)
         else -> stringResource(R.string.nav_title_default)
     }
 }
