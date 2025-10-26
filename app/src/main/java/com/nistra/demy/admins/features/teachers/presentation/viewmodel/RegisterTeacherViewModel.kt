@@ -83,7 +83,8 @@ class RegisterTeacherViewModel @Inject constructor(
                                 message = error.message?.let { msg ->
                                     LocalizedString.Raw(msg)
                                 } ?: LocalizedString.Resource(R.string.teachers_error_load_failed),
-                                type = SnackbarType.ERROR
+                                type = SnackbarType.ERROR,
+                                actionLabel = LocalizedString.Resource(R.string.action_ok)
                             )
                         )
                     }
@@ -99,7 +100,8 @@ class RegisterTeacherViewModel @Inject constructor(
                 it.copy(
                     snackbarMessage = SnackbarMessage(
                         message = LocalizedString.Resource(R.string.teachers_validation_required_fields),
-                        type = SnackbarType.WARNING
+                        type = SnackbarType.WARNING,
+                        actionLabel = LocalizedString.Resource(R.string.action_ok)
                     )
                 )
             }
@@ -125,7 +127,8 @@ class RegisterTeacherViewModel @Inject constructor(
                             isLoading = false,
                             snackbarMessage = SnackbarMessage(
                                 message = LocalizedString.Resource(R.string.teachers_register_success),
-                                type = SnackbarType.SUCCESS
+                                type = SnackbarType.SUCCESS,
+                                actionLabel = LocalizedString.Resource(R.string.action_ok)
                             )
                         )
                     }
@@ -140,7 +143,8 @@ class RegisterTeacherViewModel @Inject constructor(
                                 message = error.message?.let { msg ->
                                     LocalizedString.Raw(msg)
                                 } ?: LocalizedString.Resource(R.string.teachers_error_register_failed),
-                                type = SnackbarType.ERROR
+                                type = SnackbarType.ERROR,
+                                actionLabel = LocalizedString.Resource(R.string.action_ok)
                             )
                         )
                     }
@@ -152,3 +156,4 @@ class RegisterTeacherViewModel @Inject constructor(
         _uiState.update { it.copy(snackbarMessage = null) }
     }
 }
+
