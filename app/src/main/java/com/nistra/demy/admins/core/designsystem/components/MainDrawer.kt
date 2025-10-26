@@ -1,7 +1,7 @@
 package com.nistra.demy.admins.core.designsystem.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,24 +21,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 
 @Composable
 fun DrawerHeader(appName: String) {
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 24.dp),
-        horizontalAlignment = Alignment.Start
+            .padding(top = 24.dp),
+        contentAlignment = Alignment.Center
     ) {
-        // Image(painterResource(id = R.drawable.ic_app_logo), contentDescription = null, modifier = Modifier.size(40.dp))
-        Text(
-            text = appName,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.SemiBold
+        Image(
+            painter = painterResource(id = R.drawable.demy_combination_mark_original),
+            contentDescription = appName,
+            modifier = Modifier.height(56.dp),
+            contentScale = ContentScale.FillHeight
         )
     }
 }

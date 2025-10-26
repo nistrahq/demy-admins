@@ -5,12 +5,13 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
+@Composable
 fun NavHostController.currentTitle(): String {
-    val parentRoute = currentParentRoute()
+    val parentRoute = currentParentRouteAsState()
     return when (parentRoute) {
         MainDestination.Dashboard.route -> "Dashboard"
-        MainDestination.Teachers.route -> "Teachers"
-        MainDestination.Students.route -> "Students"
+        MainDestination.Teachers.route -> "Gestión de Profesores"
+        MainDestination.Students.route -> "Gestión de Estudiantes"
         else -> "Demy Admins"
     }
 }
