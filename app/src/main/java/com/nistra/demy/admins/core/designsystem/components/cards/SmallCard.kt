@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.designsystem.components
+package com.nistra.demy.admins.core.designsystem.components.cards
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement

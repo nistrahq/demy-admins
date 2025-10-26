@@ -2,6 +2,7 @@ package com.nistra.demy.admins.core.designsystem.samples
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 import com.nistra.demy.admins.core.designsystem.layout.MainLayout
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
@@ -29,11 +30,11 @@ fun TabletLightPreviewSample() {
         appName = "Demy Admins",
         drawerSections = listOf(
             DrawerSection(
-                header = "Overview",
+                headerResId = R.string.drawer_section_overview,
                 items = listOf(DrawerDestination.Dashboard)
             ),
             DrawerSection(
-                header = "Academy",
+                headerResId = R.string.drawer_section_academy,
                 items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
             )
         ),
@@ -64,11 +65,11 @@ fun TabletDarkPreviewSample() {
         appName = "Demy Admins",
         drawerSections = listOf(
             DrawerSection(
-                header = "Overview",
+                headerResId = R.string.drawer_section_overview,
                 items = listOf(DrawerDestination.Dashboard)
             ),
             DrawerSection(
-                header = "Academy",
+                headerResId = R.string.drawer_section_academy,
                 items = listOf(DrawerDestination.Teachers, DrawerDestination.Students)
             )
         ),

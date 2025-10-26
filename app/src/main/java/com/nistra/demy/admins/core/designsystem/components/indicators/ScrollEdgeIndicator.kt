@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.designsystem.components
+package com.nistra.demy.admins.core.designsystem.components.indicators
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

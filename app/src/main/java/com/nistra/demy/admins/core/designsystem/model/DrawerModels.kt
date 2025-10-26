@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.core.designsystem.model
 
+import androidx.annotation.StringRes
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 
 data class UserUi(
@@ -9,6 +10,6 @@ data class UserUi(
 )
 
 data class DrawerSection(
-    val header: String,
+    @param:StringRes val headerResId: Int,
     val items: List<DrawerDestination>
 )
