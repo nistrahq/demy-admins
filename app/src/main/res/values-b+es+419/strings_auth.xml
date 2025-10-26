@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="auth_label_email">Correo</string>
     <string name="auth_icon_email">Ícono de Correo</string>

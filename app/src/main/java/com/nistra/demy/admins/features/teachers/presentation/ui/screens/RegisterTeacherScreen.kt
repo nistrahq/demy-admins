@@ -17,9 +17,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.SectionHeader
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.TeacherRegistrationForm
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.TeacherSearchPanel
@@ -35,10 +37,11 @@ fun RegisterTeacherScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    // Manejar mensajes de éxito y error
+    val successMessage = stringResource(R.string.teachers_register_success)
+
     LaunchedEffect(uiState.isSuccess) {
         if (uiState.isSuccess) {
-            snackbarHostState.showSnackbar("¡Profesor registrado exitosamente!")
+            snackbarHostState.showSnackbar(successMessage)
             viewModel.clearSuccess()
         }
     }
@@ -57,20 +60,17 @@ fun RegisterTeacherScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Header Section
             SectionHeader(
-                title = "Maneja la información del personal docente",
-                description = "Administre el registro de nuevos profesores y consulte el directorio completo de la academia."
+                title = stringResource(R.string.teachers_screen_title),
+                description = stringResource(R.string.teachers_screen_description)
             )
 
-            // Two-column layout: Form (left) and Search (right)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Left column - Registration Form
                 TeacherRegistrationForm(
                     modifier = Modifier.weight(1f),
                     formData = formData,
@@ -79,7 +79,6 @@ fun RegisterTeacherScreen(
                     isLoading = uiState.isLoading
                 )
 
-                // Right column - Search Panel
                 TeacherSearchPanel(
                     modifier = Modifier.weight(1f),
                     searchQuery = searchQuery,
@@ -90,7 +89,6 @@ fun RegisterTeacherScreen(
             }
         }
 
-        // Snackbar host for messages (positioned at bottom, doesn't take space in Column)
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier.align(Alignment.BottomCenter),

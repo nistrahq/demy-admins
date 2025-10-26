@@ -27,8 +27,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.teachers.presentation.model.TeacherFormData
 
 @Composable
@@ -52,7 +54,6 @@ fun TeacherRegistrationForm(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Header con fondo de color
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -61,19 +62,18 @@ fun TeacherRegistrationForm(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "Registrar Nuevo Profesor",
+                    text = stringResource(R.string.teachers_register_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
-                    text = "Complete los datos para registrar un nuevo profesor",
+                    text = stringResource(R.string.teachers_register_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
 
-            // Formulario
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -81,7 +81,7 @@ fun TeacherRegistrationForm(
                 OutlinedTextField(
                     value = formData.firstName,
                     onValueChange = { onFormChange(formData.copy(firstName = it)) },
-                    label = { Text("Nombre") },
+                    label = { Text(stringResource(R.string.teachers_first_name)) },
                     leadingIcon = {
                         Icon(Icons.Default.Person, contentDescription = null)
                     },
@@ -92,7 +92,7 @@ fun TeacherRegistrationForm(
                 OutlinedTextField(
                     value = formData.lastName,
                     onValueChange = { onFormChange(formData.copy(lastName = it)) },
-                    label = { Text("Apellido") },
+                    label = { Text(stringResource(R.string.teachers_last_name)) },
                     leadingIcon = {
                         Icon(Icons.Default.Person, contentDescription = null)
                     },
@@ -104,7 +104,7 @@ fun TeacherRegistrationForm(
             OutlinedTextField(
                 value = formData.email,
                 onValueChange = { onFormChange(formData.copy(email = it)) },
-                label = { Text("Correo Electrónico") },
+                label = { Text(stringResource(R.string.teachers_email)) },
                 leadingIcon = {
                     Icon(Icons.Default.Email, contentDescription = null)
                 },
@@ -120,7 +120,7 @@ fun TeacherRegistrationForm(
                 OutlinedTextField(
                     value = formData.countryCode,
                     onValueChange = { onFormChange(formData.copy(countryCode = it)) },
-                    label = { Text("Código") },
+                    label = { Text(stringResource(R.string.teachers_country_code)) },
                     modifier = Modifier.width(100.dp),
                     singleLine = true
                 )
@@ -128,7 +128,7 @@ fun TeacherRegistrationForm(
                 OutlinedTextField(
                     value = formData.phone,
                     onValueChange = { onFormChange(formData.copy(phone = it)) },
-                    label = { Text("Teléfono") },
+                    label = { Text(stringResource(R.string.teachers_phone)) },
                     leadingIcon = {
                         Icon(Icons.Default.Phone, contentDescription = null)
                     },
@@ -147,7 +147,13 @@ fun TeacherRegistrationForm(
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
-                Text(if (isLoading) "Registrando..." else "Registrar Profesor")
+                Text(
+                    text = if (isLoading) {
+                        stringResource(R.string.teachers_register_button_loading)
+                    } else {
+                        stringResource(R.string.teachers_register_button)
+                    }
+                )
             }
         }
     }

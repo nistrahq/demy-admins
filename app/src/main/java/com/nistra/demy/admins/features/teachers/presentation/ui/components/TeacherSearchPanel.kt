@@ -33,7 +33,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
 
 @Composable
@@ -55,7 +57,6 @@ fun TeacherSearchPanel(
             modifier = Modifier.padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Header con fondo de color
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,12 +65,12 @@ fun TeacherSearchPanel(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "Buscar Profesores",
+                    text = stringResource(R.string.teachers_search_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
                 Text(
-                    text = "Encuentre y gestione los profesores registrados",
+                    text = stringResource(R.string.teachers_search_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f),
                     modifier = Modifier.padding(top = 4.dp)
@@ -79,13 +80,13 @@ fun TeacherSearchPanel(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = onSearchQueryChange,
-                label = { Text("Buscar por nombre o correo") },
+                label = { Text(stringResource(R.string.teachers_search_placeholder)) },
                 leadingIcon = {
-                    Icon(Icons.Default.Search, contentDescription = "Buscar")
+                    Icon(Icons.Default.Search, contentDescription = stringResource(R.string.teacher_search))
                 },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                placeholder = { Text("Ingrese nombre o correo...") },
+                placeholder = { Text(stringResource(R.string.teachers_search_input_placeholder)) },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.tertiary,
                     focusedLabelColor = MaterialTheme.colorScheme.tertiary,
@@ -94,7 +95,6 @@ fun TeacherSearchPanel(
                 )
             )
 
-            // Área de resultados
             if (isLoading) {
                 Box(
                     modifier = Modifier.fillMaxWidth(),
@@ -104,19 +104,18 @@ fun TeacherSearchPanel(
                 }
             } else if (teachers.isEmpty()) {
                 Text(
-                    text = "No se encontraron profesores",
+                    text = stringResource(R.string.teachers_not_found),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     modifier = Modifier.padding(vertical = 16.dp)
                 )
             } else {
                 Text(
-                    text = "${teachers.size} profesor${if (teachers.size != 1) "es" else ""} encontrado${if (teachers.size != 1) "s" else ""}",
+                    text = stringResource(R.string.teachers_found_count, teachers.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
 
-                // Lista de profesores
                 LazyColumn(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -150,7 +149,6 @@ private fun TeacherListItem(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Información del profesor
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -209,7 +207,6 @@ private fun TeacherListItem(
                 }
             }
 
-            // Botones de acción
             Row(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
@@ -218,7 +215,7 @@ private fun TeacherListItem(
                 ) {
                     Icon(
                         Icons.Default.Edit,
-                        contentDescription = "Editar profesor",
+                        contentDescription = stringResource(R.string.teacher_edit),
                         tint = MaterialTheme.colorScheme.tertiary
                     )
                 }
@@ -228,7 +225,7 @@ private fun TeacherListItem(
                 ) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "Eliminar profesor",
+                        contentDescription = stringResource(R.string.teacher_delete),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
