@@ -23,6 +23,7 @@ import com.nistra.demy.admins.core.designsystem.model.UserUi
  * @param user User information for the user chip.
  * @param showBackButton Whether to show a back button.
  * @param onBackClick Callback when the back button is clicked.
+ * @param onUserClick Callback when the user chip is clicked.
  * @author Salim Ramirez
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +32,8 @@ fun MainTopBar(
     title: String,
     user: UserUi,
     showBackButton: Boolean = false,
-    onBackClick: (() -> Unit)? = null
+    onBackClick: (() -> Unit)? = null,
+    onUserClick: (() -> Unit)? = null
 ) {
     TopAppBar(
         title = {
@@ -53,7 +55,7 @@ fun MainTopBar(
             }
         },
         actions = {
-            UserChip(user = user)
+            UserChip(user = user, onClick = onUserClick)
         },
         modifier = Modifier.shadow(elevation = 4.dp)
     )
