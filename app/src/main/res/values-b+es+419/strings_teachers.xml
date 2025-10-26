@@ -29,4 +29,8 @@
 
     <!-- Validation Messages -->
     <string name="teachers_validation_required_fields">Por favor completa todos los campos requeridos</string>
+
+    <!-- Error Messages -->
+    <string name="teachers_error_register_failed">Error al registrar profesor</string>
+    <string name="teachers_error_load_failed">Error al cargar profesores</string>
 </resources>
