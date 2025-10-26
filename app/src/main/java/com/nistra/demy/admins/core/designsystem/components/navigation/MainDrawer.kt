@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.designsystem.components
+package com.nistra.demy.admins.core.designsystem.components.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -26,6 +26,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.R
+import com.nistra.demy.admins.core.designsystem.components.indicators.BottomEdgeFade
+import com.nistra.demy.admins.core.designsystem.components.indicators.TopEdgeFade
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 

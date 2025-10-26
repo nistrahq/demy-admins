@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.designsystem.components
+package com.nistra.demy.admins.core.designsystem.components.navigation
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

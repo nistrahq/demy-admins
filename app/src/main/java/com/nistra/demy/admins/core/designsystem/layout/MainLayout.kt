@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.R
-import com.nistra.demy.admins.core.designsystem.components.MainNavigationDrawer
-import com.nistra.demy.admins.core.designsystem.components.MainTopBar
+import com.nistra.demy.admins.core.designsystem.components.navigation.MainNavigationDrawer
+import com.nistra.demy.admins.core.designsystem.components.navigation.MainTopBar
 import com.nistra.demy.admins.core.designsystem.model.DrawerSection
 import com.nistra.demy.admins.core.designsystem.model.UserUi
 import com.nistra.demy.admins.core.designsystem.preview.TabletPreviewDark

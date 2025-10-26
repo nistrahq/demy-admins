@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.core.designsystem.components
+package com.nistra.demy.admins.core.designsystem.components.text
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
