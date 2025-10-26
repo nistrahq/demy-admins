@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Demy</string>
     <string name="tablet_only_message">This app is only available on tablets in landscape mode.</string>
-    <string name="unkown_error">Unknown error</string>
 </resources>

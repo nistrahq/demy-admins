@@ -2,5 +2,4 @@
 <resources>
     <string name="app_name">Demy</string>
     <string name="tablet_only_message">Esta aplicación está diseñada solo para tablets en orientación horizontal.</string>
-    <string name="unkown_error">Error desconocido</string>
 </resources>
