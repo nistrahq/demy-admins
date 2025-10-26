@@ -2,6 +2,8 @@ package com.nistra.demy.admins.features.teachers.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.R
+import com.nistra.demy.admins.core.common.LocalizedString
 import com.nistra.demy.admins.core.common.SnackbarMessage
 import com.nistra.demy.admins.core.common.SnackbarType
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
@@ -78,7 +80,9 @@ class RegisterTeacherViewModel @Inject constructor(
                         it.copy(
                             isLoadingTeachers = false,
                             snackbarMessage = SnackbarMessage(
-                                message = error.message ?: "Error desconocido",
+                                message = error.message?.let { msg ->
+                                    LocalizedString.Raw(msg)
+                                } ?: LocalizedString.Resource(R.string.teachers_error_load_failed),
                                 type = SnackbarType.ERROR
                             )
                         )
@@ -94,7 +98,7 @@ class RegisterTeacherViewModel @Inject constructor(
             _uiState.update {
                 it.copy(
                     snackbarMessage = SnackbarMessage(
-                        message = "Por favor, completa todos los campos obligatorios",
+                        message = LocalizedString.Resource(R.string.teachers_validation_required_fields),
                         type = SnackbarType.WARNING
                     )
                 )
@@ -120,7 +124,7 @@ class RegisterTeacherViewModel @Inject constructor(
                         it.copy(
                             isLoading = false,
                             snackbarMessage = SnackbarMessage(
-                                message = "Profesor registrado exitosamente",
+                                message = LocalizedString.Resource(R.string.teachers_register_success),
                                 type = SnackbarType.SUCCESS
                             )
                         )
@@ -133,7 +137,9 @@ class RegisterTeacherViewModel @Inject constructor(
                         it.copy(
                             isLoading = false,
                             snackbarMessage = SnackbarMessage(
-                                message = error.message ?: "Error al registrar profesor",
+                                message = error.message?.let { msg ->
+                                    LocalizedString.Raw(msg)
+                                } ?: LocalizedString.Resource(R.string.teachers_error_register_failed),
                                 type = SnackbarType.ERROR
                             )
                         )
