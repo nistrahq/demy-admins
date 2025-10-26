@@ -34,6 +34,7 @@ import com.nistra.demy.admins.core.navigation.model.DrawerDestination
  * @param showBackButton Whether to show a back button in the app bar.
  * @param onBackClick Callback when the back button is clicked.
  * @param onUserClick Callback when the user chip is clicked.
+ * @param isProfileSelected Whether the profile is currently selected.
  * @param appName Name of the application shown in the drawer header.
  * @param drawerSections Sections and items for the navigation drawer.
  * @param selectedDestinationId Currently selected destination ID.
@@ -48,6 +49,7 @@ fun MainLayout(
     showBackButton: Boolean = false,
     onBackClick: (() -> Unit)? = null,
     onUserClick: (() -> Unit)? = null,
+    isProfileSelected: Boolean = false,
     appName: String,
     drawerSections: List<DrawerSection>,
     selectedDestinationId: String,
@@ -71,7 +73,8 @@ fun MainLayout(
                     user = user,
                     showBackButton = showBackButton,
                     onBackClick = onBackClick,
-                    onUserClick = onUserClick
+                    onUserClick = onUserClick,
+                    isProfileSelected = isProfileSelected
                 )
             }
         ) { innerPadding ->

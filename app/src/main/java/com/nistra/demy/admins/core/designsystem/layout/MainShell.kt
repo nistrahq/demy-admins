@@ -41,6 +41,7 @@ fun MainShell(
 ) {
     val scope = rememberCoroutineScope()
     val currentRoute = navController.currentParentRouteAsState()
+    val isProfileSelected = currentRoute == MainDestination.Profile.route
 
     MainLayout(
         title = title,
@@ -52,6 +53,7 @@ fun MainShell(
         onUserClick = {
             navController.navigateOnce(MainDestination.Profile.route)
         },
+        isProfileSelected = isProfileSelected,
         drawerSections = DrawerConfig.getSections(),
         selectedDestinationId = currentRoute,
         onDestinationClick = { destination ->
