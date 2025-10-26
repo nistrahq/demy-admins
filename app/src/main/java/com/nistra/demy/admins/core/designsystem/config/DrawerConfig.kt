@@ -61,7 +61,8 @@ object DrawerConfig {
         DrawerDestination.Dashboard.id,
         DrawerDestination.Teachers.id,
         DrawerDestination.Students.id,
-        DrawerDestination.Settings.id
+        DrawerDestination.Settings.id,
+        DrawerDestination.Help.id
     )
 }
 
