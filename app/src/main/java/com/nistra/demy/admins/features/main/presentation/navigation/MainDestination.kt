@@ -32,4 +32,14 @@ sealed interface MainDestination {
         override val route = "main/help"
         fun toRoute() = route
     }
+
+    data object Billing : MainDestination {
+        override val route = "main/billing"
+        fun toRoute() = route
+    }
+
+    data object Invoices : MainDestination {
+        override val route = "main/invoices"
+        fun toRoute() = route
+    }
 }

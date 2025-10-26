@@ -17,6 +17,8 @@ fun NavHostController.currentTitle(): String {
         MainDestination.Profile.route -> stringResource(R.string.nav_title_profile)
         MainDestination.Settings.route -> stringResource(R.string.nav_title_settings)
         MainDestination.Help.route -> stringResource(R.string.nav_title_help)
+        MainDestination.Billing.route -> stringResource(R.string.nav_title_billing)
+        MainDestination.Invoices.route -> stringResource(R.string.nav_title_invoices)
         else -> stringResource(R.string.nav_title_default)
     }
 }
@@ -85,7 +87,9 @@ private val moduleToParentRouteMap = mapOf(
     "students" to MainDestination.Students.route,
     "profile" to MainDestination.Profile.route,
     "settings" to MainDestination.Settings.route,
-    "help" to MainDestination.Help.route
+    "help" to MainDestination.Help.route,
+    "billing" to MainDestination.Billing.route,
+    "invoices" to MainDestination.Invoices.route
     // Add new modules here
 )
 
