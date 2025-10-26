@@ -7,6 +7,8 @@
     <string name="nav_title_profile">Perfil</string>
     <string name="nav_title_settings">Configuración</string>
     <string name="nav_title_help">Ayuda</string>
+    <string name="nav_title_billing">Cobranzas</string>
+    <string name="nav_title_invoices">Facturas</string>
     <string name="nav_title_default">Demy Admins</string>
 
     <!-- Drawer Section Headers -->
