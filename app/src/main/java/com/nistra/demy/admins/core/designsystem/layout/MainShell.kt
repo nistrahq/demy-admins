@@ -9,6 +9,7 @@ import com.nistra.demy.admins.core.navigation.RootDestination
 import com.nistra.demy.admins.core.navigation.model.DrawerDestination
 import com.nistra.demy.admins.core.navigation.navigateOnce
 import com.nistra.demy.admins.core.storage.SessionPreferences
+import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
 import com.nistra.demy.admins.features.main.presentation.navigation.currentParentRouteAsState
 import kotlinx.coroutines.launch
 
@@ -40,6 +41,7 @@ fun MainShell(
 ) {
     val scope = rememberCoroutineScope()
     val currentRoute = navController.currentParentRouteAsState()
+    val isProfileSelected = currentRoute == MainDestination.Profile.route
 
     MainLayout(
         title = title,
@@ -48,6 +50,10 @@ fun MainShell(
             name = "Profile",
             role = "Administrator"
         ),
+        onUserClick = {
+            navController.navigateOnce(MainDestination.Profile.route)
+        },
+        isProfileSelected = isProfileSelected,
         drawerSections = DrawerConfig.getSections(),
         selectedDestinationId = currentRoute,
         onDestinationClick = { destination ->

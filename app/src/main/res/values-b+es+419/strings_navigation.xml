@@ -26,6 +26,7 @@
     <string name="drawer_destination_billing">Cobranzas</string>
     <string name="drawer_destination_invoices">Facturas</string>
     <string name="drawer_destination_finance">Finanzas</string>
+    <string name="nav_title_profile">Perfil</string>
     <string name="drawer_destination_settings">Configuración</string>
     <string name="drawer_destination_help">Ayuda</string>
     <string name="drawer_destination_logout">Cerrar Sesión</string>
