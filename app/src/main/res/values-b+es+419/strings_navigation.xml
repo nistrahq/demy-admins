@@ -4,11 +4,13 @@
     <string name="nav_title_dashboard">Panel de Control</string>
     <string name="nav_title_teachers">Gestión de Profesores</string>
     <string name="nav_title_students">Gestión de Estudiantes</string>
+    <string name="nav_title_billing">Cobranzas</string>
+    <string name="nav_title_invoices">Facturas</string>
+    <string name="nav_title_finance">Finanzas</string>
+    <string name="nav_title_accounting">Contabilidad</string>
     <string name="nav_title_profile">Perfil</string>
     <string name="nav_title_settings">Configuración</string>
     <string name="nav_title_help">Ayuda</string>
-    <string name="nav_title_billing">Cobranzas</string>
-    <string name="nav_title_invoices">Facturas</string>
     <string name="nav_title_default">Demy Admins</string>
 
     <!-- Drawer Section Headers -->
@@ -31,6 +33,7 @@
     <string name="drawer_destination_billing">Cobranzas</string>
     <string name="drawer_destination_invoices">Facturas</string>
     <string name="drawer_destination_finance">Finanzas</string>
+    <string name="drawer_destination_accounting">Contabilidad</string>
     <string name="drawer_destination_settings">Configuración</string>
     <string name="drawer_destination_help">Ayuda</string>
     <string name="drawer_destination_logout">Cerrar Sesión</string>

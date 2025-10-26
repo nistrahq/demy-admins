@@ -18,6 +18,26 @@ sealed interface MainDestination {
         fun toRoute() = route
     }
 
+    data object Billing : MainDestination {
+        override val route = "main/billing"
+        fun toRoute() = route
+    }
+
+    data object Invoices : MainDestination {
+        override val route = "main/invoices"
+        fun toRoute() = route
+    }
+
+    data object Finance : MainDestination {
+        override val route = "main/finance"
+        fun toRoute() = route
+    }
+
+    data object Accounting : MainDestination {
+        override val route = "main/accounting"
+        fun toRoute() = route
+    }
+
     data object Profile : MainDestination {
         override val route = "main/profile"
         fun toRoute() = route
@@ -30,16 +50,6 @@ sealed interface MainDestination {
 
     data object Help : MainDestination {
         override val route = "main/help"
-        fun toRoute() = route
-    }
-
-    data object Billing : MainDestination {
-        override val route = "main/billing"
-        fun toRoute() = route
-    }
-
-    data object Invoices : MainDestination {
-        override val route = "main/invoices"
         fun toRoute() = route
     }
 }

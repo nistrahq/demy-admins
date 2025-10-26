@@ -7,8 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.designsystem.layout.MainShell
 import com.nistra.demy.admins.core.storage.SessionPreferences
+import com.nistra.demy.admins.features.accounting.presentation.navigation.accountingGraph
 import com.nistra.demy.admins.features.billing.presentation.navigation.billingGraph
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
+import com.nistra.demy.admins.features.finance.presentation.navigation.financeGraph
 import com.nistra.demy.admins.features.help.presentation.navigation.helpGraph
 import com.nistra.demy.admins.features.invoicing.presentation.navigation.invoicesGraph
 import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
@@ -37,11 +39,13 @@ fun MainNavHost(
             dashboardGraph(innerNavController)
             teachersGraph(innerNavController)
             studentsGraph(innerNavController)
+            billingGraph(innerNavController)
+            invoicesGraph(innerNavController)
+            financeGraph(innerNavController)
+            accountingGraph(innerNavController)
             profileGraph(innerNavController)
             settingsGraph(innerNavController)
             helpGraph(innerNavController)
-            billingGraph(innerNavController)
-            invoicesGraph(innerNavController)
         }
     }
 }

@@ -41,7 +41,8 @@ object DrawerConfig {
                 DrawerDestination.Scheduling,
                 DrawerDestination.Billing,
                 DrawerDestination.Invoices,
-                DrawerDestination.Finance
+                DrawerDestination.Finance,
+                DrawerDestination.Accounting
             )
         ),
         DrawerSection(
@@ -64,7 +65,9 @@ object DrawerConfig {
         DrawerDestination.Settings.id,
         DrawerDestination.Help.id,
         DrawerDestination.Billing.id,
-        DrawerDestination.Invoices.id
+        DrawerDestination.Invoices.id,
+        DrawerDestination.Finance.id,
+        DrawerDestination.Accounting.id
     )
 }
 
