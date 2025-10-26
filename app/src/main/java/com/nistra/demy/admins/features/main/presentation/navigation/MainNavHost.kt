@@ -39,13 +39,13 @@ fun MainNavHost(
             dashboardGraph(innerNavController)
             teachersGraph(innerNavController)
             studentsGraph(innerNavController)
-            profileGraph(innerNavController)
-            settingsGraph(innerNavController)
-            helpGraph(innerNavController)
             billingGraph(innerNavController)
             invoicesGraph(innerNavController)
             financeGraph(innerNavController)
             accountingGraph(innerNavController)
+            profileGraph(innerNavController)
+            settingsGraph(innerNavController)
+            helpGraph(innerNavController)
         }
     }
 }
