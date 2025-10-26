@@ -43,6 +43,6 @@ sealed class DrawerDestination(val id: String, @param:StringRes val labelResId: 
     data object Invoices : DrawerDestination("invoices", R.string.drawer_destination_invoices, Icons.Filled.Description)
     data object Finance : DrawerDestination("finance", R.string.drawer_destination_finance, Icons.Filled.AccountBalance)
     data object Settings : DrawerDestination(MainDestination.Settings.route, R.string.drawer_destination_settings, Icons.Filled.Settings)
-    data object Help : DrawerDestination("help", R.string.drawer_destination_help, Icons.AutoMirrored.Filled.Help)
+    data object Help : DrawerDestination(MainDestination.Help.route, R.string.drawer_destination_help, Icons.AutoMirrored.Filled.Help)
     data object LogOut : DrawerDestination("logout", R.string.drawer_destination_logout, Icons.AutoMirrored.Filled.ExitToApp)
 }

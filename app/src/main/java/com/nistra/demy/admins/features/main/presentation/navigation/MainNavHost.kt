@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.designsystem.layout.MainShell
 import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
+import com.nistra.demy.admins.features.help.presentation.navigation.helpGraph
 import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
 import com.nistra.demy.admins.features.profile.presentation.navigation.profileGraph
 import com.nistra.demy.admins.features.settings.presentation.navigation.settingsGraph
@@ -36,6 +37,7 @@ fun MainNavHost(
             studentsGraph(innerNavController)
             profileGraph(innerNavController)
             settingsGraph(innerNavController)
+            helpGraph(innerNavController)
         }
     }
 }
