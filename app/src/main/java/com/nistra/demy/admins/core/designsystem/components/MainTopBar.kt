@@ -9,8 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.designsystem.model.UserUi
 
 /**
@@ -51,7 +53,8 @@ fun MainTopBar(
         },
         actions = {
             UserChip(user = user)
-        }
+        },
+        modifier = Modifier.shadow(elevation = 4.dp)
     )
 }
 
