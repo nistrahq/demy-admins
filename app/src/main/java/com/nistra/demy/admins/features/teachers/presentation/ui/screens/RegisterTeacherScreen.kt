@@ -48,11 +48,19 @@ fun RegisterTeacherScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     val successMessage = stringResource(R.string.teachers_register_success)
+    val validationErrorMessage = stringResource(R.string.teachers_validation_required_fields)
 
     LaunchedEffect(uiState.isSuccess) {
         if (uiState.isSuccess) {
             snackbarHostState.showSnackbar(successMessage)
             viewModel.clearSuccess()
+        }
+    }
+
+    LaunchedEffect(uiState.showValidationError) {
+        if (uiState.showValidationError) {
+            snackbarHostState.showSnackbar(validationErrorMessage)
+            viewModel.clearValidationError()
         }
     }
 

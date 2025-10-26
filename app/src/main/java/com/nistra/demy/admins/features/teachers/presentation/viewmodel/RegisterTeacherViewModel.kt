@@ -75,7 +75,7 @@ class RegisterTeacherViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isLoadingTeachers = false,
-                            errorMessage = error.message ?: "Error al cargar profesores"
+                            errorMessage = error.message
                         )
                     }
                 }
@@ -85,19 +85,18 @@ class RegisterTeacherViewModel @Inject constructor(
     fun registerTeacher() {
         val data = _formData.value
 
-        // Validación básica
         if (data.firstName.isBlank() || data.lastName.isBlank() || data.email.isBlank()) {
             _uiState.update {
-                it.copy(errorMessage = "Por favor completa todos los campos requeridos")
+                it.copy(showValidationError = true)
             }
             return
         }
 
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            _uiState.update { it.copy(isLoading = true, errorMessage = null, showValidationError = false) }
 
             val teacher = Teacher(
-                id = "", // El backend generará el ID
+                id = "",
                 firstName = data.firstName,
                 lastName = data.lastName,
                 email = data.email,
@@ -108,14 +107,14 @@ class RegisterTeacherViewModel @Inject constructor(
             registerTeacherUseCase(teacher)
                 .onSuccess { registeredTeacher ->
                     _uiState.update { it.copy(isLoading = false, isSuccess = true) }
-                    _formData.value = TeacherFormData() // Limpiar formulario
-                    loadTeachers() // Recargar lista de profesores
+                    _formData.value = TeacherFormData()
+                    loadTeachers()
                 }
                 .onFailure { error ->
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = error.message ?: "Error al registrar profesor"
+                            errorMessage = error.message
                         )
                     }
                 }
@@ -124,6 +123,10 @@ class RegisterTeacherViewModel @Inject constructor(
 
     fun clearError() {
         _uiState.update { it.copy(errorMessage = null) }
+    }
+
+    fun clearValidationError() {
+        _uiState.update { it.copy(showValidationError = false) }
     }
 
     fun clearSuccess() {
