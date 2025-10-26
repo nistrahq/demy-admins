@@ -2,6 +2,8 @@ package com.nistra.demy.admins.features.teachers.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.core.common.SnackbarMessage
+import com.nistra.demy.admins.core.common.SnackbarType
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
 import com.nistra.demy.admins.features.teachers.domain.usecase.GetTeachersUseCase
 import com.nistra.demy.admins.features.teachers.domain.usecase.RegisterTeacherUseCase
@@ -75,7 +77,10 @@ class RegisterTeacherViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isLoadingTeachers = false,
-                            errorMessage = error.message
+                            snackbarMessage = SnackbarMessage(
+                                message = error.message ?: "Error desconocido",
+                                type = SnackbarType.ERROR
+                            )
                         )
                     }
                 }
@@ -87,13 +92,18 @@ class RegisterTeacherViewModel @Inject constructor(
 
         if (data.firstName.isBlank() || data.lastName.isBlank() || data.email.isBlank()) {
             _uiState.update {
-                it.copy(showValidationError = true)
+                it.copy(
+                    snackbarMessage = SnackbarMessage(
+                        message = "Por favor, completa todos los campos obligatorios",
+                        type = SnackbarType.WARNING
+                    )
+                )
             }
             return
         }
 
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, errorMessage = null, showValidationError = false) }
+            _uiState.update { it.copy(isLoading = true, snackbarMessage = null) }
 
             val teacher = Teacher(
                 id = "",
@@ -106,7 +116,15 @@ class RegisterTeacherViewModel @Inject constructor(
 
             registerTeacherUseCase(teacher)
                 .onSuccess { registeredTeacher ->
-                    _uiState.update { it.copy(isLoading = false, isSuccess = true) }
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            snackbarMessage = SnackbarMessage(
+                                message = "Profesor registrado exitosamente",
+                                type = SnackbarType.SUCCESS
+                            )
+                        )
+                    }
                     _formData.value = TeacherFormData()
                     loadTeachers()
                 }
@@ -114,22 +132,17 @@ class RegisterTeacherViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = error.message
+                            snackbarMessage = SnackbarMessage(
+                                message = error.message ?: "Error al registrar profesor",
+                                type = SnackbarType.ERROR
+                            )
                         )
                     }
                 }
         }
     }
 
-    fun clearError() {
-        _uiState.update { it.copy(errorMessage = null) }
-    }
-
-    fun clearValidationError() {
-        _uiState.update { it.copy(showValidationError = false) }
-    }
-
-    fun clearSuccess() {
-        _uiState.update { it.copy(isSuccess = false) }
+    fun clearSnackbarMessage() {
+        _uiState.update { it.copy(snackbarMessage = null) }
     }
 }

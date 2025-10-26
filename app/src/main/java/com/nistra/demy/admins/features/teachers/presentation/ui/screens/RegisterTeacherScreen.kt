@@ -7,14 +7,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,6 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.nistra.demy.admins.R
+import com.nistra.demy.admins.core.designsystem.components.feedback.DemySnackbarHost
+import com.nistra.demy.admins.core.designsystem.components.feedback.SnackbarEffect
+import com.nistra.demy.admins.core.designsystem.components.feedback.rememberDemySnackbarState
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.TeachersHeader
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.TeacherRegistrationForm
 import com.nistra.demy.admins.features.teachers.presentation.ui.components.TeacherSearchPanel
@@ -45,31 +43,13 @@ fun RegisterTeacherScreen(
     val uiState by viewModel.uiState.collectAsState()
     val formData by viewModel.formData.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarState = rememberDemySnackbarState()
 
-    val successMessage = stringResource(R.string.teachers_register_success)
-    val validationErrorMessage = stringResource(R.string.teachers_validation_required_fields)
-
-    LaunchedEffect(uiState.isSuccess) {
-        if (uiState.isSuccess) {
-            snackbarHostState.showSnackbar(successMessage)
-            viewModel.clearSuccess()
-        }
-    }
-
-    LaunchedEffect(uiState.showValidationError) {
-        if (uiState.showValidationError) {
-            snackbarHostState.showSnackbar(validationErrorMessage)
-            viewModel.clearValidationError()
-        }
-    }
-
-    LaunchedEffect(uiState.errorMessage) {
-        uiState.errorMessage?.let { error ->
-            snackbarHostState.showSnackbar(error)
-            viewModel.clearError()
-        }
-    }
+    SnackbarEffect(
+        message = uiState.snackbarMessage,
+        snackbarState = snackbarState,
+        onMessageShown = viewModel::clearSnackbarMessage
+    )
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -107,24 +87,9 @@ fun RegisterTeacherScreen(
             }
         }
 
-        SnackbarHost(
-            hostState = snackbarHostState,
-            modifier = Modifier.align(Alignment.BottomCenter),
-            snackbar = { data ->
-                Snackbar(
-                    snackbarData = data,
-                    containerColor = if (uiState.errorMessage != null) {
-                        MaterialTheme.colorScheme.errorContainer
-                    } else {
-                        MaterialTheme.colorScheme.primaryContainer
-                    },
-                    contentColor = if (uiState.errorMessage != null) {
-                        MaterialTheme.colorScheme.onErrorContainer
-                    } else {
-                        MaterialTheme.colorScheme.onPrimaryContainer
-                    }
-                )
-            }
+        DemySnackbarHost(
+            snackbarState = snackbarState,
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 }
