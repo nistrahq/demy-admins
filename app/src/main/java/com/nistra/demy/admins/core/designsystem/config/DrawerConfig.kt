@@ -59,7 +59,8 @@ object DrawerConfig {
     val implementedRoutes: Set<String> = setOf(
         DrawerDestination.Dashboard.id,
         DrawerDestination.Teachers.id,
-        DrawerDestination.Students.id
+        DrawerDestination.Students.id,
+        DrawerDestination.Courses.id
     )
 }
 

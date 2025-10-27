@@ -33,7 +33,7 @@ sealed class DrawerDestination(val id: String, val label: String, val icon: Imag
     data object Students : DrawerDestination(MainDestination.Students.route, "Students", Icons.Filled.People)
     data object Periods : DrawerDestination("periods", "Periods", Icons.Filled.CalendarMonth)
     data object Classrooms : DrawerDestination("classrooms", "Classrooms", Icons.Filled.School)
-    data object Courses : DrawerDestination("courses", "Courses", Icons.AutoMirrored.Filled.MenuBook)
+    data object Courses : DrawerDestination(MainDestination.Courses.route, "Courses", Icons.AutoMirrored.Filled.MenuBook)
     data object Schedules : DrawerDestination("schedules", "Schedules", Icons.Filled.Schedule)
     data object Enrollments : DrawerDestination("enrollments", "Enrollments", Icons.Filled.AppRegistration)
     data object Scheduling : DrawerDestination("scheduling", "Scheduling", Icons.Filled.CalendarToday)
