@@ -76,7 +76,8 @@ fun NavHostController.currentParentRouteAsState(): String {
 private val moduleToParentRouteMap = mapOf(
     "dashboard" to MainDestination.Dashboard.route,
     "teachers" to MainDestination.Teachers.route,
-    "students" to MainDestination.Students.route
+    "students" to MainDestination.Students.route,
+    "courses" to MainDestination.Courses.route
     // Add new modules here
 )
 

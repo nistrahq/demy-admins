@@ -3,7 +3,12 @@ package com.nistra.demy.admins.features.courses.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nistra.demy.admins.features.courses.domain.models.Course
-import com.nistra.demy.admins.features.courses.domain.repositories.CourseRepository
+import com.nistra.demy.admins.features.courses.domain.usecase.CreateCourseUseCase
+import com.nistra.demy.admins.features.courses.domain.usecase.DeleteCourseUseCase
+import com.nistra.demy.admins.features.courses.domain.usecase.GetAllCoursesUseCase
+import com.nistra.demy.admins.features.courses.domain.usecase.UpdateCourseUseCase
+import com.nistra.demy.admins.features.courses.presentation.model.CourseFormData
+import com.nistra.demy.admins.features.courses.presentation.state.CourseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,130 +17,128 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// 1. Define el estado de la UI para manejar todos los datos de la pantalla
-data class CourseUiState(
-    val courses: List<Course> = emptyList(),
-    val courseToEdit: Course? = null,
-    val searchQuery: String = "",
-    val isLoading: Boolean = false,
-    val error: String? = null
-)
-
 @HiltViewModel
 class CoursesViewModel @Inject constructor(
-    private val repository: CourseRepository
+    private val getAllCoursesUseCase: GetAllCoursesUseCase,
+    private val createCourseUseCase: CreateCourseUseCase,
+    private val updateCourseUseCase: UpdateCourseUseCase,
+    private val deleteCourseUseCase: DeleteCourseUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CourseUiState())
     val uiState: StateFlow<CourseUiState> = _uiState.asStateFlow()
 
-    // Lista completa de cursos (para búsquedas)
+    private val _formData = MutableStateFlow(CourseFormData())
+    val formData: StateFlow<CourseFormData> = _formData.asStateFlow()
+
     private var allCoursesCache: List<Course> = emptyList()
 
 
     init {
-        getAllCourses()
+        loadCourses()
     }
 
-    // =========================================================================
-    // 2. Lógica de Carga y Búsqueda
-    // =========================================================================
+    fun onCourseFormChange(updated: CourseFormData) {
+        _formData.value = updated
+        _uiState.update { it.copy(isFormSuccess = false, errorMessage = null) }
+    }
 
-    private fun getAllCourses() {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, error = null) }
-            try {
-                val fetchedCourses = repository.getAllCourses()
-                allCoursesCache = fetchedCourses // Almacena el caché completo
-                _uiState.update {
-                    it.copy(
-                        courses = fetchedCourses,
-                        isLoading = false
-                    )
-                }
-            } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = "Error al cargar cursos.") }
-            }
-        }
+    fun onSaveCourseClick() {
+        handleSaveCourse()
+    }
+
+    fun onCourseSelectedForEdit(course: Course) {
+        _uiState.update { it.copy(courseToEdit = course, errorMessage = null) }
+        _formData.value = CourseFormData(
+            name = course.name,
+            code = course.code,
+            description = course.description
+        )
+    }
+
+    fun onClearFormClick() {
+        _uiState.update { it.copy(courseToEdit = null, isFormSuccess = false, errorMessage = null) }
+        _formData.value = CourseFormData()
+    }
+
+    fun onDeleteCourseClick(course: Course) {
+        handleDeleteCourse(course)
     }
 
     fun searchCourses(query: String) {
         _uiState.update { it.copy(searchQuery = query) }
+        val filteredList = filterCourses(allCoursesCache, query)
+        _uiState.update { it.copy(courses = filteredList) }
+    }
 
-        // Filtra la lista en memoria (desde el caché)
-        val filteredList = if (query.isBlank()) {
-            allCoursesCache
+    private fun loadCourses() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            getAllCoursesUseCase()
+                .onSuccess { fetchedCourses ->
+                    allCoursesCache = fetchedCourses
+                    val filteredList = filterCourses(allCoursesCache, _uiState.value.searchQuery)
+                    _uiState.update { it.copy(courses = filteredList, isLoading = false) }
+                }
+                .onFailure { e ->
+                    _uiState.update { it.copy(isLoading = false, errorMessage = e.message ?: "Error al cargar cursos.") }
+                }
+        }
+    }
+
+    private fun handleSaveCourse() {
+        val existingId = _uiState.value.courseToEdit?.id ?: 0L
+        val data = _formData.value
+
+        val courseToSave = Course(
+            id = existingId,
+            name = data.name.trim(),
+            code = data.code.trim(),
+            description = data.description.trim()
+        )
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+
+            val result = if (courseToSave.id == 0L) {
+                createCourseUseCase(courseToSave)
+            } else {
+                updateCourseUseCase(courseToSave)
+            }
+
+            result
+                .onSuccess {
+                    onClearFormClick()
+                    loadCourses()
+                    _uiState.update { it.copy(isFormSuccess = true, isLoading = false) }
+                }
+                .onFailure { e ->
+                    _uiState.update { it.copy(isLoading = false, errorMessage = e.message ?: "Error al guardar el curso.") }
+                }
+        }
+    }
+
+    private fun handleDeleteCourse(course: Course) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            deleteCourseUseCase(course.id)
+                .onSuccess {
+                    loadCourses()
+                }
+                .onFailure { e ->
+                    _uiState.update { it.copy(isLoading = false, errorMessage = e.message ?: "Error al eliminar el curso.") }
+                }
+        }
+    }
+
+    private fun filterCourses(list: List<Course>, query: String): List<Course> {
+        return if (query.isBlank()) {
+            list
         } else {
-            allCoursesCache.filter { course ->
+            list.filter { course ->
                 course.name.contains(query, ignoreCase = true) ||
                     course.code.contains(query, ignoreCase = true)
             }
         }
-        _uiState.update { it.copy(courses = filteredList) }
-    }
-
-
-    // =========================================================================
-    // 3. Lógica de CRUD (Guardar/Editar/Eliminar)
-    // =========================================================================
-
-    fun saveCourse(course: Course) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, error = null) }
-
-            // NO necesitamos crear el DTO aquí. Simplemente extraemos los campos
-            // que el Repositorio necesita (name, code, description).
-
-            try {
-                if (course.id == 0L) {
-                    // Nuevo curso: Llama a createCourse con campos individuales
-                    repository.createCourse(
-                        name = course.name,
-                        code = course.code,
-                        description = course.description
-                    )
-                } else {
-                    // Edición: Llama a updateCourse con el ID y campos individuales
-                    repository.updateCourse(
-                        id = course.id,
-                        name = course.name,
-                        code = course.code,
-                        description = course.description
-                    )
-                }
-
-                // Limpia el formulario y recarga la lista
-                clearSelectedCourse()
-                getAllCourses()
-
-            } catch (e: Exception) {
-                // ... manejo de error
-                _uiState.update { it.copy(isLoading = false, error = "Error al guardar el curso.") }
-            }
-        }
-    }
-
-    fun deleteCourse(course: Course) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true, error = null) }
-            try {
-                repository.deleteCourse(course.id)
-                getAllCourses()
-            } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = "Error al eliminar el curso.") }
-            }
-        }
-    }
-
-    // =========================================================================
-    // 4. Lógica de Interacción con la UI (Selección de Curso)
-    // =========================================================================
-
-    fun selectCourseForEdit(course: Course) {
-        _uiState.update { it.copy(courseToEdit = course) }
-    }
-
-    fun clearSelectedCourse() {
-        _uiState.update { it.copy(courseToEdit = null) }
     }
 }

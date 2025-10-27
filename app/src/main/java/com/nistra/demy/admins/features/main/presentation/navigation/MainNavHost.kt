@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.nistra.demy.admins.core.designsystem.layout.MainShell
 import com.nistra.demy.admins.core.storage.SessionPreferences
+import com.nistra.demy.admins.features.courses.presentation.navigation.coursesGraph
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
 import com.nistra.demy.admins.features.main.presentation.viewmodel.MainViewModel
 import com.nistra.demy.admins.features.students.presentation.navigation.studentsGraph
@@ -32,6 +33,7 @@ fun MainNavHost(
             dashboardGraph(innerNavController)
             teachersGraph(innerNavController)
             studentsGraph(innerNavController)
+            coursesGraph(innerNavController)
         }
     }
 }
