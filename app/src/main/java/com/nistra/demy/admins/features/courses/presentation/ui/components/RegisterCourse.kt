@@ -54,7 +54,7 @@ fun RegisterCourse(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (!isEditing) "Registrar Nuevo Curso" else "Editar Curso: ${courseToEdit!!.code}",
+                    text = if (!isEditing) "Registrar Nuevo Curso" else "Editar Curso: ${courseToEdit.code}",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer

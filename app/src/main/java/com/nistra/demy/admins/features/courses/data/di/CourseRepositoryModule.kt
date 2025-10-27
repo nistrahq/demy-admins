@@ -14,7 +14,4 @@ interface CourseRepositoryModule {
     @Binds
     abstract fun provideCourseRepository(impl: CourseRepositoryImpl): CourseRepository
 
-//    @Binds
-//    // CAMBIAR 'CourseRepositoryImpl' por 'FakeCourseRepository' para usar data falsa:
-//    fun provideCourseRepository(impl: FakeCourseRepository): CourseRepository
 }

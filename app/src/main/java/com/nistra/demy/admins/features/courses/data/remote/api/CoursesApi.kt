@@ -3,7 +3,6 @@ package com.nistra.demy.admins.features.courses.data.remote.api
 import com.nistra.demy.admins.features.courses.data.remote.models.CourseResourceDto
 import com.nistra.demy.admins.features.courses.data.remote.models.CreateCourseRequestDto
 import com.nistra.demy.admins.features.courses.data.remote.models.UpdateCourseRequestDto
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -26,5 +25,5 @@ interface CoursesApi {
     suspend fun updateCourse(@Path("id") id: Long, @Body request: UpdateCourseRequestDto): CourseResourceDto
 
     @DELETE("courses/{id}")
-    suspend fun deleteCourse(@Path("id") id: Long): Unit
+    suspend fun deleteCourse(@Path("id") id: Long)
 }
