@@ -30,7 +30,6 @@ fun CourseList(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
 
-            // Título y Campo de Búsqueda
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = onSearchQueryChange,
@@ -39,7 +38,6 @@ fun CourseList(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
             )
 
-            // Lista de Cursos
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)

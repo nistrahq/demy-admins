@@ -51,7 +51,6 @@ fun CourseListItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Avatar con la primera letra
             Box(
                 modifier = Modifier
                     .size(40.dp)
@@ -68,7 +67,6 @@ fun CourseListItem(
             }
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Información del curso
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = course.name,
@@ -93,7 +91,6 @@ fun CourseListItem(
             }
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Acciones: Editar y Eliminar
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)

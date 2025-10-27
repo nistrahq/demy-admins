@@ -44,7 +44,6 @@ fun RegisterCourse(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Título del formulario
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -62,7 +61,6 @@ fun RegisterCourse(
             }
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Campos de entrada - Usa onFormChange para actualizar el estado
             OutlinedTextField(
                 value = formData.name,
                 onValueChange = { onFormChange(formData.copy(name = it)) },
@@ -101,12 +99,10 @@ fun RegisterCourse(
                 )
             }
 
-            // Botones de Acción
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Botón de Guardar/Registrar
                 Button(
                     onClick = onSaveCourseClick,
                     modifier = Modifier
@@ -124,7 +120,6 @@ fun RegisterCourse(
                     }
                 }
 
-                // Botón de Cancelar/Limpiar formulario (condicional)
                 if (isEditing || formData.name.isNotBlank() || formData.code.isNotBlank() || formData.description.isNotBlank()) {
                     OutlinedButton(
                         onClick = onClearFormClick,

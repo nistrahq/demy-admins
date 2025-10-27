@@ -16,36 +16,29 @@ import com.nistra.demy.admins.features.courses.presentation.viewmodel.CoursesVie
 fun CoursesScreen(
     viewModel: CoursesViewModel = hiltViewModel()
 ) {
-    // 1. Recolección de Estado de la capa de Presentación
     val uiState by viewModel.uiState.collectAsState()
     val formData by viewModel.formData.collectAsState()
 
-
-        // Contenedor principal para el diseño de dos paneles 50/50
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Panel Izquierdo: Formulario de Registro
             RegisterCourse(
                 modifier = Modifier.weight(0.50f),
                 courseToEdit = uiState.courseToEdit,
                 formData = formData,
                 isLoading = uiState.isLoading,
                 errorMessage = uiState.errorMessage,
-                // Mapeo de eventos a funciones descriptivas del ViewModel
                 onFormChange = viewModel::onCourseFormChange,
                 onSaveCourseClick = viewModel::onSaveCourseClick,
                 onClearFormClick = viewModel::onClearFormClick
             )
 
-            // Panel Derecho: Lista de Cursos
             CourseList(
                 modifier = Modifier.weight(0.50f),
                 courses = uiState.courses,
-                // Mapeo de eventos de la lista
                 onCourseSelected = viewModel::onCourseSelectedForEdit,
                 onDeleteCourse = viewModel::onDeleteCourseClick,
                 onSearchQueryChange = viewModel::searchCourses,
