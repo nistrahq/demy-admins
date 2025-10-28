@@ -7,6 +7,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -65,6 +67,7 @@ fun RegisterCourse(
                 value = formData.name,
                 onValueChange = { onFormChange(formData.copy(name = it)) },
                 label = { Text("Nombre del Curso") },
+                leadingIcon = { Icon(Icons.Default.MenuBook, contentDescription = "Nombre del Curso") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
@@ -74,6 +77,7 @@ fun RegisterCourse(
                 value = formData.code,
                 onValueChange = { onFormChange(formData.copy(code = it)) },
                 label = { Text("Código de Curso") },
+                leadingIcon = { Icon(Icons.Default.Tag, contentDescription = "Código de Curso") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
@@ -89,7 +93,6 @@ fun RegisterCourse(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Mensaje de error
             if (errorMessage != null) {
                 Text(
                     text = errorMessage,
