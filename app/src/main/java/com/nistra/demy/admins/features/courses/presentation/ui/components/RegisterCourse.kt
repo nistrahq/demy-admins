@@ -6,8 +6,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -67,7 +67,7 @@ fun RegisterCourse(
                 value = formData.name,
                 onValueChange = { onFormChange(formData.copy(name = it)) },
                 label = { Text("Nombre del Curso") },
-                leadingIcon = { Icon(Icons.Default.MenuBook, contentDescription = "Nombre del Curso") },
+                leadingIcon = { Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Nombre del Curso") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
