@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.nistra.demy.admins.features.profile.data.remote.ProfileStats
 import com.nistra.demy.admins.features.profile.domain.repository.AcademyRepository
 import com.nistra.demy.admins.features.profile.domain.repository.ProfileRepository
+import com.nistra.demy.admins.features.profile.domain.usecase.GetProfileUseCase
 import com.nistra.demy.admins.features.profile.presentation.state.ProfileUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -17,28 +18,23 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository,
-    private val academyRepository: AcademyRepository
+    private val getProfileUseCase: GetProfileUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
-    fun load() = viewModelScope.launch {
+    init {
+        loadProfile()
+    }
+
+    fun loadProfile() = viewModelScope.launch {
         _uiState.value = ProfileUiState.Loading
-        kotlin.runCatching {
-            val generalInfo = profileRepository.fetchProfileInfo()
-            val academyInfo = academyRepository.fetchAcademyInfo()
-            ProfileStats(
-                accountStatus = "ACTIVE",
-                slogan = academyInfo.description,
-                generalInfo = generalInfo,
-                academyInfo = academyInfo
-            )
-        }.onSuccess {
-            _uiState.value = ProfileUiState.Success(it)
-        }.onFailure {
-            _uiState.value = ProfileUiState.Error("Failed to load profile")
+        try {
+            val stats = getProfileUseCase()
+            _uiState.value = ProfileUiState.Success(stats)
+        } catch (e: Exception) {
+            _uiState.value = ProfileUiState.Error("Failed to load profile: ${e.message}")
         }
     }
 }
