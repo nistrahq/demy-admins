@@ -9,6 +9,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,7 +35,6 @@ fun RegisterClassroom(
     onClearFormClick: () -> Unit
 ) {
     val isEditing = classroomToEdit != null
-    // La validación se realiza sobre el modelo de datos inyectado
     val isFormValid = formData.code.isNotBlank() && formData.campus.isNotBlank() && formData.capacity > 0
 
     Card(
@@ -50,7 +52,6 @@ fun RegisterClassroom(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Título del formulario
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -60,7 +61,7 @@ fun RegisterClassroom(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (!isEditing) "Registrar Nueva Aula" else "Editar Aula: ${classroomToEdit!!.code}",
+                    text = if (!isEditing) "Registrar Nueva Aula" else "Editar Aula: ${classroomToEdit.code}",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -68,11 +69,11 @@ fun RegisterClassroom(
             }
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Campos de entrada
             OutlinedTextField(
                 value = formData.code,
                 onValueChange = { onFormChange(formData.copy(code = it)) },
                 label = { Text("Código de Aula") },
+                leadingIcon = { Icon(Icons.Default.Key, contentDescription = "Código") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
@@ -80,9 +81,9 @@ fun RegisterClassroom(
 
             OutlinedTextField(
                 value = formData.capacityText,
-                // Filtramos y luego actualizamos el modelo
                 onValueChange = { onFormChange(formData.copy(capacityText = it.filter { char -> char.isDigit() })) },
                 label = { Text("Capacidad") },
+                leadingIcon = { Icon(Icons.Default.Group, contentDescription = "Capacidad") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -92,14 +93,14 @@ fun RegisterClassroom(
             OutlinedTextField(
                 value = formData.campus,
                 onValueChange = { onFormChange(formData.copy(campus = it)) },
-                label = { Text("Sede (Campus)") },
+                label = { Text("Sede") },
+                leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = "Sede") },
                 modifier = Modifier.fillMaxWidth(),
-                minLines = 3,
+                singleLine = true,
                 shape = RoundedCornerShape(8.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Mensaje de error
             if (errorMessage != null) {
                 Text(
                     text = errorMessage,
@@ -109,12 +110,10 @@ fun RegisterClassroom(
                 )
             }
 
-            // Botones de Acción
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Botón de Guardar/Registrar
                 Button(
                     onClick = onSaveClassroomClick,
                     modifier = Modifier
@@ -132,7 +131,6 @@ fun RegisterClassroom(
                     }
                 }
 
-                // Botón de Cancelar/Limpiar formulario
                 if (isEditing || formData.code.isNotBlank() || formData.capacityText.isNotBlank() || formData.campus.isNotBlank()) {
                     OutlinedButton(
                         onClick = onClearFormClick,
