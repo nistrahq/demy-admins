@@ -135,23 +135,23 @@ class SchedulesViewModel @Inject constructor(
     // =========================================================================
 
     fun addClassSession(session: ClassSession) {
-        viewModelScope.launch {
-            val schedule = _uiState.value.scheduleToEdit ?: return@launch
-            _uiState.update { it.copy(isLoading = true, error = null) }
-
-            try {
-
-                repository.addClassSessionToSchedule(schedule.id, session.toAddRequest())?.let {
-                    _uiState.update { state -> state.copy(
-                        scheduleToEdit = it, // Actualizar el schedule en edición con la nueva sesión
-                        isLoading = false
-                    ) }
-                }
-                getAllSchedules() // Recargar la lista principal
-            } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false, error = "Error al añadir sesión.") }
-            }
-        }
+//        viewModelScope.launch {
+//            val schedule = _uiState.value.scheduleToEdit ?: return@launch
+//            _uiState.update { it.copy(isLoading = true, error = null) }
+//
+//            try {
+//
+//                repository.addClassSessionToSchedule(schedule.id, session.toAddRequest())?.let {
+//                    _uiState.update { state -> state.copy(
+//                        scheduleToEdit = it, // Actualizar el schedule en edición con la nueva sesión
+//                        isLoading = false
+//                    ) }
+//                }
+//                getAllSchedules() // Recargar la lista principal
+//            } catch (e: Exception) {
+//                _uiState.update { it.copy(isLoading = false, error = "Error al añadir sesión.") }
+//            }
+//        }
     }
 
     fun deleteClassSession(session: ClassSession) {
