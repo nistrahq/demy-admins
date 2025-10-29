@@ -35,7 +35,7 @@ sealed class DrawerDestination(val id: String, @param:StringRes val labelResId: 
     data object Teachers : DrawerDestination(MainDestination.Teachers.route, R.string.drawer_destination_teachers, Icons.Filled.Work)
     data object Students : DrawerDestination(MainDestination.Students.route, R.string.drawer_destination_students, Icons.Filled.People)
     data object Periods : DrawerDestination("periods", R.string.drawer_destination_periods, Icons.Filled.CalendarMonth)
-    data object Classrooms : DrawerDestination("classrooms", R.string.drawer_destination_classrooms, Icons.Filled.School)
+    data object Classrooms : DrawerDestination(MainDestination.Classrooms.route, R.string.drawer_destination_classrooms, Icons.Filled.School)
     data object Courses : DrawerDestination("courses", R.string.drawer_destination_courses, Icons.AutoMirrored.Filled.MenuBook)
     data object Schedules : DrawerDestination(MainDestination.Schedules.route, R.string.drawer_destination_schedules, Icons.Filled.Schedule)
     data object Enrollments : DrawerDestination("enrollments", R.string.drawer_destination_enrollments, Icons.Filled.AppRegistration)

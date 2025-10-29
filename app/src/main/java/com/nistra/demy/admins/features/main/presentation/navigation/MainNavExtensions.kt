@@ -95,6 +95,7 @@ private val moduleToParentRouteMap = mapOf(
     "profile" to MainDestination.Profile.route,
     "settings" to MainDestination.Settings.route,
     "help" to MainDestination.Help.route,
+    "classrooms" to MainDestination.Classrooms.route,
     "schedules" to MainDestination.Schedules.route,
     "scheduling" to MainDestination.Scheduling.route,
     // Add new modules here
