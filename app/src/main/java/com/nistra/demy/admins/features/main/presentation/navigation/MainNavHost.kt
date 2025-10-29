@@ -10,6 +10,7 @@ import com.nistra.demy.admins.core.storage.SessionPreferences
 import com.nistra.demy.admins.features.accounting.presentation.navigation.accountingGraph
 import com.nistra.demy.admins.features.billing.presentation.navigation.billingGraph
 import com.nistra.demy.admins.features.classrooms.presentation.navigation.classroomsGraph
+import com.nistra.demy.admins.features.courses.presentation.navigation.coursesGraph
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
 import com.nistra.demy.admins.features.finance.presentation.navigation.financeGraph
 import com.nistra.demy.admins.features.help.presentation.navigation.helpGraph
@@ -50,6 +51,7 @@ fun MainNavHost(
             helpGraph(innerNavController)
             classroomsGraph(innerNavController)
             schedulesGraph(innerNavController)
+            coursesGraph(innerNavController)
         }
     }
 }

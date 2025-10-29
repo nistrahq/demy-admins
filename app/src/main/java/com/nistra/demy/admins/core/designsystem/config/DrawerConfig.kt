@@ -70,7 +70,8 @@ object DrawerConfig {
         DrawerDestination.Accounting.id,
         DrawerDestination.Classrooms.id,
         DrawerDestination.Schedules.id,
-        DrawerDestination.Scheduling.id
+        DrawerDestination.Scheduling.id,
+        DrawerDestination.Courses.id
     )
 }
 

@@ -98,6 +98,7 @@ private val moduleToParentRouteMap = mapOf(
     "classrooms" to MainDestination.Classrooms.route,
     "schedules" to MainDestination.Schedules.route,
     "scheduling" to MainDestination.Scheduling.route,
+    "courses" to MainDestination.Courses.route
     // Add new modules here
 )
 
