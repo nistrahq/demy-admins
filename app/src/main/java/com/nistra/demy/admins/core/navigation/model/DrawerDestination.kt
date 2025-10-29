@@ -37,9 +37,11 @@ sealed class DrawerDestination(val id: String, @param:StringRes val labelResId: 
     data object Periods : DrawerDestination("periods", R.string.drawer_destination_periods, Icons.Filled.CalendarMonth)
     data object Classrooms : DrawerDestination("classrooms", R.string.drawer_destination_classrooms, Icons.Filled.School)
     data object Courses : DrawerDestination("courses", R.string.drawer_destination_courses, Icons.AutoMirrored.Filled.MenuBook)
-    data object Schedules : DrawerDestination("schedules", R.string.drawer_destination_schedules, Icons.Filled.Schedule)
+    data object Schedules : DrawerDestination(MainDestination.Schedules.route, R.string.drawer_destination_schedules, Icons.Filled.Schedule)
     data object Enrollments : DrawerDestination("enrollments", R.string.drawer_destination_enrollments, Icons.Filled.AppRegistration)
-    data object Scheduling : DrawerDestination("scheduling", R.string.drawer_destination_scheduling, Icons.Filled.CalendarToday)
+    data object Scheduling : DrawerDestination(MainDestination.Scheduling.route
+
+        , R.string.drawer_destination_scheduling, Icons.Filled.CalendarToday)
     data object Billing : DrawerDestination(MainDestination.Billing.route, R.string.drawer_destination_billing, Icons.Filled.Payment)
     data object Invoices : DrawerDestination(MainDestination.Invoices.route, R.string.drawer_destination_invoices, Icons.Filled.Description)
     data object Finance : DrawerDestination(MainDestination.Finance.route, R.string.drawer_destination_finance, Icons.Filled.AccountBalance)
