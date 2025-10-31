@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.schedules.presentation.ui
+package com.nistra.demy.admins.features.schedules.presentation.ui.screens
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -296,8 +296,8 @@ fun ScheduleGrid(
 ) {
 
     // 🚨 CAMBIO: Usamos el modelo de dominio directamente
-    val allSessions = remember(schedule.sessions) {
-        schedule.sessions
+    val allSessions = remember(schedule.classSessions) {
+        schedule.classSessions
     }
 
     val sessionsGroupedByDay = remember(allSessions) {
