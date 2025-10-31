@@ -5,27 +5,27 @@ import retrofit2.http.*
 
 interface SchedulesApi {
 
-    @GET("weekly-schedules")
+    @GET("schedules")
     suspend fun getAllSchedules(): List<ScheduleResourceDto>
 
-    @GET("weekly-schedules/{scheduleId}")
+    @GET("schedules/{scheduleId}")
     suspend fun getScheduleById(@Path("scheduleId") scheduleId: Long): ScheduleResourceDto
 
-    @GET("weekly-schedules/by-teacher/{teacherId}")
+    @GET("schedules/by-teacher/{teacherId}")
     suspend fun getClassSessionsByTeacherId(@Path("teacherId") teacherId: Long): List<ClassSessionResourceDto>
 
-    @POST("weekly-schedules")
+    @POST("schedules")
     suspend fun createSchedule(@Body request: CreateScheduleRequestDto): ScheduleResourceDto
 
-    @PUT("weekly-schedules/{scheduleId}")
+    @PUT("schedules/{scheduleId}")
     suspend fun updateScheduleName(@Path("scheduleId") scheduleId: Long, @Body request: CreateScheduleRequestDto): ScheduleResourceDto
 
-    @DELETE("weekly-schedules/{scheduleId}")
+    @DELETE("schedules/{scheduleId}")
     suspend fun deleteSchedule(@Path("scheduleId") scheduleId: Long): Unit
 
-    @POST("weekly-schedules/{scheduleId}/schedules")
+    @POST("schedules/{scheduleId}/class-sessions")
     suspend fun addClassSessionToSchedule(@Path("scheduleId") scheduleId: Long, @Body request: AddClassSessionRequestDto): ScheduleResourceDto
 
-    @DELETE("weekly-schedules/{scheduleId}/schedules/{classSessionId}")
+    @DELETE("schedules/{scheduleId}/class-sessions/{classSessionId}")
     suspend fun removeClassSessionFromSchedule(@Path("scheduleId") scheduleId: Long, @Path("classSessionId") classSessionId: Long): ScheduleResourceDto
 }
