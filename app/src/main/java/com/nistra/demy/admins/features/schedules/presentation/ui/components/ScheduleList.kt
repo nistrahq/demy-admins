@@ -1,5 +1,5 @@
 package com.nistra.demy.admins.features.schedules.presentation.ui.components
-
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,7 +24,8 @@ fun ScheduleList(
     onScheduleSelected: (Schedule) -> Unit,
     onDeleteSchedule: (Schedule) -> Unit,
     onSearchQueryChange: (String) -> Unit,
-    searchQuery: String
+    searchQuery: String,
+    isLoading: Boolean // Agregamos el estado de carga
 ) {
     Card(
         modifier = modifier.fillMaxHeight(),
@@ -38,8 +39,17 @@ fun ScheduleList(
                 onValueChange = onSearchQueryChange,
                 label = { Text("Buscar horarios por nombre") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
-                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+                enabled = !isLoading
             )
+
+            if (isLoading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+
+            if (schedules.isEmpty() && !isLoading) {
+                Text("No hay agendas disponibles.", modifier = Modifier.padding(top = 16.dp))
+            }
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -73,6 +83,8 @@ fun ScheduleListItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                // Al hacer clic en el item, se selecciona para editar en el panel izquierdo.
+                .clickable { onEditClick() }
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -88,7 +100,7 @@ fun ScheduleListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Sesiones: ${schedule.sessions.size}",
+                    text = "Sesiones: ${schedule.classSessions.size}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
