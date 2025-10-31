@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
-import com.nistra.demy.admins.features.schedules.presentation.ui.ScheduleViewerScreen
-import com.nistra.demy.admins.features.schedules.presentation.ui.SchedulesScreen
+import com.nistra.demy.admins.features.schedules.presentation.ui.screens.ScheduleViewerScreen
+import com.nistra.demy.admins.features.schedules.presentation.ui.screens.SchedulesScreen
 
 fun NavGraphBuilder.schedulesGraph(navController: NavHostController) {
     navigation(

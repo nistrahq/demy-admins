@@ -60,7 +60,7 @@ fun ScheduleResourceDto.toDomain(): Schedule? {
         Schedule(
             id = id,
             name = name,
-            sessions = classSessions?.mapNotNull { it.toDomain() } ?: emptyList()
+            classSessions = classSessions?.mapNotNull { it.toDomain() } ?: emptyList()
         )
     } else {
         null
