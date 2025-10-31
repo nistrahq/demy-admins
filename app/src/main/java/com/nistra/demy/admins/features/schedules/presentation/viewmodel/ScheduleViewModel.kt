@@ -186,7 +186,7 @@ class SchedulesViewModel @Inject constructor(
         }
 
         // CORRECCIÓN: Usar data.teacherId directamente ya que es Long?
-        val selectedTeacher = data.teacherId?.let { id ->
+        val selectedTeacher = data.teacherId.let { id ->
             _uiState.value.availableTeachers.find { it.id == id }
         }
 
