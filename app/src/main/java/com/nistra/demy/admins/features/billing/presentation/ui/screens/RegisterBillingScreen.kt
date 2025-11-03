@@ -32,13 +32,13 @@ fun RegisterBillingScreen(
     @Suppress("UNUSED_PARAMETER") onGoToList: () -> Unit = {}
 ) {
 
-    // 2. Recolectar los estados del ViewModel de Billing
+
     val uiState by viewModel.uiState.collectAsState()
     val formData by viewModel.formData.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val snackbarState = rememberDemySnackbarState()
 
-    // 3. El SnackbarEffect se mantiene, solo necesita el UiState de Billing
+
     SnackbarEffect(
         message = uiState.snackbarMessage,
         snackbarState = snackbarState,
@@ -52,7 +52,7 @@ fun RegisterBillingScreen(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // 4. Usar el Header de Billing con sus strings
+
             BillingAccountsHeader(
                 title = stringResource(R.string.billing_screen_title),
                 description = stringResource(R.string.billing_screen_description)
@@ -64,7 +64,7 @@ fun RegisterBillingScreen(
                     .weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // 5. Usar el Formulario de Billing y sus lambdas
+
                 BillingRegistrationForm(
                     formData = formData,
                     onFormChange = viewModel::onFieldChange,
@@ -73,7 +73,7 @@ fun RegisterBillingScreen(
                     isLoading = uiState.isLoading
                 )
 
-                // 6. Usar el Panel de Búsqueda de Billing y sus lambdas
+
                 BillingSearchPanel(
                     searchQuery = searchQuery,
                     onSearchQueryChange = viewModel::onSearchQueryChange,
@@ -91,7 +91,7 @@ fun RegisterBillingScreen(
     }
 }
 
-// 7. Preview adaptado para la pantalla de Billing
+
 @Preview(showBackground = true, widthDp = 1200, heightDp = 800)
 @Composable
 fun RegisterBillingScreenPreview() {
