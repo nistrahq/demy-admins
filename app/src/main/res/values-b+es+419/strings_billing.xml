@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Billing Search Panel -->
+    <string name="billing_search_title">Buscar Cuentas</string>
+    <string name="billing_search_description">Encuentre y gestione las cuentas de facturación</string>
+    <string name="billing_search_placeholder">Buscar por ID de estudiante o academia</string>
+    <string name="billing_not_found">No se encontraron cuentas</string>
+
+    <!-- Billing Registration Form -->
+    <string name="billing_register_title">Registrar Nueva Cuenta</string>
+    <string name="billing_register_description">Complete los datos para registrar una nueva cuenta de facturación</string>
+    <string name="billing_student_id">ID del Estudiante</string>
+    <string name="billing_register_button">Registrar Cuenta</string>
+    <string name="billing_register_button_loading">Registrando…</string>
+
+    <!-- Billing Screen -->
+    <string name="billing_screen_title">Maneja la información de facturación</string>
+    <string name="billing_screen_description">Administre el registro de nuevas cuentas y consulte el directorio completo.</string>
+    <string name="billing_register_success">¡Cuenta de facturación registrada exitosamente!</string>
+
+    <!-- Validation Messages -->
+    <string name="billing_validation_required_fields">Por favor, ingrese el ID del estudiante</string>
+
+    <!-- Error Messages -->
+    <string name="billing_error_register_failed">Error al registrar la cuenta</string>
+    <string name="billing_error_load_failed">Error al cargar las cuentas</string>
+</resources>

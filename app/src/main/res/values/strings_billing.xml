@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Billing Search Panel -->
+    <string name="billing_search_title">Search Accounts</string>
+    <string name="billing_search_description">Find and manage billing accounts</string>
+    <string name="billing_search_placeholder">Search by student or academy ID</string>
+    <string name="billing_not_found">No accounts found</string>
+
+    <!-- Billing Registration Form -->
+    <string name="billing_register_title">Register New Account</string>
+    <string name="billing_register_description">Complete the details to register a new billing account</string>
+    <string name="billing_student_id">Student ID</string>
+    <string name="billing_register_button">Register Account</string>
+    <string name="billing_register_button_loading">Registering…</string>
+
+    <!-- Billing Screen -->
+    <string name="billing_screen_title">Manage billing information</string>
+    <string name="billing_screen_description">Manage the registration of new accounts and consult the complete directory.</string>
+    <string name="billing_register_success">Billing account registered successfully!</string>
+
+    <!-- Validation Messages -->
+    <string name="billing_validation_required_fields">Please enter the student ID</string>
+
+    <!-- Error Messages -->
+    <string name="billing_error_register_failed">Error registering account</string>
+    <string name="billing_error_load_failed">Error loading accounts</string>
+</resources>
