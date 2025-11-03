@@ -1,14 +1,11 @@
 package com.nistra.demy.admins.features.billing.presentation.viewmodel
 
-// Eliminados los imports incorrectos como 'androidx.activity.result.launch', etc.
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nistra.demy.admins.R
-// <-- CORRECIÓN: El import correcto para tu clase LocalizedString
 import com.nistra.demy.admins.core.common.LocalizedString
 import com.nistra.demy.admins.core.common.SnackbarMessage
 import com.nistra.demy.admins.core.common.SnackbarType
-// <-- CORRECIÓN: El import correcto para el modelo de dominio
 import com.nistra.demy.admins.features.billing.domain.model.BillingAccount
 import com.nistra.demy.admins.features.billing.domain.usecase.GetBillingAccountByIdUseCase
 import com.nistra.demy.admins.features.billing.domain.usecase.GetBillingAccountsUseCase
@@ -82,12 +79,11 @@ class RegisterBillingAccountViewModel @Inject constructor(
                 .onFailure { error ->
                     _uiState.update {
                         it.copy(
-                            // <-- CORRECIÓN: Cambiado a la variable de estado correcta
                             isLoadingBillingAccounts = false,
                             snackbarMessage = SnackbarMessage(
                                 message = error.message?.let { msg ->
                                     LocalizedString.Raw(msg)
-                                } ?: LocalizedString.Resource(R.string.billing_error_load_failed), // <-- CORRECIÓN: Usando el string de billing
+                                } ?: LocalizedString.Resource(R.string.billing_error_load_failed),
                                 type = SnackbarType.ERROR,
                                 actionLabel = LocalizedString.Resource(R.string.action_ok)
                             )
@@ -104,7 +100,6 @@ class RegisterBillingAccountViewModel @Inject constructor(
             _uiState.update {
                 it.copy(
                     snackbarMessage = SnackbarMessage(
-                        // <-- CORRECIÓN: Usando el LocalizedString correcto de tu proyecto y el string de billing
                         message = LocalizedString.Resource(R.string.billing_validation_required_fields),
                         type = SnackbarType.WARNING,
                         actionLabel = LocalizedString.Resource(R.string.action_ok)
@@ -117,7 +112,7 @@ class RegisterBillingAccountViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, snackbarMessage = null) }
 
-            // Se crea el objeto BillingAccount a partir del formulario
+
             val accountToRegister = BillingAccount(
                 id = "",
                 studentId = data.studentId,
@@ -131,7 +126,6 @@ class RegisterBillingAccountViewModel @Inject constructor(
                         it.copy(
                             isLoading = false,
                             snackbarMessage = SnackbarMessage(
-                                // <-- CORRECIÓN: Usando el LocalizedString correcto y el string de billing
                                 message = LocalizedString.Resource(R.string.billing_register_success),
                                 type = SnackbarType.SUCCESS,
                                 actionLabel = LocalizedString.Resource(R.string.action_ok)
@@ -146,7 +140,6 @@ class RegisterBillingAccountViewModel @Inject constructor(
                         it.copy(
                             isLoading = false,
                             snackbarMessage = SnackbarMessage(
-                                // <-- CORRECIÓN: Usando el LocalizedString correcto y el string de billing
                                 message = error.message?.let { msg ->
                                     LocalizedString.Raw(msg)
                                 } ?: LocalizedString.Resource(R.string.billing_error_register_failed),
