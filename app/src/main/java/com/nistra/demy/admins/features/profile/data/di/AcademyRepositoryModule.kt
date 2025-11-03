@@ -11,6 +11,7 @@ import jakarta.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AcademyRepositoryModule {
-    @Binds @Singleton
+    @Binds
+    @Singleton
     abstract fun bindAcademyRepository(impl: AcademyRepositoryImpl): AcademyRepository
 }

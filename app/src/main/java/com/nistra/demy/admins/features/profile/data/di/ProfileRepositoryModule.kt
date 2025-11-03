@@ -11,6 +11,7 @@ import jakarta.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class ProfileRepositoryModule {
-    @Binds @Singleton
+    @Binds
+    @Singleton
     abstract fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
 }
