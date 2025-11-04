@@ -22,14 +22,7 @@ fun HelpScreen() {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Header
-        Text(
-            text = "Help",
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.SemiBold
-        )
-
-        // Intro Card
+        //Intro Card
         InfoCard(
             title = "Do you need help?",
             modifier = Modifier.fillMaxWidth(),
@@ -41,18 +34,15 @@ fun HelpScreen() {
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-
-        // Main content area
+        //Main content area
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // LEFT SECTION
             Column(
                 modifier = Modifier.weight(1.4f),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Contact Card (Blue)
                 InfoCardNoTitle(containerColor = Color(0xFF1E3A8A)) {
                     Text(
                         text = "We are here to help you",
@@ -93,14 +83,11 @@ fun HelpScreen() {
                         color = Color.White
                     )
                 }
-
-                // Legal Section
                 InfoCard(
                     title = "Legal",
                     containerColor = MaterialTheme.colorScheme.surface
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        // Naranja real
                         InfoCardNoTitle(
                             containerColor = Color(0xFFFF9800)
                         ) {
@@ -114,8 +101,6 @@ fun HelpScreen() {
                                 style = MaterialTheme.typography.bodySmall,
                             )
                         }
-
-                        // Naranja real
                         InfoCardNoTitle(
                             containerColor = Color(0xFFFF9800)
                         ) {
@@ -132,7 +117,6 @@ fun HelpScreen() {
                     }
                 }
             }
-
             // RIGHT SECTION
             Column(
                 modifier = Modifier.weight(1.8f),
@@ -144,7 +128,6 @@ fun HelpScreen() {
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
-                        // Morado con todo el texto blanco
                         InfoCardNoTitle(
                             containerColor = MaterialTheme.colorScheme.tertiaryContainer
                         ) {
@@ -161,7 +144,6 @@ fun HelpScreen() {
                             )
                         }
 
-                        // Morado con todo el texto blanco
                         InfoCardNoTitle(
                             containerColor = MaterialTheme.colorScheme.tertiaryContainer
                         ) {
