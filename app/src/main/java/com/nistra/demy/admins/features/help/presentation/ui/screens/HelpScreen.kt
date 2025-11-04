@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCard
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCardNoTitle
-import com.nistra.demy.admins.core.designsystem.theme.extendedColors
 
 @Composable
 fun HelpScreen() {
@@ -101,37 +100,33 @@ fun HelpScreen() {
                     containerColor = MaterialTheme.colorScheme.surface
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        // Celeste → Naranja
+                        // Naranja real
                         InfoCardNoTitle(
-                            containerColor = MaterialTheme.extendedColors.warning.colorContainer
+                            containerColor = Color(0xFFFF9800)
                         ) {
                             Text(
                                 text = "Terms & Conditions",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.SemiBold,
-                                color = Color.White
                             )
                             Text(
                                 text = "By using our services, you agree to our Terms and Conditions. Please read them before proceeding.",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color.White
                             )
                         }
 
-                        // Celeste → Naranja
+                        // Naranja real
                         InfoCardNoTitle(
-                            containerColor = MaterialTheme.extendedColors.warning.colorContainer
+                            containerColor = Color(0xFFFF9800)
                         ) {
                             Text(
                                 text = "Privacy Policy",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.SemiBold,
-                                color = Color.White
                             )
                             Text(
                                 text = "By using our services, you agree to our Privacy Policy. We recommend reading it to understand how we handle your data.",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = Color.White
                             )
                         }
                     }
@@ -148,27 +143,38 @@ fun HelpScreen() {
                     containerColor = MaterialTheme.colorScheme.surface
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        // Amarillo → Morado
-                        InfoCard(
-                            title = "Report a bug",
-                            containerColor = MaterialTheme.extendedColors.info.colorContainer
+
+                        // Morado con todo el texto blanco
+                        InfoCardNoTitle(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
                         ) {
+                            Text(
+                                text = "Report a bug",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.White
+                            )
                             Text(
                                 text = "If you’ve found a bug or something isn’t working as expected, please report it. Your feedback helps us improve and provide a better experience for everyone.",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = Color.White
                             )
                         }
 
-                        // Verde → Morado
-                        InfoCard(
-                            title = "Contribute",
-                            containerColor = MaterialTheme.extendedColors.info.colorContainer
+                        // Morado con todo el texto blanco
+                        InfoCardNoTitle(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
                         ) {
+                            Text(
+                                text = "Contribute",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.White
+                            )
                             Text(
                                 text = "Want to contribute to the project? Whether it’s ideas, code, or suggestions, your input is welcome and helps us grow.",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = Color.White
                             )
                         }
                     }
