@@ -53,7 +53,7 @@ fun ProfileInfoCard(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.teachers_management_header_photo),
+                            painter = painterResource(id = R.drawable.profile_management_photo),
                             contentDescription = "User photo",
                             modifier = Modifier
                                 .size(90.dp)

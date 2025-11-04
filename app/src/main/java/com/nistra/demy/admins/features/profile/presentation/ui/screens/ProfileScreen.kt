@@ -56,7 +56,7 @@ fun ProfileScreen(
                 ImageHeaderSection(
                     title = "See and edit your profile information",
                     description = "Manage your personal data and academy details",
-                    backgroundImage = R.drawable.teachers_management_header_photo,
+                    backgroundImage = R.drawable.profile_management_header_photo,
                     modifier = Modifier.fillMaxWidth()
                 )
 
