@@ -1,12 +1,13 @@
 package com.nistra.demy.admins.features.settings.presentation.ui.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -14,10 +15,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCard
+import com.nistra.demy.admins.core.designsystem.components.cards.InfoCardNoTitle
 import com.nistra.demy.admins.core.designsystem.components.cards.ListItemCard
 import com.nistra.demy.admins.core.designsystem.theme.extendedColors
 import com.nistra.demy.admins.features.settings.presentation.ui.components.SettingsItem
 import com.nistra.demy.admins.features.settings.presentation.viewmodel.SettingsViewModel
+import com.nistra.demy.admins.features.settings.domain.model.SettingsUiState
 
 @Composable
 fun SettingsScreen(
@@ -43,14 +46,8 @@ fun SettingsScreen(
         val isWideScreen = maxWidth >= 900.dp
 
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            //Header
-            Text(
-                text = "Settings",
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.SemiBold
-            )
 
-            //Intro card
+            // Intro
             InfoCard(
                 title = "Adjust your preferences",
                 containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
@@ -73,109 +70,62 @@ fun SettingsScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         AccessibilityTestCard()
-                        ThemeConfigurationCard(
-                            isDarkTheme = isDarkTheme,
-                            themeText = themeText,
-                            uiState = uiState,
-                            viewModel = viewModel
-                        )
+                        ThemeConfigurationCard(viewModel, uiState, themeText, isDarkTheme)
                     }
                     Column(
                         modifier = Modifier.weight(1f),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        GeneralSettingsCard(
-                            uiState = uiState,
-                            viewModel = viewModel,
-                            languageText = languageText
-                        )
+                        GeneralSettingsCard(viewModel, uiState, languageText)
                     }
                 }
             } else {
                 AccessibilityTestCard()
-                ThemeConfigurationCard(
-                    isDarkTheme = isDarkTheme,
-                    themeText = themeText,
-                    uiState = uiState,
-                    viewModel = viewModel
-                )
-                GeneralSettingsCard(
-                    uiState = uiState,
-                    viewModel = viewModel,
-                    languageText = languageText
-                )
+                ThemeConfigurationCard(viewModel, uiState, themeText, isDarkTheme)
+                GeneralSettingsCard(viewModel, uiState, languageText)
             }
         }
     }
 }
+
 @Composable
 private fun AccessibilityTestCard() {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 6.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E3A8A)),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-        shape = MaterialTheme.shapes.medium,
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 20.dp,
-                    end = 20.dp,
-                    bottom = 20.dp,
-                    top = 16.dp
-                ),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Accessibility Test",
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
-                fontWeight = FontWeight.SemiBold
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Adjust the accessibility options to reflect changes in this block.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White
-            )
+    InfoCardNoTitle(containerColor = Color(0xFF1E3A8A)) {
+        Text(
+            text = "Accessibility Test",
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.White,
+            fontWeight = FontWeight.SemiBold
+        )
+
+        Text(
+            text = "Adjust the accessibility options to reflect changes in this block.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.White
+        )
+
+        listOf(
+            MaterialTheme.typography.bodySmall,
+            MaterialTheme.typography.bodyMedium,
+            MaterialTheme.typography.bodyLarge,
+            MaterialTheme.typography.titleMedium,
+            MaterialTheme.typography.titleLarge
+        ).forEach { style ->
             Text(
                 text = "This is how the text will look in the application.",
-                style = MaterialTheme.typography.bodySmall,
-                color = Color.White
-            )
-            Text(
-                text = "This is how the text will look in the application.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White
-            )
-            Text(
-                text = "This is how the text will look in the application.",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.White
-            )
-            Text(
-                text = "This is how the text will look in the application.",
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White
-            )
-            Text(
-                text = "This is how the text will look in the application.",
-                style = MaterialTheme.typography.titleLarge,
+                style = style,
                 color = Color.White
             )
         }
     }
 }
+
 @Composable
 private fun ThemeConfigurationCard(
-    isDarkTheme: Boolean,
+    viewModel: SettingsViewModel,
+    uiState: SettingsUiState,
     themeText: String,
-    uiState: com.nistra.demy.admins.features.settings.presentation.viewmodel.SettingsUiState,
-    viewModel: SettingsViewModel
+    isDarkTheme: Boolean
 ) {
     InfoCard(
         title = "Theme configuration",
@@ -185,9 +135,9 @@ private fun ThemeConfigurationCard(
             title = "Dark theme",
             description = "Current: $themeText mode (follows system theme).",
             isChecked = isDarkTheme,
-            onCheckedChange = {}
+            onCheckedChange = viewModel::toggleDarkTheme
         )
-        Spacer(modifier = Modifier.height(8.dp))
+
         SettingsItem(
             title = "High contrast",
             description = "Improve visibility with higher contrast.",
@@ -199,8 +149,8 @@ private fun ThemeConfigurationCard(
 
 @Composable
 private fun GeneralSettingsCard(
-    uiState: com.nistra.demy.admins.features.settings.presentation.viewmodel.SettingsUiState,
     viewModel: SettingsViewModel,
+    uiState: SettingsUiState,
     languageText: String
 ) {
     InfoCard(
@@ -213,14 +163,13 @@ private fun GeneralSettingsCard(
             isChecked = uiState.notificationsEnabled,
             onCheckedChange = viewModel::toggleNotifications
         )
+
         SettingsItem(
             title = "Marketing",
             description = "Allow promotional messages and emails.",
             isChecked = uiState.marketingEnabled,
             onCheckedChange = viewModel::toggleMarketing
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
 
         ListItemCard(
             onClick = { /* Change password */ },

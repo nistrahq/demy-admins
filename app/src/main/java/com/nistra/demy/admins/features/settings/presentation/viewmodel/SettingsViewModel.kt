@@ -2,17 +2,10 @@ package com.nistra.demy.admins.features.settings.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.features.settings.domain.model.SettingsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-
-data class SettingsUiState(
-    val darkTheme: Boolean = false,
-    val highContrast: Boolean = false,
-    val notificationsEnabled: Boolean = true,
-    val marketingEnabled: Boolean = false
-)
-
 class SettingsViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
