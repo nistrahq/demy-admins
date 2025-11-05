@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AddInvoiceDialog -->
+    <string name="invoice_dialog_title">Añadir Nueva Factura</string>
+    <string name="invoice_dialog_description_label">Descripción</string>
+    <string name="invoice_dialog_amount_label">Monto</string>
+    <string name="invoice_dialog_currency_label">Moneda</string>
+    <string name="invoice_dialog_type_label">Tipo de Factura</string>
+    <string name="invoice_dialog_due_date_label">Fecha de Vencimiento</string>
+    <string name="invoice_dialog_due_date_placeholder">Seleccione una fecha</string>
+    <string name="invoice_dialog_confirm_button">Confirmar</string>
+    <string name="invoice_dialog_cancel_button">Cancelar</string>
+    <string name="invoice_dialog_date_picker_ok">OK</string>
+    <string name="invoice_dialog_date_picker_cancel">Cancelar</string>
+    <string name="invoice_dialog_date_picker_icon_description">Seleccionar fecha</string>
+
+
+    <!-- Invoice Type Options -->
+    <string name="invoice_type_student_enrollment">Matrícula de Estudiante</string>
+    <string name="invoice_type_student_monthly_fee">Cuota Mensual</string>
+    <string name="invoice_type_student_one_time_payment">Pago Único</string>
+    <string name="invoice_type_other">Otro</string>
+
+</resources>

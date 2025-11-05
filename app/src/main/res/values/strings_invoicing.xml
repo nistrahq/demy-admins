@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AddInvoiceDialog -->
+    <string name="invoice_dialog_title">Add New Invoice</string>
+    <string name="invoice_dialog_description_label">Description</string>
+    <string name="invoice_dialog_amount_label">Amount</string>
+    <string name="invoice_dialog_currency_label">Currency</string>
+    <string name="invoice_dialog_type_label">Invoice Type</string>
+    <string name="invoice_dialog_due_date_label">Due Date</string>
+    <string name="invoice_dialog_due_date_placeholder">Select a date</string>
+    <string name="invoice_dialog_confirm_button">Confirm</string>
+    <string name="invoice_dialog_cancel_button">Cancel</string>
+    <string name="invoice_dialog_date_picker_ok">OK</string>
+    <string name="invoice_dialog_date_picker_cancel">Cancel</string>
+    <string name="invoice_dialog_date_picker_icon_description">Select date</string>
+
+    <!-- Invoice Type Options -->
+    <string name="invoice_type_student_enrollment">Student Enrollment</string>
+    <string name="invoice_type_student_monthly_fee">Monthly Fee</string>
+    <string name="invoice_type_student_one_time_payment">One-Time Payment</string>
+    <string name="invoice_type_other">Other</string>
+
+</resources>
