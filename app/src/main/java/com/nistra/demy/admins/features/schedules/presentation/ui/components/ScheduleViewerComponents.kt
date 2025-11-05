@@ -10,6 +10,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +44,7 @@ internal fun getDayStringResId(dayBackendName: String): Int {
 
 internal val eventColors = listOf(
     Color(0xFFB1EEFF),
-    Color(0xFFFFCDDF),
+    Color(0xFFFFBAB5),
     Color(0xFFC4CBFF),
     Color(0xFFD9FAC4),
     Color(0xFFFFEABC),
@@ -56,7 +57,7 @@ fun timeStringToMinutes(timeStr: String): Int {
         val hours = parts.getOrElse(0) { "0" }.toInt()
         val minutes = parts.getOrElse(1) { "0" }.toInt()
         hours * 60 + minutes
-    } catch (e: Exception) { 0 }
+    } catch (_: Exception) { 0 }
 }
 
 internal fun formatHour(hour: Int): String {
@@ -203,14 +204,13 @@ private fun ScheduleTimeColumn(modifier: Modifier = Modifier, scrollState: Scrol
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.End
     ) {
-        Spacer(modifier = Modifier.height(HOUR_HEIGHT / 2))
 
         for (i in START_HOUR + 1..END_HOUR) {
             Box(
                 modifier = Modifier
                     .height(HOUR_HEIGHT)
                     .fillMaxWidth()
-                    .padding(end = 4.dp),
+                    .padding(end = 8.dp),
                 contentAlignment = Alignment.TopEnd
             ) {
                 Text(
@@ -272,7 +272,7 @@ private fun VerticalGridLines(modifier: Modifier = Modifier) {
 
         repeat(lineCount) { index ->
             val isHourLine = index % slotsPerHour == 0
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier.height(slotHeight).fillMaxWidth(),
                 thickness = if (isHourLine) 1.dp else 0.5.dp,
                 color = if (isHourLine) MaterialTheme.colorScheme.outline.copy(alpha = LIGHT_GRID_COLOR_ALPHA) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = LIGHT_GRID_COLOR_ALPHA)
