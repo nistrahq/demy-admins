@@ -3,10 +3,17 @@ package com.nistra.demy.admins.features.schedules.presentation.ui.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.AccessTimeFilled
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.classrooms.domain.models.Classroom
@@ -16,6 +23,7 @@ import com.nistra.demy.admins.features.courses.domain.models.Course
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
 import androidx.compose.ui.res.stringResource
 import com.nistra.demy.admins.R
+import android.annotation.SuppressLint
 
 @Composable
 fun AddClassSessionForm(
@@ -44,7 +52,8 @@ fun AddClassSessionForm(
         DayOfWeekDropdown(
             label = stringResource(R.string.schedules_day_label),
             selectedDay = DayOfWeek.entries.find { it.name == formData.selectedDay },
-            onDaySelected = { day -> onFormChange(formData.copy(selectedDay = day.name)) }
+            onDaySelected = { day -> onFormChange(formData.copy(selectedDay = day.name)) },
+            leadingIcon = Icons.Filled.CalendarMonth
         )
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -54,7 +63,8 @@ fun AddClassSessionForm(
                 options = timeOptions,
                 selectedId = formData.startTime,
                 onSelected = { time -> onFormChange(formData.copy(startTime = time)) },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                leadingIcon = Icons.Filled.AccessTime
             )
 
             DropdownMenu(
@@ -62,7 +72,8 @@ fun AddClassSessionForm(
                 options = timeOptions,
                 selectedId = formData.endTime,
                 onSelected = { time -> onFormChange(formData.copy(endTime = time)) },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                leadingIcon = Icons.Filled.AccessTimeFilled
             )
         }
 
@@ -70,21 +81,24 @@ fun AddClassSessionForm(
             label = stringResource(R.string.schedules_course_label),
             options = courseOptions,
             selectedId = formData.courseId,
-            onSelected = { id -> onFormChange(formData.copy(courseId = id)) }
+            onSelected = { id -> onFormChange(formData.copy(courseId = id)) },
+            leadingIcon = Icons.AutoMirrored.Filled.MenuBook
         )
 
         DropdownMenu(
             label = stringResource(R.string.schedules_classroom_label),
             options = classroomOptions,
             selectedId = formData.classroomId,
-            onSelected = { id -> onFormChange(formData.copy(classroomId = id)) }
+            onSelected = { id -> onFormChange(formData.copy(classroomId = id)) },
+            leadingIcon = Icons.Filled.LocationOn
         )
 
         DropdownMenu(
             label = stringResource(R.string.schedules_teacher_label),
             options = teacherOptions,
             selectedId = formData.teacherId,
-            onSelected = { id -> onFormChange(formData.copy(teacherId = id)) }
+            onSelected = { id -> onFormChange(formData.copy(teacherId = id)) },
+            leadingIcon = Icons.Filled.Person
         )
 
         Button(
@@ -111,7 +125,8 @@ fun <T> DropdownMenu(
     options: Map<T, String>,
     selectedId: T?,
     onSelected: (T) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    leadingIcon: ImageVector? = null
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectedName = options[selectedId] ?: label
@@ -127,7 +142,12 @@ fun <T> DropdownMenu(
             readOnly = true,
             label = { Text(label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = if (leadingIcon != null) {
+                { Icon(leadingIcon, contentDescription = label) }
+            } else {
+                null
+            },
+            modifier = Modifier.menuAnchor().fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         )
         ExposedDropdownMenu(
@@ -154,7 +174,8 @@ fun <T> DropdownMenu(
 fun DayOfWeekDropdown(
     label: String,
     selectedDay: DayOfWeek?,
-    onDaySelected: (DayOfWeek) -> Unit
+    onDaySelected: (DayOfWeek) -> Unit,
+    leadingIcon: ImageVector? = null
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -183,7 +204,12 @@ fun DayOfWeekDropdown(
             readOnly = true,
             label = { Text(label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = if (leadingIcon != null) {
+                { Icon(leadingIcon, contentDescription = label) }
+            } else {
+                null
+            },
+            modifier = Modifier.menuAnchor().fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         )
         ExposedDropdownMenu(
@@ -204,14 +230,13 @@ fun DayOfWeekDropdown(
     }
 }
 
+@SuppressLint("DefaultLocale")
 private fun generateTimeOptions(): Map<String, String> {
     val options = mutableMapOf<String, String>()
     for (hour in 7..19) {
         for (minute in listOf(0, 30)) {
             val time = String.format("%02d:%02d", hour, minute)
-            if (hour < 20 || (hour == 20 && minute == 0)) {
-                options[time] = time
-            }
+            options[time] = time
         }
     }
     return options

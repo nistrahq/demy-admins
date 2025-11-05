@@ -64,7 +64,7 @@ private fun ClassCardContent(
             Text(
                 text = session.course.name,
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Medium,
                 color = textColor,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis

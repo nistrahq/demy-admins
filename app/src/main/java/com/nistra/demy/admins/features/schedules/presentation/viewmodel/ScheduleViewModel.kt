@@ -23,15 +23,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SchedulesViewModel @Inject constructor(
-    // Use Cases de Schedule (CRUD principal)
     private val getAllSchedulesUseCase: GetAllSchedulesUseCase,
     private val createScheduleUseCase: CreateScheduleUseCase,
     private val updateScheduleNameUseCase: UpdateScheduleNameUseCase,
     private val deleteScheduleUseCase: DeleteScheduleUseCase,
-    // Use Cases de Sesiones (CRUD anidado)
+
     private val addClassSessionToScheduleUseCase: AddClassSessionToScheduleUseCase,
     private val removeClassSessionFromScheduleUseCase: RemoveClassSessionFromScheduleUseCase,
-    // Use Cases de Data Maestra (Otras features)
+
     private val getAllCoursesUseCase: GetAllCoursesUseCase,
     private val getAllClassroomsUseCase: GetAllClassroomsUseCase,
     private val getAllTeachersUseCase: GetTeachersUseCase
@@ -60,10 +59,8 @@ class SchedulesViewModel @Inject constructor(
                     schedulesResult.onSuccess { fetchedSchedules ->
                         allSchedulesCache = fetchedSchedules
                         val filteredList = filterSchedules(fetchedSchedules, _uiState.value.searchQuery)
-                        // Las actualizaciones de StateFlow son seguras y se reflejarán en el Main Thread.
                         _uiState.update { it.copy(schedules = filteredList) }
                     }.onFailure { e ->
-                        // Esto manejará el error 500 del servidor.
                         _uiState.update { it.copy(error = e.message ?: "Error al cargar agendas.") }
                     }
 
@@ -80,18 +77,12 @@ class SchedulesViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                // Captura excepciones inesperadas (ej. problemas de red o Hilt)
                 _uiState.update { it.copy(error = "Error de inicialización: ${e.message ?: "Desconocido"}") }
             } finally {
-                // 3. Desactiva el indicador de carga.
                 _uiState.update { it.copy(isLoading = false) }
             }
         }
     }
-
-    // =========================================================================
-    // Handlers de Interacción y Búsqueda
-    // =========================================================================
 
     fun searchSchedules(query: String) {
         _uiState.update { it.copy(searchQuery = query) }
@@ -117,10 +108,6 @@ class SchedulesViewModel @Inject constructor(
         _uiState.update { it.copy(scheduleToEdit = null, nameForm = ScheduleFormData(), error = null) }
     }
 
-    // =========================================================================
-    // Handlers de Forms (Name Form)
-    // =========================================================================
-
     fun onScheduleNameChange(name: String) {
         _uiState.update { it.copy(nameForm = it.nameForm.copy(name = name)) }
     }
@@ -141,14 +128,13 @@ class SchedulesViewModel @Inject constructor(
                 }
 
                 result.onSuccess { updatedSchedule ->
-                    // Si es nuevo, selecciona el nuevo Schedule para permitir añadir sesiones
                     updatedSchedule?.let { selectScheduleForEdit(it) }
                     loadData() // Recargar listas
                 }.onFailure { e ->
                     _uiState.update { it.copy(isLoading = false, error = e.message ?: "Error al guardar el horario.") }
                 }
 
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 _uiState.update { it.copy(isLoading = false, error = "Error de conexión o datos.") }
             }
         }
@@ -168,10 +154,6 @@ class SchedulesViewModel @Inject constructor(
         }
     }
 
-    // =========================================================================
-    // Handlers de Forms (Session Form)
-    // =========================================================================
-
     fun onSessionFormChange(formData: ClassSessionFormData) {
         _uiState.update { it.copy(sessionForm = formData, error = null) }
     }
@@ -185,12 +167,10 @@ class SchedulesViewModel @Inject constructor(
             return
         }
 
-        // CORRECCIÓN: Usar data.teacherId directamente ya que es Long?
         val selectedTeacher = data.teacherId.let { id ->
             _uiState.value.availableTeachers.find { it.id == id }
         }
 
-        // Obtener nombres, utilizando un valor predeterminado si el profesor no se encuentra
         val teacherFirstName = selectedTeacher?.firstName ?: ""
         val teacherLastName = selectedTeacher?.lastName ?: ""
 
@@ -207,38 +187,31 @@ class SchedulesViewModel @Inject constructor(
                 teacherFirstName = teacherFirstName,
                 teacherLastName = teacherLastName
             ).onSuccess { updatedSchedule ->
-                // --- INICIO DE LA SOLUCIÓN ---
                 if (updatedSchedule != null) {
-                    // 1. Actualizar el caché local
                     val newSchedulesCache = allSchedulesCache.map {
                         if (it.id == updatedSchedule.id) updatedSchedule else it
                     }
                     allSchedulesCache = newSchedulesCache
 
-                    // 2. Aplicar el filtro actual a la lista actualizada
                     val filteredList = filterSchedules(newSchedulesCache, _uiState.value.searchQuery)
 
-                    // 3. Actualizar el estado de la UI en una sola operación
                     _uiState.update { state ->
                         state.copy(
-                            scheduleToEdit = updatedSchedule, // Refresca el detalle
-                            schedules = filteredList,         // Refresca la lista principal
-                            sessionForm = ClassSessionFormData(), // Limpia el formulario
+                            scheduleToEdit = updatedSchedule,
+                            schedules = filteredList,
+                            sessionForm = ClassSessionFormData(),
                             isSessionFormLoading = false
                         )
                     }
                 } else {
                     _uiState.update { it.copy(isSessionFormLoading = false) }
                 }
-                // NO llames a loadData() aquí
-                // --- FIN DE LA SOLUCIÓN ---
             }.onFailure { e ->
                 _uiState.update { it.copy(isSessionFormLoading = false, error = e.message ?: "Error al añadir sesión.") }
             }
         }
     }
 
-    // REEMPLAZA ESTA FUNCIÓN COMPLETA
     fun deleteClassSession(session: ClassSession) {
         val scheduleId = _uiState.value.scheduleToEdit?.id ?: return
 
@@ -247,31 +220,24 @@ class SchedulesViewModel @Inject constructor(
 
             removeClassSessionFromScheduleUseCase(scheduleId, session.id)
                 .onSuccess { updatedSchedule ->
-                    // --- INICIO DE LA SOLUCIÓN ---
                     if (updatedSchedule != null) {
-                        // 1. Actualizar el caché local
                         val newSchedulesCache = allSchedulesCache.map {
                             if (it.id == updatedSchedule.id) updatedSchedule else it
                         }
                         allSchedulesCache = newSchedulesCache
 
-                        // 2. Aplicar el filtro actual a la lista actualizada
                         val filteredList = filterSchedules(newSchedulesCache, _uiState.value.searchQuery)
 
-                        // 3. Actualizar el estado de la UI en una sola operación
                         _uiState.update { state ->
                             state.copy(
-                                scheduleToEdit = updatedSchedule, // Refresca el detalle
-                                schedules = filteredList,         // Refresca la lista principal
+                                scheduleToEdit = updatedSchedule,
+                                schedules = filteredList,
                                 isSessionFormLoading = false
                             )
                         }
                     } else {
-                        // Si por alguna razón el schedule actualizado es nulo, al menos detén la carga
                         _uiState.update { it.copy(isSessionFormLoading = false) }
                     }
-                    // NO llames a loadData() aquí
-                    // --- FIN DE LA SOLUCIÓN ---
                 }
                 .onFailure { e ->
                     _uiState.update { it.copy(isSessionFormLoading = false, error = e.message ?: "Error al eliminar sesión.") }
