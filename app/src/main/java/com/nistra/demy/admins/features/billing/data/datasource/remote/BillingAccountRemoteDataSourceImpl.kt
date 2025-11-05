@@ -4,6 +4,7 @@ import com.nistra.demy.admins.core.common.safeApiCall
 import com.nistra.demy.admins.features.billing.data.remote.api.BillingAccountsApi
 import com.nistra.demy.admins.features.billing.data.remote.dto.BillingAccountResourceDto
 import com.nistra.demy.admins.features.billing.data.remote.dto.CreateBillingAccountRequestDto
+import com.nistra.demy.admins.features.invoicing.data.remote.dto.InvoiceResourceDto
 import javax.inject.Inject
 
 class BillingAccountRemoteDataSourceImpl @Inject constructor(
@@ -19,5 +20,9 @@ class BillingAccountRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun addBillingAccount( request: CreateBillingAccountRequestDto): BillingAccountResourceDto {
         return safeApiCall(endpoint = "billing-accounts") {  api.createBillingAccount(request) }
+    }
+
+    override suspend fun addInvoiceToBillingAccount(billingAccountId: String, request: InvoiceResourceDto): BillingAccountResourceDto {
+        return safeApiCall(endpoint= "billing-accounts/{billingAccountId}/invoices") { api.addInvoiceToBillingAccount(billingAccountId, request)}
     }
 }

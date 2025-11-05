@@ -2,7 +2,7 @@ package com.nistra.demy.admins.features.billing.data.datasource.remote
 
 import com.nistra.demy.admins.features.billing.data.remote.dto.BillingAccountResourceDto
 import com.nistra.demy.admins.features.billing.data.remote.dto.CreateBillingAccountRequestDto
-import com.nistra.demy.admins.features.billing.domain.model.BillingAccount
+import com.nistra.demy.admins.features.invoicing.data.remote.dto.InvoiceResourceDto
 
 interface BillingAccountRemoteDataSource {
 
@@ -11,4 +11,8 @@ interface BillingAccountRemoteDataSource {
     suspend fun fetchBillingAccountById(billingAccountId: String): BillingAccountResourceDto
 
     suspend fun addBillingAccount(request: CreateBillingAccountRequestDto): BillingAccountResourceDto
+
+    suspend fun addInvoiceToBillingAccount(billingAccountId: String ,request: InvoiceResourceDto): BillingAccountResourceDto
+
+
 }
