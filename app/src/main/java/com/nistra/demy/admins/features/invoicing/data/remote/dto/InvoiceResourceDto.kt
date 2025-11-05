@@ -1,4 +1,4 @@
-package com.nistra.demy.admins.features.billing.data.remote.dto
+package com.nistra.demy.admins.features.invoicing.data.remote.dto
 
 import com.squareup.moshi.JsonClass
 
