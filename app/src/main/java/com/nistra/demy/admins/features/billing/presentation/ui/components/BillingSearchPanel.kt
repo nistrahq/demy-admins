@@ -29,6 +29,7 @@ fun BillingSearchPanel(
     billingAccounts: List<BillingAccount>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
+    onItemClick: (String) -> Unit,
     onEditBilling: (BillingAccount) -> Unit = {},
     onDeleteBilling: (BillingAccount) -> Unit = {}
 ) {
@@ -51,6 +52,7 @@ fun BillingSearchPanel(
         items(billingAccounts) { account ->
             BillingListItem(
                 account = account,
+                onClick = { onItemClick(account.id) },
                 onEdit = { onEditBilling(account) },
                 onDelete = { onDeleteBilling(account) }
             )
@@ -63,12 +65,13 @@ fun BillingSearchPanel(
 @Composable
 private fun BillingListItem(
     account: BillingAccount,
+    onClick: () -> Unit,
     onEdit: () -> Unit,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ListItemCard(
-        onClick = { /* TODO: Implementar click para ver detalles de la cuenta */ },
+        onClick = onClick,
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
         mainContent = {
