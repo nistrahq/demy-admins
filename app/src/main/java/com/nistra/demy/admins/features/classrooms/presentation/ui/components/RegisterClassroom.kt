@@ -22,6 +22,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.classrooms.domain.models.Classroom
 import com.nistra.demy.admins.features.classrooms.presentation.model.ClassroomFormData
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun RegisterClassroom(
@@ -61,19 +63,18 @@ fun RegisterClassroom(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (!isEditing) "Registrar Nueva Aula" else "Editar Aula: ${classroomToEdit.code}",
+                    text = if (!isEditing) stringResource(R.string.classrooms_registration_title) else stringResource(R.string.classrooms_edit_title_prefix) + classroomToEdit!!.code,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 value = formData.code,
                 onValueChange = { onFormChange(formData.copy(code = it)) },
-                label = { Text("Código de Aula") },
-                leadingIcon = { Icon(Icons.Default.Key, contentDescription = "Código") },
+                label = { Text(stringResource(R.string.classrooms_code_label)) },
+                leadingIcon = { Icon(Icons.Default.Key, contentDescription = stringResource(R.string.classrooms_code_cd)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
@@ -82,8 +83,8 @@ fun RegisterClassroom(
             OutlinedTextField(
                 value = formData.capacityText,
                 onValueChange = { onFormChange(formData.copy(capacityText = it.filter { char -> char.isDigit() })) },
-                label = { Text("Capacidad") },
-                leadingIcon = { Icon(Icons.Default.Group, contentDescription = "Capacidad") },
+                label = { Text(stringResource(R.string.classrooms_capacity_label)) },
+                leadingIcon = { Icon(Icons.Default.Group, contentDescription = stringResource(R.string.classrooms_capacity_cd)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -93,8 +94,8 @@ fun RegisterClassroom(
             OutlinedTextField(
                 value = formData.campus,
                 onValueChange = { onFormChange(formData.copy(campus = it)) },
-                label = { Text("Sede") },
-                leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = "Sede") },
+                label = { Text(stringResource(R.string.classrooms_campus_label)) },
+                leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = stringResource(R.string.classrooms_campus_cd)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
@@ -125,7 +126,7 @@ fun RegisterClassroom(
                         CircularProgressIndicator(modifier = Modifier.size(20.dp))
                     } else {
                         Text(
-                            text = if (!isEditing) "Registrar Aula" else "Guardar Cambios",
+                            text = if (!isEditing) stringResource(R.string.classrooms_register_button) else stringResource(R.string.classrooms_action_save_changes),
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
@@ -139,9 +140,9 @@ fun RegisterClassroom(
                             .height(48.dp),
                         enabled = !isLoading
                     ) {
-                        Icon(Icons.Default.Clear, contentDescription = "Cancelar")
+                        Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.classrooms_action_cancel))
                         Spacer(Modifier.width(4.dp))
-                        Text("Cancelar")
+                        Text(stringResource(R.string.classrooms_action_cancel))
                     }
                 }
             }

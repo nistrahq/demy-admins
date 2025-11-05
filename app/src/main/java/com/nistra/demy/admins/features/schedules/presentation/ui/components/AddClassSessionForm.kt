@@ -14,7 +14,8 @@ import com.nistra.demy.admins.features.schedules.domain.models.DayOfWeek
 import com.nistra.demy.admins.features.schedules.presentation.model.ClassSessionFormData
 import com.nistra.demy.admins.features.courses.domain.models.Course
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
-import java.util.Locale
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun AddClassSessionForm(
@@ -27,7 +28,7 @@ fun AddClassSessionForm(
     isLoading: Boolean
 ) {
     Text(
-        "Añadir Nueva Sesión de Clase",
+        stringResource(R.string.schedules_session_add_title),
         style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.SemiBold,
     )
@@ -36,53 +37,53 @@ fun AddClassSessionForm(
     val teacherOptions = availableTeachers.associate { it.id to "${it.firstName} ${it.lastName}" }
     val courseOptions = availableCourses.associate { it.id to "${it.code} - ${it.name}" }
     val classroomOptions = availableClassrooms.associate { it.id to "C${it.code} - ${it.campus}" }
+    val timeOptions = remember { generateTimeOptions() }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
 
-        // 1. DÍA DE LA SEMANA (Dropdown)
         DayOfWeekDropdown(
-            label = "Día de la Semana",
+            label = stringResource(R.string.schedules_day_label),
             selectedDay = DayOfWeek.entries.find { it.name == formData.selectedDay },
             onDaySelected = { day -> onFormChange(formData.copy(selectedDay = day.name)) }
         )
 
-        // 2. RANGO DE TIEMPO
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            OutlinedTextField(
-                value = formData.startTime,
-                onValueChange = { onFormChange(formData.copy(startTime = it)) },
-                label = { Text("Hora Inicio (HH:mm)") },
-                modifier = Modifier.weight(1f),
-                singleLine = true
+
+            // HORA INICIO (50%)
+            DropdownMenu(
+                label = stringResource(R.string.schedules_time_start_label),
+                options = timeOptions,
+                selectedId = formData.startTime,
+                onSelected = { time -> onFormChange(formData.copy(startTime = time)) },
+                modifier = Modifier.weight(1f)
             )
-            OutlinedTextField(
-                value = formData.endTime,
-                onValueChange = { onFormChange(formData.copy(endTime = it)) },
-                label = { Text("Hora Fin (HH:mm)") },
-                modifier = Modifier.weight(1f),
-                singleLine = true
+
+            // HORA FIN (50%)
+            DropdownMenu(
+                label = stringResource(R.string.schedules_time_end_label),
+                options = timeOptions,
+                selectedId = formData.endTime,
+                onSelected = { time -> onFormChange(formData.copy(endTime = time)) },
+                modifier = Modifier.weight(1f)
             )
         }
 
-        // 3. CURSO (Dropdown)
         DropdownMenu(
-            label = "Curso Disponible",
+            label = stringResource(R.string.schedules_course_label),
             options = courseOptions,
             selectedId = formData.courseId,
             onSelected = { id -> onFormChange(formData.copy(courseId = id)) }
         )
 
-        // 4. AULA (Dropdown)
         DropdownMenu(
-            label = "Aula/Classroom",
+            label = stringResource(R.string.schedules_classroom_label),
             options = classroomOptions,
             selectedId = formData.classroomId,
             onSelected = { id -> onFormChange(formData.copy(classroomId = id)) }
         )
 
-        // 5. PROFESOR (Dropdown)
         DropdownMenu(
-            label = "Profesor",
+            label = stringResource(R.string.schedules_teacher_label),
             options = teacherOptions,
             selectedId = formData.teacherId,
             onSelected = { id -> onFormChange(formData.copy(teacherId = id)) }
@@ -96,9 +97,9 @@ fun AddClassSessionForm(
             if (isLoading) {
                 CircularProgressIndicator(Modifier.size(20.dp), color = MaterialTheme.colorScheme.onPrimary)
             } else {
-                Icon(Icons.Default.Add, contentDescription = "Añadir Sesión")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.schedules_session_add_cd))
                 Spacer(Modifier.width(8.dp))
-                Text("Añadir Sesión al Horario")
+                Text(stringResource(R.string.schedules_session_add_button))
             }
         }
     }
@@ -107,11 +108,12 @@ fun AddClassSessionForm(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun <T> DropdownMenu( // <-- Se añadió el tipo genérico <T>
+fun <T> DropdownMenu(
     label: String,
     options: Map<T, String>,
     selectedId: T?,
-    onSelected: (T) -> Unit
+    onSelected: (T) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectedName = options[selectedId] ?: label
@@ -119,7 +121,7 @@ fun <T> DropdownMenu( // <-- Se añadió el tipo genérico <T>
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
     ) {
         OutlinedTextField(
             value = selectedName,
@@ -149,7 +151,6 @@ fun <T> DropdownMenu( // <-- Se añadió el tipo genérico <T>
 }
 
 
-// --- Componente auxiliar específico para Días de la Semana ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DayOfWeekDropdown(
@@ -159,13 +160,27 @@ fun DayOfWeekDropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
+    fun DayOfWeek.getStringResId(): Int {
+        return when (this) {
+            DayOfWeek.MONDAY -> R.string.day_monday
+            DayOfWeek.TUESDAY -> R.string.day_tuesday
+            DayOfWeek.WEDNESDAY -> R.string.day_wednesday
+            DayOfWeek.THURSDAY -> R.string.day_thursday
+            DayOfWeek.FRIDAY -> R.string.day_friday
+            DayOfWeek.SATURDAY -> R.string.day_saturday
+            DayOfWeek.SUNDAY -> R.string.day_sunday
+        }
+    }
+
+    val selectedText = selectedDay?.let { stringResource(it.getStringResId()) } ?: label
+
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
         OutlinedTextField(
-            value = selectedDay?.name?.lowercase()?.capitalize(Locale.getDefault()) ?: label,
+            value = selectedText,
             onValueChange = {},
             readOnly = true,
             label = { Text(label) },
@@ -179,7 +194,7 @@ fun DayOfWeekDropdown(
         ) {
             DayOfWeek.entries.forEach { day ->
                 DropdownMenuItem(
-                    text = { Text(day.name.lowercase().capitalize(Locale.getDefault())) },
+                    text = { Text(stringResource(day.getStringResId())) },
                     onClick = {
                         onDaySelected(day)
                         expanded = false
@@ -189,4 +204,17 @@ fun DayOfWeekDropdown(
             }
         }
     }
+}
+
+private fun generateTimeOptions(): Map<String, String> {
+    val options = mutableMapOf<String, String>()
+    for (hour in 7..19) {
+        for (minute in listOf(0, 30)) {
+            val time = String.format("%02d:%02d", hour, minute)
+            if (hour < 20 || (hour == 20 && minute == 0)) {
+                options[time] = time
+            }
+        }
+    }
+    return options
 }

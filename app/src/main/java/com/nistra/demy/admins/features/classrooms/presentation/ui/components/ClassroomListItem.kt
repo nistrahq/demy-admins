@@ -29,6 +29,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.classrooms.domain.models.Classroom
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun ClassroomListItem(
@@ -76,12 +78,12 @@ fun ClassroomListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Sede: ${classroom.campus}",
+                    text = stringResource(R.string.classrooms_campus_prefix) + classroom.campus,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Capacidad: ${classroom.capacity} personas",
+                    text = stringResource(R.string.classrooms_capacity_prefix, classroom.capacity),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
@@ -97,14 +99,14 @@ fun ClassroomListItem(
                 IconButton(onClick = onEditClick) {
                     Icon(
                         Icons.Default.Edit,
-                        contentDescription = "Editar aula",
+                        contentDescription = stringResource(R.string.classrooms_edit_cd),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 IconButton(onClick = onDeleteClick) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "Eliminar aula",
+                        contentDescription = stringResource(R.string.classrooms_delete_cd),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
