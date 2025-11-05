@@ -1,37 +1,38 @@
 package com.nistra.demy.admins.features.schedules.presentation.ui.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.schedules.presentation.ui.components.RegisterSchedule
 import com.nistra.demy.admins.features.schedules.presentation.ui.components.ScheduleList
+import com.nistra.demy.admins.features.schedules.presentation.ui.components.SchedulesHeader
 import com.nistra.demy.admins.features.schedules.presentation.viewmodel.SchedulesViewModel
 
 @Composable
 fun SchedulesScreen(
-    // La navegación a la pantalla de detalle de horarios (viewer) se agregaría aquí
     viewModel: SchedulesViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Surface(
+    Column(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Contenedor principal para el diseño de dos paneles 50/50
+        SchedulesHeader(
+            title = stringResource(com.nistra.demy.admins.R.string.schedules_screen_title),
+            description = stringResource(R.string.schedules_screen_description)
+        )
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Panel Izquierdo: Formulario de Registro/Edición (50% del ancho)
             RegisterSchedule(
                 modifier = Modifier.weight(0.5f),
                 uiState = uiState,
@@ -41,10 +42,8 @@ fun SchedulesScreen(
                 onSessionFormChange = viewModel::onSessionFormChange,
                 onAddClassSession = viewModel::addClassSession,
                 onDeleteClassSession = viewModel::deleteClassSession,
-                // onNavigateToViewer se podría pasar aquí si fuera necesario ver el Schedule en otra vista
             )
 
-            // Panel Derecho: Lista de Schedules (50% del ancho)
             ScheduleList(
                 modifier = Modifier.weight(0.5f),
                 schedules = uiState.schedules,
@@ -56,4 +55,5 @@ fun SchedulesScreen(
             )
         }
     }
+
 }
