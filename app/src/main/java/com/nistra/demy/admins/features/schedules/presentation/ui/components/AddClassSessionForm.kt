@@ -49,7 +49,6 @@ fun AddClassSessionForm(
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
 
-            // HORA INICIO (50%)
             DropdownMenu(
                 label = stringResource(R.string.schedules_time_start_label),
                 options = timeOptions,
@@ -58,7 +57,6 @@ fun AddClassSessionForm(
                 modifier = Modifier.weight(1f)
             )
 
-            // HORA FIN (50%)
             DropdownMenu(
                 label = stringResource(R.string.schedules_time_end_label),
                 options = timeOptions,
