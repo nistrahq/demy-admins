@@ -16,6 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.schedules.domain.models.Schedule
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun ScheduleList(
@@ -25,20 +27,21 @@ fun ScheduleList(
     onDeleteSchedule: (Schedule) -> Unit,
     onSearchQueryChange: (String) -> Unit,
     searchQuery: String,
-    isLoading: Boolean // Agregamos el estado de carga
+    isLoading: Boolean
 ) {
     Card(
         modifier = modifier.fillMaxHeight(),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
 
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = onSearchQueryChange,
-                label = { Text("Buscar horarios por nombre") },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
+                label = { Text(stringResource(R.string.schedules_search_label)) },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = stringResource(R.string.schedules_search_cd)) },
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                 enabled = !isLoading
             )
@@ -48,7 +51,7 @@ fun ScheduleList(
             }
 
             if (schedules.isEmpty() && !isLoading) {
-                Text("No hay agendas disponibles.", modifier = Modifier.padding(top = 16.dp))
+                Text(stringResource(R.string.schedules_no_schedules), modifier = Modifier.padding(top = 16.dp))
             }
 
             LazyColumn(
@@ -83,13 +86,11 @@ fun ScheduleListItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                // Al hacer clic en el item, se selecciona para editar en el panel izquierdo.
                 .clickable { onEditClick() }
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Información del Horario
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = schedule.name,
@@ -100,14 +101,13 @@ fun ScheduleListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Sesiones: ${schedule.classSessions.size}",
+                    text = stringResource(R.string.schedules_list_sessions_count, schedule.classSessions.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Acciones: Editar y Eliminar
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -115,14 +115,14 @@ fun ScheduleListItem(
                 IconButton(onClick = onEditClick) {
                     Icon(
                         Icons.Default.Edit,
-                        contentDescription = "Editar horario",
+                        contentDescription = stringResource(R.string.schedules_edit_cd),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 IconButton(onClick = onDeleteClick) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "Eliminar horario",
+                        contentDescription = stringResource(R.string.schedules_delete_cd),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }

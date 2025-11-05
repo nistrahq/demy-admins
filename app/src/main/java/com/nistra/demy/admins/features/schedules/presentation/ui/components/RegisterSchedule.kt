@@ -22,6 +22,8 @@ import com.nistra.demy.admins.features.schedules.presentation.model.ClassSession
 import com.nistra.demy.admins.features.teachers.domain.model.Teacher
 import com.nistra.demy.admins.features.courses.domain.models.Course
 import java.util.Locale
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun RegisterSchedule(
@@ -43,7 +45,8 @@ fun RegisterSchedule(
     Card(
         modifier = modifier.fillMaxHeight(),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
             modifier = Modifier
@@ -53,7 +56,6 @@ fun RegisterSchedule(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Título
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -63,19 +65,17 @@ fun RegisterSchedule(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (!isEditing) "Registrar Nuevo Horario" else "Editar: ${scheduleName}",
+                    text = if (!isEditing) stringResource(R.string.schedules_register_title) else stringResource(R.string.schedules_edit_title_prefix) + scheduleName,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
 
-            // Campo de Nombre y Botones de Schedule
             OutlinedTextField(
                 value = scheduleName,
                 onValueChange = onScheduleNameChange,
-                label = { Text("Nombre del Horario") },
+                label = { Text(stringResource(R.string.schedules_name_label)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp),
@@ -94,7 +94,7 @@ fun RegisterSchedule(
                     if (isScheduleFormLoading) {
                         CircularProgressIndicator(Modifier.size(20.dp))
                     } else {
-                        Text(text = if (!isEditing) "Crear Horario" else "Actualizar Nombre")
+                        Text(text = if (!isEditing) stringResource(R.string.schedules_create_button) else stringResource(R.string.schedules_update_name_button))
                     }
                 }
 
@@ -104,19 +104,17 @@ fun RegisterSchedule(
                         modifier = Modifier.weight(1f).height(48.dp),
                         enabled = !isScheduleFormLoading
                     ) {
-                        Icon(Icons.Default.Clear, contentDescription = "Cancelar")
+                        Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.action_cancel))
                         Spacer(Modifier.width(4.dp))
-                        Text("Cancelar")
+                        Text(stringResource(R.string.action_cancel))
                     }
                 }
             }
 
-            // Mensaje de Error
             uiState.error?.let { errorMsg ->
                 Text(text = errorMsg, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
             }
 
-            // Contenido Adicional: Formulario/Lista de Sesiones (SOLO EN EDICIÓN)
             if (isEditing && scheduleToEdit != null) {
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
                 ScheduleSessionsContent(
@@ -135,16 +133,12 @@ fun RegisterSchedule(
     }
 }
 
-// =================================================================================
-// Subcomponentes del formulario principal
-// =================================================================================
-
 @Composable
 private fun ScheduleSessionsContent(
     schedule: Schedule,
     formData: ClassSessionFormData,
     availableCourses: List<Course>,
-    availableClassrooms: List<Classroom>, // Usar modelo Classroom
+    availableClassrooms: List<Classroom>,
     availableTeachers: List<Teacher>,
     onSessionFormChange: (ClassSessionFormData) -> Unit,
     onAddClassSession: () -> Unit,
@@ -156,13 +150,12 @@ private fun ScheduleSessionsContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            "Sesiones de Clase (${schedule.classSessions.size})",
+            stringResource(R.string.schedules_sessions_count_title, schedule.classSessions.size),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.primary
         )
 
-        // Lista de Sesiones Existentes
         if (schedule.classSessions.isNotEmpty()) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 schedule.classSessions.forEach { session ->
@@ -170,12 +163,11 @@ private fun ScheduleSessionsContent(
                 }
             }
         } else {
-            Text("No hay sesiones registradas para este horario.", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(R.string.schedules_no_sessions), style = MaterialTheme.typography.bodyMedium)
         }
 
         Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-        // Formulario de Adición de Sesión (Refactorizado)
         AddClassSessionForm(
             formData = formData,
             availableCourses = availableCourses,
@@ -205,7 +197,7 @@ fun ClassSessionListItem(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "${session.courseCode} (${session.courseName})",
+                    text = "${session.course.code} (${session.course.name})",
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
@@ -214,7 +206,11 @@ fun ClassSessionListItem(
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
-                    text = "Aula: ${session.classroomCode} | Prof: ${session.teacherName}",
+                    text = stringResource(R.string.schedules_session_classroom_prefix, session.classroom.code),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    text = stringResource(R.string.schedules_session_teacher_prefix, session.teacher.firstName + " " + session.teacher.lastName),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
@@ -222,7 +218,7 @@ fun ClassSessionListItem(
             IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "Eliminar Sesión",
+                    contentDescription = stringResource(R.string.schedules_session_delete_cd),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
