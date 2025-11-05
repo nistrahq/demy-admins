@@ -29,6 +29,7 @@ import com.nistra.demy.admins.R
 @Composable
 fun RegisterBillingScreen(
     viewModel: RegisterBillingAccountViewModel = hiltViewModel(),
+    onGoToDetails:(String) -> Unit,
     @Suppress("UNUSED_PARAMETER") onGoToList: () -> Unit = {}
 ) {
 
@@ -79,7 +80,8 @@ fun RegisterBillingScreen(
                     onSearchQueryChange = viewModel::onSearchQueryChange,
                     billingAccounts = uiState.filteredBillingAccounts,
                     modifier = Modifier.weight(1f),
-                    isLoading = uiState.isLoadingBillingAccounts
+                    isLoading = uiState.isLoadingBillingAccounts,
+                    onItemClick = onGoToDetails,
                 )
             }
         }
@@ -96,6 +98,6 @@ fun RegisterBillingScreen(
 @Composable
 fun RegisterBillingScreenPreview() {
     MaterialTheme {
-        RegisterBillingScreen()
+        RegisterBillingScreen(onGoToDetails = {})
     }
 }
