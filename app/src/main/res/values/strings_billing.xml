@@ -24,4 +24,14 @@
     <!-- Error Messages -->
     <string name="billing_error_register_failed">Error registering account</string>
     <string name="billing_error_load_failed">Error loading accounts</string>
+
+    <string name="billing_details_title">Account Details</string>
+    <string name="billing_details_back_button_description">Back</string>
+    <string name="billing_details_error_message">Error: %1$s</string>
+    <string name="billing_details_account_id">Account ID: %1$s</string>
+    <string name="billing_details_student_id">Student ID: %1$s</string>
+    <string name="billing_details_invoices_title">Invoices (%1$d)</string>
+    <string name="billing_details_no_invoices">This account has no invoices yet.</string>
+    <string name="billing_details_invoice_item_label">- Invoice #%1$s: %2$s %3$s (%4$s)</string>
+    <string name="billing_details_add_invoice_button">Add New Invoice</string>
 </resources>
