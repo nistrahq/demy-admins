@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.courses.domain.models.Course
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun CourseList(
@@ -33,8 +35,8 @@ fun CourseList(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = onSearchQueryChange,
-                label = { Text("Buscar cursos") },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
+                label = { Text(stringResource(R.string.courses_search_label)) },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = stringResource(R.string.courses_search_cd)) },
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
             )
 

@@ -25,11 +25,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.courses.domain.models.Course
-
+import com.nistra.demy.admins.R
 
 @Composable
 fun CourseListItem(
@@ -77,12 +78,12 @@ fun CourseListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Código: ${course.code}",
+                    text = stringResource(R.string.courses_code_prefix) + course.code,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Descripción: ${course.description}",
+                    text = stringResource(R.string.courses_description_prefix) + course.description,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
@@ -98,14 +99,14 @@ fun CourseListItem(
                 IconButton(onClick = onEditClick) {
                     Icon(
                         Icons.Default.Edit,
-                        contentDescription = "Editar curso",
+                        contentDescription = stringResource(R.string.courses_edit_cd),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 IconButton(onClick = onDeleteClick) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "Eliminar curso",
+                        contentDescription = stringResource(R.string.courses_delete_cd),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }

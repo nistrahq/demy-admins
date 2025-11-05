@@ -5,9 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.courses.presentation.ui.components.CourseList
+import com.nistra.demy.admins.features.courses.presentation.ui.components.CoursesHeader
 import com.nistra.demy.admins.features.courses.presentation.ui.components.RegisterCourse
 import com.nistra.demy.admins.features.courses.presentation.viewmodel.CoursesViewModel
 
@@ -19,10 +22,17 @@ fun CoursesScreen(
     val uiState by viewModel.uiState.collectAsState()
     val formData by viewModel.formData.collectAsState()
 
-        Row(
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        CoursesHeader(
+            title = stringResource(com.nistra.demy.admins.R.string.courses_screen_title),
+            description = stringResource(R.string.courses_screen_description)
+        )
+        Row (
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             RegisterCourse(
@@ -45,5 +55,5 @@ fun CoursesScreen(
                 searchQuery = uiState.searchQuery
             )
         }
-
+    }
 }

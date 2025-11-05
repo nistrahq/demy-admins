@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nistra.demy.admins.features.courses.domain.models.Course // Tu modelo de dominio
+import com.nistra.demy.admins.features.courses.domain.models.Course
 import com.nistra.demy.admins.features.courses.presentation.model.CourseFormData
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun RegisterCourse(
@@ -55,18 +57,17 @@ fun RegisterCourse(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (!isEditing) "Registrar Nuevo Curso" else "Editar Curso: ${courseToEdit.code}",
+                    text = if (!isEditing) stringResource(R.string.courses_registration_title) else stringResource(R.string.courses_edit_title_prefix) + courseToEdit!!.code,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 value = formData.name,
                 onValueChange = { onFormChange(formData.copy(name = it)) },
-                label = { Text("Nombre del Curso") },
+                label = { Text(stringResource(R.string.courses_name_label)) },
                 leadingIcon = { Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Nombre del Curso") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
@@ -76,7 +77,7 @@ fun RegisterCourse(
             OutlinedTextField(
                 value = formData.code,
                 onValueChange = { onFormChange(formData.copy(code = it)) },
-                label = { Text("Código de Curso") },
+                label = { Text(stringResource(R.string.courses_code_label)) },
                 leadingIcon = { Icon(Icons.Default.Tag, contentDescription = "Código de Curso") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
@@ -86,7 +87,7 @@ fun RegisterCourse(
             OutlinedTextField(
                 value = formData.description,
                 onValueChange = { onFormChange(formData.copy(description = it)) },
-                label = { Text("Descripción") },
+                label = { Text(stringResource(R.string.courses_description_label)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 4,
                 shape = RoundedCornerShape(8.dp)
@@ -117,7 +118,7 @@ fun RegisterCourse(
                         CircularProgressIndicator(modifier = Modifier.size(20.dp))
                     } else {
                         Text(
-                            text = if (!isEditing) "Registrar Curso" else "Guardar Cambios",
+                            text = if (!isEditing) stringResource(R.string.courses_register_button) else stringResource(R.string.courses_action_save_changes),
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
@@ -133,7 +134,7 @@ fun RegisterCourse(
                     ) {
                         Icon(Icons.Default.Clear, contentDescription = "Cancelar")
                         Spacer(Modifier.width(4.dp))
-                        Text("Cancelar")
+                        Text(stringResource(R.string.courses_action_cancel))
                     }
                 }
             }
