@@ -1,4 +1,6 @@
-package com.nistra.demy.admins.features.billing.domain.model
+package com.nistra.demy.admins.features.invoicing.domain.model
+
+import java.math.BigDecimal
 
 data class Invoice(
     val id: String,
