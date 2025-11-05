@@ -3,6 +3,7 @@ package com.nistra.demy.admins.features.billing.data.mapper
 import com.nistra.demy.admins.features.billing.data.remote.dto.BillingAccountResourceDto
 import com.nistra.demy.admins.features.billing.data.remote.dto.CreateBillingAccountRequestDto
 import com.nistra.demy.admins.features.billing.domain.model.BillingAccount
+import com.nistra.demy.admins.features.invoicing.data.mapper.toDomain
 
 fun BillingAccountResourceDto.toDomain(): BillingAccount {
     val accountId = this.id
