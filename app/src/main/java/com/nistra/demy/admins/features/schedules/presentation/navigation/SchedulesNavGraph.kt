@@ -11,12 +11,20 @@ import com.nistra.demy.admins.features.schedules.presentation.ui.screens.Schedul
 fun NavGraphBuilder.schedulesGraph(navController: NavHostController) {
     navigation(
         startDestination = SchedulesDestination.Overview.route,
-        route = MainDestination.Schedules.route
+        route = MainDestination.Schedules.route // main/schedules
     ) {
         composable(SchedulesDestination.Overview.route) {
             SchedulesScreen()
         }
+    }
 
+
+
+    navigation(
+        startDestination = SchedulesDestination.ScheduleViewer.route,
+        route = MainDestination.Scheduling.route // main/scheduling
+    ) {
+        // Usamos la pantalla del visor como punto de entrada para esta sección.
         composable(SchedulesDestination.ScheduleViewer.route) {
             ScheduleViewerScreen()
         }
