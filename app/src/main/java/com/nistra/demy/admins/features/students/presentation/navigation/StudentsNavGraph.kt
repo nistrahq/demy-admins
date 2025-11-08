@@ -5,14 +5,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
+import com.nistra.demy.admins.features.periods.presentation.navigation.AcademicPeriodsDestination
+import com.nistra.demy.admins.features.periods.presentation.ui.screens.AcademicPeriodsScreen
 import com.nistra.demy.admins.features.students.presentation.ui.screens.StudentsScreen
 
 fun NavGraphBuilder.studentsGraph(navController: NavHostController) {
     navigation(
-        startDestination = StudentsDestination.Register.route,
+        startDestination = StudentsDestination.Overview.route,
         route = MainDestination.Students.route
     ) {
-        composable(StudentsDestination.Register.toRoute()) { StudentsScreen() }
+        composable(StudentsDestination.Overview.toRoute()) { StudentsScreen() }
     }
 }
+
 
