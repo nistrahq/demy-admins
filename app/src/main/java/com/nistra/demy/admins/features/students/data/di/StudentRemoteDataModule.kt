@@ -1,7 +1,6 @@
 package com.nistra.demy.admins.features.students.data.di
 
-import com.nistra.demy.admins.features.periods.data.remote.api.AcademicPeriodApi
-import com.nistra.demy.admins.features.students.data.remote.api.StudentsApi
+import com.nistra.demy.admins.features.students.data.remote.api.StudentApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +15,7 @@ object StudentRemoteDataModule {
 
     @Provides
     @Singleton
-    fun provideStudentService(retrofit: Retrofit): StudentsApi {
-        return retrofit.create(StudentsApi::class.java)
+    fun provideStudentService(retrofit: Retrofit): StudentApi {
+        return retrofit.create(StudentApi::class.java)
     }
 }
