@@ -1,14 +1,14 @@
 package com.nistra.demy.admins.features.students.data.datasource.remote
 
 import com.nistra.demy.admins.core.common.safeApiCall
-import com.nistra.demy.admins.features.students.data.remote.api.StudentsApi
+import com.nistra.demy.admins.features.students.data.remote.api.StudentApi
 import com.nistra.demy.admins.features.students.data.remote.models.CreateStudentRequestDto
 import com.nistra.demy.admins.features.students.data.remote.models.StudentResourceDto
 import com.nistra.demy.admins.features.students.data.remote.models.UpdateStudentRequestDto
 import javax.inject.Inject
 
 class StudentRemoteDataSourceImpl @Inject constructor(
-    private val api: StudentsApi
+    private val api: StudentApi
 ) : StudentRemoteDataSource {
 
     override suspend fun fetchAllStudents(): List<StudentResourceDto> {
