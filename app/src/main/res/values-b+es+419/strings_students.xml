@@ -19,7 +19,7 @@
     <string name="students_phone_input">Teléfono</string>
     <string name="students_country_code">Código</string>
     <string name="students_sex_label">Sexo</string>
-    <string name="students_birthdate_label">Fecha de Nacimiento (A-M-d)</string>
+    <string name="students_birthdate_label">Fecha Nacimiento (A-M-d)</string>
     <string name="students_street_label">Calle</string>
     <string name="students_district_label">Distrito</string>
     <string name="students_province_label">Provincia</string>
