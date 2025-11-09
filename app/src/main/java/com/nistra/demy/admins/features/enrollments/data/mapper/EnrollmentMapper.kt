@@ -38,7 +38,7 @@ fun Enrollment.toUpdateEnrollmentRequestDto(): UpdateEnrollmentRequestDto {
     return UpdateEnrollmentRequestDto(
         amount = this.amount,
         currency = this.currency,
-        enrollmentStatus = this.enrollmentStatus.name,
+        enrollmentStatus = this.enrollmentStatus?.name ?: "ACTIVE",
         paymentStatus = this.paymentStatus.name
     )
 }
