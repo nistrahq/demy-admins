@@ -8,7 +8,7 @@ data class Enrollment(
     val amount: String,
     val currency: String,
     val paymentStatus: PaymentStatus,
-    val enrollmentStatus: EnrollmentStatus,
+    val enrollmentStatus: EnrollmentStatus? = null,
 
     val studentName: String = "",
     val periodName: String = "",
