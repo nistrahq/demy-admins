@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.CurrencyExchange
-import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -134,33 +134,42 @@ fun RegisterEnrollment(
                 leadingIcon = Icons.Filled.AccessTime
             )
 
-            OutlinedTextField(
-                value = formData.amount,
-                onValueChange = { onFormChange(formData.copy(amount = it)) },
-                label = { Text(stringResource(R.string.enrollments_amount_label)) },
-                leadingIcon = { Icon(Icons.Filled.AttachMoney, contentDescription = "Monto") },
-                keyboardOptions = KeyboardOptions.Default,
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                shape = RoundedCornerShape(8.dp)
-            )
 
-            OutlinedTextField(
-                value = formData.currency,
-                onValueChange = { onFormChange(formData.copy(currency = it)) },
-                label = { Text(stringResource(R.string.enrollments_currency_label)) },
-                leadingIcon = { Icon(Icons.Filled.CurrencyExchange, contentDescription = "Moneda") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                shape = RoundedCornerShape(8.dp)
-            )
+            Row (
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+            ) {
+
+                OutlinedTextField(
+                    value = formData.currency,
+                    onValueChange = { onFormChange(formData.copy(currency = it)) },
+                    label = { Text(stringResource(R.string.enrollments_currency_label)) },
+                    leadingIcon = { Icon(Icons.Filled.CurrencyExchange, contentDescription = "Moneda") },
+                    modifier = Modifier.width(100.dp),
+                    singleLine = true,
+                    shape = RoundedCornerShape(8.dp)
+                )
+
+                OutlinedTextField(
+                    value = formData.amount,
+                    onValueChange = { onFormChange(formData.copy(amount = it)) },
+                    label = { Text(stringResource(R.string.enrollments_amount_label)) },
+                    leadingIcon = { Icon(Icons.Filled.AttachMoney, contentDescription = "Monto") },
+                    keyboardOptions = KeyboardOptions.Default,
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    shape = RoundedCornerShape(8.dp)
+                )
+            }
+
 
             PaymentStatusDropdown(
                 label = stringResource(R.string.enrollments_payment_status_label),
                 selectedPaymentStatus = PaymentStatus.entries.find { it.name == formData.paymentStatus },
                 onPaymentStatusSelected = { selectedPaymentStatus ->
-                    onFormChange(formData.copy(enrollmentStatus = selectedPaymentStatus.name)) },
-            )
+                    onFormChange(formData.copy(paymentStatus = selectedPaymentStatus.name))
+                },
+                )
 
             if (isEditing) {
                 EnrollmentStatusDropdown(
@@ -289,7 +298,7 @@ fun PaymentStatusDropdown(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
-        modifier = Modifier.width(100.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         OutlinedTextField(
             value = selectedText,
@@ -301,7 +310,7 @@ fun PaymentStatusDropdown(
             leadingIcon = if (leadingIcon != null) {
                 { Icon(leadingIcon, contentDescription = label) }
             } else null,
-            modifier = Modifier.menuAnchor().fillMaxWidth().height(64.dp),
+            modifier = Modifier.menuAnchor().fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         )
 
@@ -349,7 +358,7 @@ fun EnrollmentStatusDropdown(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
-        modifier = Modifier.width(100.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         OutlinedTextField(
             value = selectedText,
@@ -361,7 +370,7 @@ fun EnrollmentStatusDropdown(
             leadingIcon = if (leadingIcon != null) {
                 { Icon(leadingIcon, contentDescription = label) }
             } else null,
-            modifier = Modifier.menuAnchor().fillMaxWidth().height(64.dp),
+            modifier = Modifier.menuAnchor().fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         )
 
