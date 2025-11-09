@@ -12,6 +12,7 @@ import com.nistra.demy.admins.features.billing.presentation.navigation.billingGr
 import com.nistra.demy.admins.features.classrooms.presentation.navigation.classroomsGraph
 import com.nistra.demy.admins.features.courses.presentation.navigation.coursesGraph
 import com.nistra.demy.admins.features.dashboard.presentation.navigation.dashboardGraph
+import com.nistra.demy.admins.features.enrollments.presentation.navigation.enrollmentsGraph
 import com.nistra.demy.admins.features.finance.presentation.navigation.financeGraph
 import com.nistra.demy.admins.features.help.presentation.navigation.helpGraph
 import com.nistra.demy.admins.features.invoicing.presentation.navigation.invoicesGraph
@@ -44,6 +45,7 @@ fun MainNavHost(
             teachersGraph(innerNavController)
             periodsGraph(innerNavController)
             studentsGraph(innerNavController)
+            enrollmentsGraph(innerNavController)
             billingGraph(innerNavController)
             invoicesGraph(innerNavController)
             financeGraph(innerNavController)
