@@ -1,6 +1,7 @@
 package com.nistra.demy.admins.core.network
 
 import com.nistra.demy.admins.BuildConfig
+import com.nistra.demy.admins.core.network.adapters.LocalDateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -101,6 +102,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(LocalDateAdapter())
         .addLast(KotlinJsonAdapterFactory())
         .build()
 
