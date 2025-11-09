@@ -48,6 +48,11 @@ sealed interface MainDestination {
         fun toRoute() = route
     }
 
+    data object Enrollments : MainDestination {
+        override val route = "main/enrollments"
+        fun toRoute() = route
+    }
+
     data object Settings : MainDestination {
         override val route = "main/settings"
         fun toRoute() = route
