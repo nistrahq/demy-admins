@@ -23,4 +23,10 @@ interface BillingAccountsApi {
     suspend fun addInvoiceToBillingAccount(
         @Path("billingAccountId") billingAccountId: String,
         @Body invoiceDto: InvoiceResourceDto): BillingAccountResourceDto
+
+    @POST("billing-accounts/{billingAccountId}/invoices/{invoiceId}/mark-as-paid")
+    suspend fun markInvoiceAsPaid(
+        @Path("billingAccountId") billingAccountId: String,
+        @Path("invoiceId") invoiceId: String
+    ): InvoiceResourceDto
 }
