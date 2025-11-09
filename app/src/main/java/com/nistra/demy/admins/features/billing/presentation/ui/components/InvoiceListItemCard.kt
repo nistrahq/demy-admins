@@ -24,10 +24,10 @@ import com.nistra.demy.admins.features.invoicing.domain.model.Invoice
 fun InvoiceListItemCard(
     invoice: Invoice,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: (Invoice) -> Unit = {}
 ) {
     ListItemCard(
-        onClick = onClick,
+        onClick = { onClick(invoice) },
         modifier = modifier,
         containerColor = when (invoice.status) {
             "PAID" -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
