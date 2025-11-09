@@ -43,7 +43,7 @@ fun BillingSearchPanel(
         isLoading = isLoading,
         emptyMessage = stringResource(R.string.billing_not_found),
         itemCount = billingAccounts.size,
-        itemCountLabel = "${billingAccounts.size} cuenta(s) encontrada(s)",
+        itemCountLabel = stringResource(id = R.string.billing_found_count, billingAccounts.size),
         modifier = modifier,
         searchLeadingIcon = {
             Icon(Icons.Default.Search, contentDescription = stringResource(R.string.billing_search_title))
@@ -77,7 +77,7 @@ private fun BillingListItem(
         mainContent = {
             IconLabelRow(
                 icon = Icons.Default.Person,
-                text = "ID Estudiante: ${account.studentId}",
+                text = stringResource(id = R.string.billing_student_id_label, account.studentId),
                 iconSize = 20.dp,
                 iconColor = MaterialTheme.colorScheme.secondary,
                 textStyle = MaterialTheme.typography.titleMedium,
@@ -86,8 +86,8 @@ private fun BillingListItem(
 
 
             IconLabelRow(
-                icon = Icons.Default.AccountBalanceWallet, // Icono relevante para facturación/academia
-                text = "ID Academia: ${account.academyId}",
+                icon = Icons.Default.AccountBalanceWallet,
+                text = stringResource(id = R.string.billing_academy_id_label, account.academyId),
                 iconColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
             )
         },
@@ -95,7 +95,7 @@ private fun BillingListItem(
             IconButton(onClick = onEdit) {
                 Icon(
                     Icons.Default.Edit,
-                    contentDescription = "Editar cuenta de facturación",
+                    contentDescription = stringResource(R.string.billing_edit_action_description),
                     tint = MaterialTheme.colorScheme.secondary
                 )
             }
@@ -103,7 +103,7 @@ private fun BillingListItem(
             IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "Eliminar cuenta de facturación",
+                    contentDescription = stringResource(R.string.billing_delete_action_description),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
