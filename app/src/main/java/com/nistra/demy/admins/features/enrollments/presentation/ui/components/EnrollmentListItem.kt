@@ -75,6 +75,11 @@ fun EnrollmentListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
+                    text = "${stringResource(R.string.enrollments_schedule_label)} ${enrollment.scheduleName}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
                     text = "${stringResource(R.string.enrollments_period_prefix)} ${enrollment.periodName}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
