@@ -14,5 +14,7 @@ interface BillingAccountRemoteDataSource {
 
     suspend fun addInvoiceToBillingAccount(billingAccountId: String ,request: InvoiceResourceDto): BillingAccountResourceDto
 
+    suspend fun markInvoiceAsPaid(billingAccountId: String, invoiceId: String): InvoiceResourceDto
+
 
 }

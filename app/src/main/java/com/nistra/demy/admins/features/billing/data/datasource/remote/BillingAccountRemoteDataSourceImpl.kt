@@ -25,4 +25,11 @@ class BillingAccountRemoteDataSourceImpl @Inject constructor(
     override suspend fun addInvoiceToBillingAccount(billingAccountId: String, request: InvoiceResourceDto): BillingAccountResourceDto {
         return safeApiCall(endpoint= "billing-accounts/{billingAccountId}/invoices") { api.addInvoiceToBillingAccount(billingAccountId, request)}
     }
+
+
+    override suspend fun markInvoiceAsPaid(billingAccountId: String, invoiceId: String): InvoiceResourceDto {
+        return safeApiCall(endpoint = "billing-accounts/{billingAccountId}/invoices/{invoiceId}/mark-as-paid") {
+            api.markInvoiceAsPaid(billingAccountId, invoiceId)
+        }
+    }
 }
