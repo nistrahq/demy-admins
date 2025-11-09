@@ -4,6 +4,7 @@ package com.nistra.demy.admins.features.billing.presentation.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.common.SnackbarMessage
 import com.nistra.demy.admins.features.billing.domain.usecase.AddInvoiceToBillingAccountUseCase
 import com.nistra.demy.admins.features.billing.domain.usecase.GetBillingAccountByIdUseCase
@@ -26,7 +27,7 @@ import com.nistra.demy.admins.core.common.LocalizedString
 
 @HiltViewModel
 class BillingAccountDetailsViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle, // Hilt nos lo da para leer los argumentos de navegación
+    savedStateHandle: SavedStateHandle,
     private val getBillingAccountByIdUseCase: GetBillingAccountByIdUseCase,
     private val addInvoiceToBillingAccountUseCase: AddInvoiceToBillingAccountUseCase
 ) : ViewModel() {
@@ -38,14 +39,13 @@ class BillingAccountDetailsViewModel @Inject constructor(
     private val _invoiceFormData = MutableStateFlow(InvoiceFormData())
     val invoiceFormData = _invoiceFormData.asStateFlow()
 
-    // Obtenemos el ID de la ruta de navegación
     private val billingAccountId: String = savedStateHandle.get<String>(BILLING_ACCOUNT_ID_ARG)!!
 
     init {
         loadAccountDetails()
     }
 
-    // --- Funciones para manejar el diálogo y el formulario ---
+
 
     fun onShowAddInvoiceDialog(show: Boolean) {
         _uiState.update { it.copy(isAddInvoiceDialogVisible = show) }
@@ -71,7 +71,7 @@ class BillingAccountDetailsViewModel @Inject constructor(
             formData.dueDate.isBlank())
         {
             _uiState.update {
-                it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Raw("Por favor, complete todos los campos.")))
+                it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_add_invoice_validation_empty)))
             }
             return
         }
@@ -79,10 +79,10 @@ class BillingAccountDetailsViewModel @Inject constructor(
 
         val amountWithDot = formData.amount.replace(',', '.')
 
-        // --- PASO 2: VALIDAR EL MONTO YA ESTANDARIZADO ---
+
         if (amountWithDot.toDoubleOrNull() == null) {
             _uiState.update {
-                it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Raw("El monto ingresado no es un número válido.")))
+                it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_add_invoice_validation_invalid_amount)))
             }
             return
         }
@@ -112,12 +112,12 @@ class BillingAccountDetailsViewModel @Inject constructor(
                     onShowAddInvoiceDialog(false)
                     loadAccountDetails()
                     _uiState.update {
-                        it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Raw("¡Factura añadida con éxito!")))
+                        it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_add_invoice_success)))
                     }
                 }
                 .onFailure { error ->
                     _uiState.update {
-                        it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Raw("Error al guardar: ${error.message}")))
+                        it.copy(snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_add_invoice_error)))
                     }
                 }
         }
@@ -134,7 +134,11 @@ class BillingAccountDetailsViewModel @Inject constructor(
                 }
                 .onFailure { error ->
                     _uiState.update {
-                        it.copy(isLoading = false, error = error.message ?: "Error desconocido")
+                        it.copy(
+                            isLoading = false,
+                            error = error.message,
+                            snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_details_error_message))
+                        )
                     }
                 }
         }
