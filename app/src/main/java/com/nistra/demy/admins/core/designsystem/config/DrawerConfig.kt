@@ -67,6 +67,7 @@ object DrawerConfig {
         DrawerDestination.Help.id,
         DrawerDestination.Billing.id,
         DrawerDestination.Invoices.id,
+        DrawerDestination.Enrollments.id,
         DrawerDestination.Finance.id,
         DrawerDestination.Accounting.id,
         DrawerDestination.Classrooms.id,
