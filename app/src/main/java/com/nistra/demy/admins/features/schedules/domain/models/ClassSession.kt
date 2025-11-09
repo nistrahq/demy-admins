@@ -1,18 +1,17 @@
 package com.nistra.demy.admins.features.schedules.domain.models
 
+import com.nistra.demy.admins.features.classrooms.domain.models.Classroom
+import com.nistra.demy.admins.features.courses.domain.models.Course
+import com.nistra.demy.admins.features.teachers.domain.model.Teacher
+
 data class ClassSession(
     val id: Long,
     val timeRange: TimeRange,
     val dayOfWeek: DayOfWeek,
-    val courseId: Long,
-    val classroomId: Long,
-    val teacherId: Long,
 
-    // Campos enriquecidos para la UI (similares a ScheduleResource.java)
-    val courseName: String,
-    val courseCode: String,
-    val teacherName: String, //usar algo del shared?? full name
-    val classroomCode: String,
-    val classroomCampus: String,
-    val durationMinutes: Int   // 🚨🚨🚨 Campo agregado para cálculo de UI
+    val course: Course,
+    val teacher: Teacher,
+    val classroom: Classroom,
+
+    val durationMinutes: Int
 )

@@ -9,6 +9,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,40 +21,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.classrooms.domain.models.Classroom
+import com.nistra.demy.admins.features.classrooms.presentation.model.ClassroomFormData
+import androidx.compose.ui.res.stringResource
+import com.nistra.demy.admins.R
 
 @Composable
 fun RegisterClassroom(
     modifier: Modifier = Modifier,
     classroomToEdit: Classroom?,
-    onSaveClassroom: (Classroom) -> Unit,
-    onClearForm: () -> Unit
+    formData: ClassroomFormData,
+    isLoading: Boolean,
+    errorMessage: String?,
+    onFormChange: (ClassroomFormData) -> Unit,
+    onSaveClassroomClick: () -> Unit,
+    onClearFormClick: () -> Unit
 ) {
-    // 1. Manejo del Estado Local del Formulario
-    var code by remember { mutableStateOf("") }
-    var capacityText by remember { mutableStateOf("") }
-    var campus by remember { mutableStateOf("") }
-
-    // Validación y conversión de capacidad
-    val capacity = capacityText.toIntOrNull() ?: 0
-    val isFormValid = code.isNotBlank() && campus.isNotBlank() && capacity > 0
-
-    // 2. Sincronización: Cargar datos si se está editando
-    LaunchedEffect(classroomToEdit) {
-        if (classroomToEdit != null) {
-            code = classroomToEdit.code
-            capacityText = classroomToEdit.capacity.toString()
-            campus = classroomToEdit.campus
-        } else {
-            code = ""
-            capacityText = ""
-            campus = ""
-        }
-    }
+    val isEditing = classroomToEdit != null
+    val isFormValid = formData.code.isNotBlank() && formData.campus.isNotBlank() && formData.capacity > 0
 
     Card(
         modifier = modifier.fillMaxHeight(),
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+
     ) {
         Column(
             modifier = Modifier
@@ -61,7 +54,6 @@ fun RegisterClassroom(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Título del formulario
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -71,28 +63,28 @@ fun RegisterClassroom(
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = if (classroomToEdit == null) "Registrar Nueva Aula" else "Editar Aula: ${classroomToEdit.code}",
+                    text = if (!isEditing) stringResource(R.string.classrooms_registration_title) else stringResource(R.string.classrooms_edit_title_prefix) + classroomToEdit!!.code,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
 
-            // Campos de entrada
             OutlinedTextField(
-                value = code,
-                onValueChange = { code = it },
-                label = { Text("Código de Aula") },
+                value = formData.code,
+                onValueChange = { onFormChange(formData.copy(code = it)) },
+                label = { Text(stringResource(R.string.classrooms_code_label)) },
+                leadingIcon = { Icon(Icons.Default.Key, contentDescription = stringResource(R.string.classrooms_code_cd)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(8.dp)
             )
 
             OutlinedTextField(
-                value = capacityText,
-                onValueChange = { capacityText = it.filter { char -> char.isDigit() } }, // Solo permite dígitos
-                label = { Text("Capacidad") },
+                value = formData.capacityText,
+                onValueChange = { onFormChange(formData.copy(capacityText = it.filter { char -> char.isDigit() })) },
+                label = { Text(stringResource(R.string.classrooms_capacity_label)) },
+                leadingIcon = { Icon(Icons.Default.Group, contentDescription = stringResource(R.string.classrooms_capacity_cd)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -100,53 +92,57 @@ fun RegisterClassroom(
             )
 
             OutlinedTextField(
-                value = campus,
-                onValueChange = { campus = it },
-                label = { Text("Sede (Campus)") },
+                value = formData.campus,
+                onValueChange = { onFormChange(formData.copy(campus = it)) },
+                label = { Text(stringResource(R.string.classrooms_campus_label)) },
+                leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = stringResource(R.string.classrooms_campus_cd)) },
                 modifier = Modifier.fillMaxWidth(),
-                minLines = 3,
+                singleLine = true,
                 shape = RoundedCornerShape(8.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Botones de Acción
+            if (errorMessage != null) {
+                Text(
+                    text = errorMessage,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Botón de Guardar/Registrar
                 Button(
-                    onClick = {
-                        val classroomToSave = Classroom(
-                            id = classroomToEdit?.id ?: 0L,
-                            code = code.trim(),
-                            capacity = capacity,
-                            campus = campus.trim()
-                        )
-                        onSaveClassroom(classroomToSave)
-                    },
+                    onClick = onSaveClassroomClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    enabled = isFormValid
+                    enabled = isFormValid && !isLoading
                 ) {
-                    Text(
-                        text = if (classroomToEdit == null) "Registrar Aula" else "Guardar Cambios",
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                    if (isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.size(20.dp))
+                    } else {
+                        Text(
+                            text = if (!isEditing) stringResource(R.string.classrooms_register_button) else stringResource(R.string.classrooms_action_save_changes),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
                 }
 
-                // Botón de Cancelar/Limpiar formulario
-                if (classroomToEdit != null || code.isNotBlank() || capacityText.isNotBlank() || campus.isNotBlank()) {
+                if (isEditing || formData.code.isNotBlank() || formData.capacityText.isNotBlank() || formData.campus.isNotBlank()) {
                     OutlinedButton(
-                        onClick = onClearForm,
+                        onClick = onClearFormClick,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(48.dp)
+                            .height(48.dp),
+                        enabled = !isLoading
                     ) {
-                        Icon(Icons.Default.Clear, contentDescription = "Cancelar")
+                        Icon(Icons.Default.Clear, contentDescription = stringResource(R.string.classrooms_action_cancel))
                         Spacer(Modifier.width(4.dp))
-                        Text("Cancelar")
+                        Text(stringResource(R.string.classrooms_action_cancel))
                     }
                 }
             }
