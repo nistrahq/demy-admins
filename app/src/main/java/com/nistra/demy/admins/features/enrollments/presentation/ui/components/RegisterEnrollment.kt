@@ -115,7 +115,8 @@ fun RegisterEnrollment(
                 options = studentOptions,
                 selectedId = formData.studentId,
                 onSelected = { id -> onFormChange(formData.copy(studentId = id)) },
-                leadingIcon = Icons.Filled.Person
+                leadingIcon = Icons.Filled.Person,
+                enabled = !isEditing
             )
 
             DropdownMenu(
@@ -123,7 +124,8 @@ fun RegisterEnrollment(
                 options = periodsOptions,
                 selectedId = formData.periodId,
                 onSelected = { id -> onFormChange(formData.copy(periodId = id)) },
-                leadingIcon = Icons.Filled.CalendarMonth
+                leadingIcon = Icons.Filled.CalendarMonth,
+                enabled = !isEditing
             )
 
             DropdownMenu(
@@ -131,7 +133,8 @@ fun RegisterEnrollment(
                 options = schedulesOptions,
                 selectedId = formData.scheduleId,
                 onSelected = { id -> onFormChange(formData.copy(scheduleId = id)) },
-                leadingIcon = Icons.Filled.AccessTime
+                leadingIcon = Icons.Filled.AccessTime,
+                enabled = !isEditing
             )
 
 
@@ -230,14 +233,15 @@ fun <T> DropdownMenu(
     selectedId: T?,
     onSelected: (T) -> Unit,
     modifier: Modifier = Modifier,
-    leadingIcon: ImageVector? = null
+    leadingIcon: ImageVector? = null,
+    enabled: Boolean = true
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectedName = options[selectedId] ?: label
 
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
+        onExpandedChange = { if (enabled) expanded = !expanded },
         modifier = modifier
     ) {
         OutlinedTextField(
@@ -252,7 +256,8 @@ fun <T> DropdownMenu(
                 null
             },
             modifier = Modifier.menuAnchor().fillMaxWidth(),
-            shape = RoundedCornerShape(8.dp)
+            shape = RoundedCornerShape(8.dp),
+            enabled = enabled
         )
         ExposedDropdownMenu(
             expanded = expanded,
