@@ -11,6 +11,9 @@ import com.nistra.demy.admins.features.enrollments.domain.usecase.GetAllEnrollme
 import com.nistra.demy.admins.features.enrollments.domain.usecase.UpdateEnrollmentUseCase
 import com.nistra.demy.admins.features.enrollments.presentation.model.EnrollmentFormData
 import com.nistra.demy.admins.features.enrollments.presentation.state.EnrollmentUiState
+import com.nistra.demy.admins.features.periods.domain.usecase.GetAllPeriodsUseCase
+import com.nistra.demy.admins.features.schedules.domain.usecase.GetAllSchedulesUseCase
+import com.nistra.demy.admins.features.students.domain.usecase.GetAllStudentsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,7 +27,10 @@ class EnrollmentsViewModel @Inject constructor(
     private val getAllEnrollmentsUseCase: GetAllEnrollmentsUseCase,
     private val createEnrollmentUseCase: CreateEnrollmentUseCase,
     private val updateEnrollmentUseCase: UpdateEnrollmentUseCase,
-    private val deleteEnrollmentUseCase: DeleteEnrollmentUseCase
+    private val deleteEnrollmentUseCase: DeleteEnrollmentUseCase,
+    private val getAllStudentsUseCase: GetAllStudentsUseCase,
+    private val getAllPeriodsUseCase: GetAllPeriodsUseCase,
+    private val getAllSchedulesUseCase: GetAllSchedulesUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(EnrollmentUiState())
@@ -36,7 +42,53 @@ class EnrollmentsViewModel @Inject constructor(
     private var allEnrollmentsCache: List<Enrollment> = emptyList()
 
     init {
-        loadEnrollments()
+        loadData()
+    }
+
+    private fun loadData() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+
+            try {
+                val studentsResult = getAllStudentsUseCase()
+                val periodsResult = getAllPeriodsUseCase()
+                val schedulesResult = getAllSchedulesUseCase()
+                val enrollmentsResult = getAllEnrollmentsUseCase()
+
+                if (studentsResult.isSuccess && periodsResult.isSuccess && schedulesResult.isSuccess && enrollmentsResult.isSuccess) {
+                    val students = studentsResult.getOrThrow()
+                    val periods = periodsResult.getOrThrow()
+                    val schedules = schedulesResult.getOrThrow()
+                    val enrollments = enrollmentsResult.getOrThrow()
+
+                    // 🔧 Enriquecer
+                    val enriched = enrollments.map { enrollment ->
+                        val studentName = students.find { it.id == enrollment.studentId }?.let { "${it.firstName} ${it.lastName}" } ?: "-"
+                        val periodName = periods.find { it.id == enrollment.periodId }?.periodName ?: "-"
+                        val scheduleName = schedules.find { it.id == enrollment.scheduleId }?.name ?: "-"
+
+                        enrollment.copy(
+                            studentName = studentName,
+                            periodName = periodName,
+                            scheduleName = scheduleName
+                        )
+                    }
+
+                    allEnrollmentsCache = enriched
+                    _uiState.update {
+                        it.copy(
+                            enrollments = enriched,
+                            availableStudents = students,
+                            availablePeriods = periods,
+                            availableSchedules = schedules,
+                            isLoading = false
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isLoading = false, errorMessage = e.message) }
+            }
+        }
     }
 
     fun onEnrollmentFormChange(updated: EnrollmentFormData) {
@@ -57,7 +109,7 @@ class EnrollmentsViewModel @Inject constructor(
             amount = enrollment.amount,
             currency = enrollment.currency,
             paymentStatus = enrollment.paymentStatus.name,
-            enrollmentStatus = enrollment.enrollmentStatus.name
+            enrollmentStatus = enrollment.enrollmentStatus?.name ?: "ACTIVE"
         )
     }
 
@@ -95,16 +147,29 @@ class EnrollmentsViewModel @Inject constructor(
         val existingId = _uiState.value.enrollmentToEdit?.id ?: 0L
         val data = _formData.value
 
-        val enrollmentToSave = Enrollment(
-            id = existingId,
-            studentId = data.studentId!!,
-            periodId = data.periodId!!,
-            scheduleId = data.scheduleId!!,
-            amount = data.amount,
-            currency = data.currency,
-            paymentStatus = PaymentStatus.valueOf(data.paymentStatus.uppercase()),
-            enrollmentStatus = EnrollmentStatus.valueOf(data.enrollmentStatus.uppercase())
-        )
+        val enrollmentToSave = if (existingId == 0L) {
+            Enrollment(
+                id = existingId,
+                studentId = data.studentId!!,
+                periodId = data.periodId!!,
+                scheduleId = data.scheduleId!!,
+                amount = data.amount,
+                currency = data.currency,
+                paymentStatus = PaymentStatus.valueOf(data.paymentStatus.uppercase())
+            )
+        } else {
+            Enrollment(
+                id = existingId,
+                studentId = data.studentId!!,
+                periodId = data.periodId!!,
+                scheduleId = data.scheduleId!!,
+                amount = data.amount,
+                currency = data.currency,
+                paymentStatus = PaymentStatus.valueOf(data.paymentStatus.uppercase()),
+                enrollmentStatus = EnrollmentStatus.valueOf(data.enrollmentStatus.uppercase())
+            )
+        }
+
 
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
@@ -118,7 +183,7 @@ class EnrollmentsViewModel @Inject constructor(
             result
                 .onSuccess {
                     onClearFormClick()
-                    loadEnrollments()
+                    loadData()
                     _uiState.update { it.copy(isFormSuccess = true, isLoading = false) }
                 }
                 .onFailure { e ->
