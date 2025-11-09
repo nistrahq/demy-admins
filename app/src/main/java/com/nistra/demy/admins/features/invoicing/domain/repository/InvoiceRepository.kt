@@ -6,4 +6,6 @@ interface InvoiceRepository {
 
     suspend fun getAllInvoicesByBillingAccountId(billingAccountId: String): List<Invoice>
 
+    suspend fun markInvoiceAsPaid(billingAccountId: String, invoiceId: String): Invoice
+
 }
