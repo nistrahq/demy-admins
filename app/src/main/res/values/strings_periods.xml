@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- Academic Periods Search Panel -->
+    <string name="periods_screen_title">Manage Academic Periods</string>
+    <string name="periods_screen_description">Create, edit, and control your institution’s academic periods.</string>
+
+    <!-- Academic Periods Search Panel -->
     <string name="periods_search_title">Search Academic Periods</string>
     <string name="periods_search_description">Find and manage registered academic periods</string>
     <string name="periods_search_placeholder">Search by name or date</string>
@@ -24,8 +27,6 @@
     <string name="periods_cancel_button">Cancel</string>
 
     <!-- Academic Period Screen -->
-    <string name="periods_screen_title">Manage Academic Period Information</string>
-    <string name="periods_screen_description">Administer new period registrations and view the complete list of academic periods</string>
     <string name="periods_register_success">Academic period registered successfully!</string>
 
     <!-- Validation Messages -->
