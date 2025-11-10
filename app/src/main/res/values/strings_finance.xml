@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Finance Screen -->
+    <string name="finance_screen_title">Financial Management</string>
+    <string name="finance_screen_description">Register and manage financial transactions</string>
+
+    <!-- Finance Registration Form -->
+    <string name="finance_register_title">Register Transaction</string>
+    <string name="finance_register_description">Fill in the transaction details</string>
+    <string name="finance_type">Transaction Type</string>
+    <string name="finance_category">Category</string>
+    <string name="finance_method">Payment Method</string>
+    <string name="finance_amount">Amount</string>
+    <string name="finance_currency">Currency</string>
+    <string name="finance_date">Date</string>
+    <string name="finance_description">Description</string>
+    <string name="finance_register_button">Register Transaction</string>
+    <string name="finance_register_button_loading">Registering…</string>
+
+    <!-- Finance Messages -->
+    <string name="finance_register_success">Transaction registered successfully</string>
+    <string name="finance_error_register_failed">Failed to register transaction</string>
+    <string name="finance_error_load_failed">Failed to load transactions</string>
+    <string name="finance_validation_required_fields">Please fill in all required fields</string>
+</resources>
