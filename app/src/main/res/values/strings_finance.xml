@@ -46,4 +46,12 @@
     <string name="finance_error_register_failed">Failed to register transaction</string>
     <string name="finance_error_load_failed">Failed to load transactions</string>
     <string name="finance_validation_required_fields">Please fill in all required fields</string>
+
+    <!-- Finance Analytics -->
+    <string name="finance_analytics_title">Financial Analytics</string>
+    <string name="finance_analytics_description">Visual insights of your financial data</string>
+    <string name="finance_income_expense_trend">Income vs Expense Trend</string>
+    <string name="finance_expense_categories">Top Expense Categories</string>
+    <string name="finance_loading_data">Loading financial data…</string>
+    <string name="finance_no_data">No data available to display</string>
 </resources>
