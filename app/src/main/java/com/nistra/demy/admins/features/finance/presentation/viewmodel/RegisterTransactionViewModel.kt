@@ -24,7 +24,7 @@ import javax.inject.Inject
 class RegisterTransactionViewModel @Inject constructor(
     private val registerTransactionUseCase: RegisterTransactionUseCase,
     private val getAllTransactionsUseCase: GetAllTransactionsUseCase,
-    private val getTransactionByIdUseCase: GetTransactionByIdUseCase
+    @Suppress("unused") private val getTransactionByIdUseCase: GetTransactionByIdUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RegisterTransactionUiState())
@@ -75,7 +75,7 @@ class RegisterTransactionViewModel @Inject constructor(
     fun registerTransaction() {
         val data = _formData.value
 
-        if (data.type.isBlank() || data.category.isBlank() || data.method.isBlank() ||
+        if (data.type == null || data.category == null || data.method == null ||
             data.amount.isBlank() || data.date.isBlank()) {
             _uiState.update {
                 it.copy(
@@ -94,17 +94,17 @@ class RegisterTransactionViewModel @Inject constructor(
 
             val transaction = Transaction(
                 id = "",
-                type = data.type,
-                category = data.category,
-                method = data.method,
+                type = data.type.value,
+                category = data.category.value,
+                method = data.method.value,
                 amount = data.amount,
-                currency = data.currency,
+                currency = data.currency.code,
                 description = data.description,
                 date = data.date
             )
 
             registerTransactionUseCase(transaction)
-                .onSuccess { registeredTransaction ->
+                .onSuccess { _ ->
                     _uiState.update {
                         it.copy(
                             isLoading = false,
