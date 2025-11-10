@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Pantalla principal -->
-    <string name="enrollments_screen_title">Gestión de Matrículas</string>
-    <string name="enrollments_screen_description">Administra las matrículas de los estudiantes, sus periodos y horarios asignados.</string>
-
+    <string name="enrollments_screen_title">Gestionar Matrículas de Estudiantes</string>
+    <string name="enrollments_screen_description">Registra, actualiza y administra las matrículas de los estudiantes en cada periodo académico.</string>
     <!-- Formulario -->
     <string name="enrollments_registration_title">Registrar nueva matrícula</string>
     <string name="enrollments_edit_title_prefix">Editar matrícula N° </string>
