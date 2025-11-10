@@ -109,4 +109,10 @@ dependencies {
     // DataStore + Coroutines
     implementation(libs.datastore)
     implementation(libs.coroutines)
+
+    // Vico Charts
+    implementation(libs.vico.compose.m3)
+
+    // ByteBeats Charts
+    implementation(libs.bytebeats.compose.charts)
 }
