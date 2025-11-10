@@ -14,7 +14,7 @@ fun StudentsHeader (
     ImageHeaderSection(
         title = title,
         description = description,
-        backgroundImage = R.drawable.auth_image,
+        backgroundImage = R.drawable.students_management_header_photo,
         modifier = modifier
     )
 }
