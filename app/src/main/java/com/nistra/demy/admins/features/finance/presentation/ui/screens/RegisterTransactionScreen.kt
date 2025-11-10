@@ -3,6 +3,7 @@ package com.nistra.demy.admins.features.finance.presentation.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +20,7 @@ import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.components.feedback.DemySnackbarHost
 import com.nistra.demy.admins.core.designsystem.components.feedback.SnackbarEffect
 import com.nistra.demy.admins.core.designsystem.components.feedback.rememberDemySnackbarState
+import com.nistra.demy.admins.features.finance.presentation.ui.components.FinanceAnalyticsPanel
 import com.nistra.demy.admins.features.finance.presentation.ui.components.FinanceHeader
 import com.nistra.demy.admins.features.finance.presentation.ui.components.TransactionRegistrationForm
 import com.nistra.demy.admins.features.finance.presentation.viewmodel.RegisterTransactionViewModel
@@ -37,6 +39,7 @@ fun FinanceScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val formData by viewModel.formData.collectAsState()
+    val chartData by viewModel.chartData.collectAsState()
     val snackbarState = rememberDemySnackbarState()
 
     SnackbarEffect(
@@ -57,13 +60,26 @@ fun FinanceScreen(
                 description = stringResource(R.string.finance_screen_description)
             )
 
-            TransactionRegistrationForm(
-                formData = formData,
-                onFormChange = viewModel::onFieldChange,
-                onSubmit = viewModel::registerTransaction,
-                modifier = Modifier.fillMaxWidth(),
-                isLoading = uiState.isLoading
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                TransactionRegistrationForm(
+                    formData = formData,
+                    onFormChange = viewModel::onFieldChange,
+                    onSubmit = viewModel::registerTransaction,
+                    modifier = Modifier.weight(1f),
+                    isLoading = uiState.isLoading
+                )
+
+                FinanceAnalyticsPanel(
+                    chartData = chartData,
+                    isLoading = uiState.isLoadingTransactions,
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
 
         DemySnackbarHost(

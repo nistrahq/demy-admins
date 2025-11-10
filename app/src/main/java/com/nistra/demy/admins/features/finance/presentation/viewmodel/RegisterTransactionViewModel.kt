@@ -10,6 +10,8 @@ import com.nistra.demy.admins.features.finance.domain.model.Transaction
 import com.nistra.demy.admins.features.finance.domain.usecase.GetAllTransactionsUseCase
 import com.nistra.demy.admins.features.finance.domain.usecase.GetTransactionByIdUseCase
 import com.nistra.demy.admins.features.finance.domain.usecase.RegisterTransactionUseCase
+import com.nistra.demy.admins.features.finance.presentation.model.ChartData
+import com.nistra.demy.admins.features.finance.presentation.model.ChartDataProcessor
 import com.nistra.demy.admins.features.finance.presentation.model.TransactionFormData
 import com.nistra.demy.admins.features.finance.presentation.state.RegisterTransactionUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +35,9 @@ class RegisterTransactionViewModel @Inject constructor(
     private val _formData = MutableStateFlow(TransactionFormData())
     val formData: StateFlow<TransactionFormData> = _formData.asStateFlow()
 
+    private val _chartData = MutableStateFlow<ChartData?>(null)
+    val chartData: StateFlow<ChartData?> = _chartData.asStateFlow()
+
     init {
         loadTransactions()
     }
@@ -47,6 +52,7 @@ class RegisterTransactionViewModel @Inject constructor(
 
             getAllTransactionsUseCase()
                 .onSuccess { transactions ->
+                    val processedChartData = ChartDataProcessor.processTransactions(transactions)
                     _uiState.update {
                         it.copy(
                             transactions = transactions,
@@ -54,6 +60,7 @@ class RegisterTransactionViewModel @Inject constructor(
                             isLoadingTransactions = false
                         )
                     }
+                    _chartData.value = processedChartData
                 }
                 .onFailure { error ->
                     _uiState.update {
