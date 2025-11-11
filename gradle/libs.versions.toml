@@ -24,7 +24,7 @@ room = "2.8.1"
 datastore = "1.1.7"
 coroutines = "1.10.2"
 vico = "1.15.0"
-bytebeatsCharts = "0.2.0"
+ehsannarmaniCharts = "0.0.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -68,7 +68,7 @@ coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-andro
 vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vico" }
 vico-compose = { module = "com.patrykandpatrick.vico:compose", version.ref = "vico" }
 vico-views = { module = "com.patrykandpatrick.vico:views", version.ref = "vico" }
-bytebeats-compose-charts = { module = "io.github.bytebeats:compose-charts", version.ref = "bytebeatsCharts" }
+ehsannarmani-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "ehsannarmaniCharts" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

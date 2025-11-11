@@ -115,6 +115,6 @@ dependencies {
     implementation(libs.vico.compose)
     implementation(libs.vico.views)
 
-    // ByteBeats Charts
-    implementation(libs.bytebeats.compose.charts)
+    // Ehsan Narmani Charts
+    implementation(libs.ehsannarmani.charts)
 }
