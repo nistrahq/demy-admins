@@ -5,4 +5,5 @@
     <!-- Common Actions -->
     <string name="action_ok">Aceptar</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
 </resources>

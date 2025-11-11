@@ -49,7 +49,4 @@
     <string name="day_friday">Viernes</string>
     <string name="day_saturday">Sábado</string>
     <string name="day_sunday">Domingo</string>
-
-    <string name="action_cancel">Cancelar</string>
-    <string name="action_delete">Eliminar</string>
 </resources>
