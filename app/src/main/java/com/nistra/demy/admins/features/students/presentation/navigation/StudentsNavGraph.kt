@@ -9,10 +9,11 @@ import com.nistra.demy.admins.features.students.presentation.ui.screens.Students
 
 fun NavGraphBuilder.studentsGraph(navController: NavHostController) {
     navigation(
-        startDestination = StudentsDestination.Register.route,
+        startDestination = StudentsDestination.Overview.route,
         route = MainDestination.Students.route
     ) {
-        composable(StudentsDestination.Register.toRoute()) { StudentsScreen() }
+        composable(StudentsDestination.Overview.toRoute()) { StudentsScreen() }
     }
 }
+
 
