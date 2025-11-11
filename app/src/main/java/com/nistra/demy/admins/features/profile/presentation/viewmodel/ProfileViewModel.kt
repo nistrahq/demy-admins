@@ -1,12 +1,7 @@
 package com.nistra.demy.admins.features.profile.presentation.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nistra.demy.admins.features.profile.data.remote.ProfileStats
-import com.nistra.demy.admins.features.profile.domain.repository.AcademyRepository
-import com.nistra.demy.admins.features.profile.domain.repository.ProfileRepository
 import com.nistra.demy.admins.features.profile.domain.usecase.GetProfileUseCase
 import com.nistra.demy.admins.features.profile.presentation.state.ProfileUiState
 import dagger.hilt.android.lifecycle.HiltViewModel

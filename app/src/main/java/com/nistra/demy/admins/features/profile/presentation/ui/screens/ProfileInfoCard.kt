@@ -36,7 +36,6 @@ fun ProfileInfoCard(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            //General info
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -81,7 +80,7 @@ fun ProfileInfoCard(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(
-                            onClick = { /* TODO edit profile */ },
+                            onClick = { /*button*/ },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
