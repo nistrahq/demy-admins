@@ -81,7 +81,7 @@ fun ProfileInfoCard(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(
-                            onClick = { /* */ },
+                            onClick = { /* TODO edit profile */ },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
