@@ -37,6 +37,8 @@ fun FinanceAnalyticsPanel(
     FormCard(
         title = stringResource(R.string.finance_analytics_title),
         description = stringResource(R.string.finance_analytics_description),
+        headerBackgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+        headerTextColor = MaterialTheme.colorScheme.onTertiaryContainer,
         modifier = modifier
     ) {
         if (isLoading) {
