@@ -45,41 +45,61 @@ fun IncomeExpenseLineChart(
     val incomeColor = Color(0xFF4CAF50) // Green
     val expenseColor = Color(0xFFF44336) // Red
 
-    // Extract dates for display
-    val dateLabels = remember(data) {
-        val allDates = mutableListOf<String>()
+    // Combine and sort all unique dates from both datasets
+    val allDates = remember(data) {
+        val dates = mutableSetOf<String>()
+        data.incomeData.forEach { dates.add(it.date) }
+        data.expenseData.forEach { dates.add(it.date) }
 
-        // Combine dates from both datasets
-        val maxSize = maxOf(data.incomeData.size, data.expenseData.size)
-        for (i in 0 until maxSize) {
-            val date = when {
-                i < data.incomeData.size -> data.incomeData[i].date
-                i < data.expenseData.size -> data.expenseData[i].date
-                else -> ""
+        // Sort dates chronologically (oldest to newest)
+        dates.sortedBy { dateStr ->
+            try {
+                val parts = dateStr.split("-")
+                if (parts.size == 3) {
+                    // Convert yyyy-MM-dd to comparable long
+                    val year = parts[0].toInt()
+                    val month = parts[1].toInt()
+                    val day = parts[2].toInt()
+                    year * 10000L + month * 100L + day
+                } else {
+                    0L
+                }
+            } catch (_: Exception) {
+                0L
             }
-            allDates.add(date)
         }
+    }
 
+    // Create maps for quick lookup
+    val incomeMap = remember(data) {
+        data.incomeData.associate { it.date to it.amount }
+    }
+    val expenseMap = remember(data) {
+        data.expenseData.associate { it.date to it.amount }
+    }
+
+    // Format dates for display
+    val dateLabels = remember(allDates) {
         allDates.map { dateStr ->
             val parts = dateStr.split("-")
             if (parts.size == 3) "${parts[1]}/${parts[2]}" else dateStr
         }
     }
 
-    // Create chart entry model producer
+    // Create chart entry model producer with aligned data
     val chartEntryModelProducer = remember(data) {
         ChartEntryModelProducer(
-            if (data.incomeData.isEmpty() && data.expenseData.isEmpty()) {
+            if (allDates.isEmpty()) {
                 emptyList()
             } else {
                 listOf(
-                    // Income series
-                    data.incomeData.mapIndexed { index, item ->
-                        FloatEntry(index.toFloat(), item.amount)
+                    // Income series - aligned with all dates
+                    allDates.mapIndexed { index, date ->
+                        FloatEntry(index.toFloat(), incomeMap[date] ?: 0f)
                     },
-                    // Expense series
-                    data.expenseData.mapIndexed { index, item ->
-                        FloatEntry(index.toFloat(), item.amount)
+                    // Expense series - aligned with all dates
+                    allDates.mapIndexed { index, date ->
+                        FloatEntry(index.toFloat(), expenseMap[date] ?: 0f)
                     }
                 )
             }
