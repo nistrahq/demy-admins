@@ -47,7 +47,7 @@ fun TermsAndConditionsScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Volver a Ayuda",
+                    text = "Back to Help",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontFamily = poppinsRegular,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -56,7 +56,7 @@ fun TermsAndConditionsScreen(navController: NavController) {
             }
 
             Text(
-                text = "Términos y Condiciones",
+                text = "Terms and Conditions",
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontFamily = poppinsBold,
                     color = MaterialTheme.colorScheme.primary,
@@ -66,7 +66,7 @@ fun TermsAndConditionsScreen(navController: NavController) {
             )
 
             Text(
-                text = "Última actualización: Noviembre 2025",
+                text = "Last updated: November 2025",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontFamily = poppinsRegular,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -75,46 +75,56 @@ fun TermsAndConditionsScreen(navController: NavController) {
 
             Text(
                 text = """
-1. Aceptación de los Términos  
-Al acceder y utilizar la plataforma **Demy**, usted acepta estar sujeto a estos términos y condiciones de uso. Demy es una plataforma de gestión académica diseñada para optimizar la administración de academias, centros educativos y organizaciones de enseñanza.
+1. Acceptance of Terms  
+By accessing and using the **Demy** platform, you agree to be bound by these terms and conditions of use.  
+Demy is an academic management platform designed to optimize the administration of academies, educational centers, and teaching organizations.
 
-2. Descripción del Servicio  
-Demy proporciona herramientas de gestión académica que incluyen:  
-• Gestión de matrículas y estudiantes  
-• Control de horarios y clases  
-• Administración de pagos y facturación  
-• Seguimiento académico y reportes  
-• Comunicación con estudiantes y padres de familia  
-• Gestión de profesores y personal administrativo  
+2. Service Description  
+Demy provides academic management tools that include:  
+• Management of enrollments and students  
+• Class and schedule control  
+• Payment and billing administration  
+• Academic tracking and reporting  
+• Communication with students and parents  
+• Management of teachers and administrative staff  
 
-3. Cuentas de Usuario  
-Para acceder a los servicios de Demy, debe crear una cuenta proporcionando información precisa y actualizada. Es responsable de mantener la confidencialidad de su contraseña y de todas las actividades que ocurran bajo su cuenta. Debe notificarnos inmediatamente cualquier uso no autorizado de su cuenta.
+3. User Accounts  
+To access Demy’s services, you must create an account by providing accurate and up-to-date information.  
+You are responsible for maintaining the confidentiality of your password and all activities that occur under your account.  
+You must notify us immediately of any unauthorized use of your account.
 
-4. Uso Aceptable  
-Usted se compromete a utilizar Demy únicamente para fines legítimos de gestión académica. Está prohibido:  
-• Usar la plataforma para actividades ilegales o no autorizadas  
-• Interferir con el funcionamiento normal de la plataforma  
-• Intentar acceder a cuentas de otros usuarios  
-• Compartir información falsa o engañosa  
-• Violar los derechos de propiedad intelectual  
+4. Acceptable Use  
+You agree to use Demy solely for legitimate academic management purposes. It is prohibited to:  
+• Use the platform for illegal or unauthorized activities  
+• Interfere with the normal operation of the platform  
+• Attempt to access other users’ accounts  
+• Share false or misleading information  
+• Violate intellectual property rights  
 
-5. Datos y Contenido  
-Usted conserva todos los derechos sobre los datos académicos que ingrese en Demy. Al usar nuestros servicios, nos otorga una licencia limitada para procesar, almacenar y respaldar sus datos únicamente para proporcionar el servicio. Nos comprometemos a mantener la confidencialidad de la información académica sensible.
+5. Data and Content  
+You retain all rights to the academic data you enter into Demy.  
+By using our services, you grant us a limited license to process, store, and back up your data solely to provide the service.  
+We are committed to maintaining the confidentiality of sensitive academic information.
 
-6. Facturación y Pagos  
-Los servicios de Demy están disponibles bajo planes de suscripción mensual o anual. Los pagos se procesan de forma segura y se renuevan automáticamente a menos que cancele su suscripción. Puede cancelar su suscripción en cualquier momento desde su panel de control.
+6. Billing and Payments  
+Demy’s services are available under monthly or annual subscription plans.  
+Payments are processed securely and automatically renewed unless you cancel your subscription.  
+You can cancel your subscription at any time from your control panel.
 
-7. Limitación de Responsabilidad  
-Demy se proporciona "tal como está". No garantizamos que el servicio esté libre de errores o interrupciones. Nuestra responsabilidad se limita al monto pagado por el servicio en los 12 meses anteriores al evento que dio lugar al reclamo.
+7. Limitation of Liability  
+Demy is provided “as is.” We do not guarantee that the service will be error-free or uninterrupted.  
+Our liability is limited to the amount paid for the service during the 12 months preceding the event that gave rise to the claim.
 
-8. Terminación  
-Podemos suspender o terminar su acceso a Demy si viola estos términos. Al terminar el servicio, sus datos permanecerán disponibles para exportación durante 30 días, después de los cuales serán eliminados permanentemente.
+8. Termination  
+We may suspend or terminate your access to Demy if you violate these terms.  
+Upon termination, your data will remain available for export for 30 days, after which it will be permanently deleted.
 
-9. Modificaciones  
-Nos reservamos el derecho de modificar estos términos. Los cambios significativos serán notificados con 30 días de anticipación. El uso continuado del servicio constituye aceptación de los nuevos términos.
+9. Modifications  
+We reserve the right to modify these terms.  
+Significant changes will be notified 30 days in advance. Continued use of the service constitutes acceptance of the new terms.
 
-10. Contacto  
-Para consultas sobre estos términos o sobre nuestros servicios, contáctenos en:  
+10. Contact  
+For inquiries about these terms or our services, contact us at:  
  contact_us@demy.com  
  +51 927 230 192
                 """.trimIndent(),
