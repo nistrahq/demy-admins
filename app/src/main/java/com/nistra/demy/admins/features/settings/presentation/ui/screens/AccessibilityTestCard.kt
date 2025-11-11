@@ -1,25 +1,29 @@
 package com.nistra.demy.admins.features.settings.presentation.ui.screens
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCardNoTitle
 
 @Composable
 fun AccessibilityTestCard() {
-    InfoCardNoTitle(containerColor = Color(0xFF1E3A8A)) {
+    InfoCardNoTitle(
+        containerColor = MaterialTheme.colorScheme.primaryContainer
+    ) {
         Text(
             text = "Accessibility Test",
-            style = MaterialTheme.typography.titleMedium,
-            color = Color.White
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                fontWeight = FontWeight.SemiBold
+            )
         )
 
         Text(
             text = "Adjust the accessibility options to reflect changes in this block.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.White
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         )
 
         listOf(
@@ -31,8 +35,7 @@ fun AccessibilityTestCard() {
         ).forEach { style ->
             Text(
                 text = "This is how the text will look in the application.",
-                style = style,
-                color = Color.White
+                style = style.copy(color = MaterialTheme.colorScheme.onPrimaryContainer)
             )
         }
     }

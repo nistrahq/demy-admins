@@ -1,10 +1,7 @@
-package com.nistra.demy.admins.features.profile.presentation.ui.screens
+package com.nistra.demy.admins.features.help.presentation.ui.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,8 +13,10 @@ import androidx.compose.ui.unit.sp
 import com.nistra.demy.admins.R
 
 @Composable
-fun AccountStatusCard(
-    accountStatus: String,
+fun WeAreHereToHelpCard(
+    email: String,
+    phone: String,
+    schedule: String,
     modifier: Modifier = Modifier
 ) {
     val poppinsBold = FontFamily(Font(R.font.poppins_bold))
@@ -28,7 +27,7 @@ fun AccountStatusCard(
             .fillMaxWidth()
             .heightIn(min = 170.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 1f)
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 1f)
         ),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -40,17 +39,28 @@ fun AccountStatusCard(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
-                text = "Account status",
+                text = "We are here to help you",
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontFamily = poppinsRegular,
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
-                    fontSize = 17.sp
+                    fontSize = 18.sp
                 )
             )
 
+            Text(
+                text = "Have questions or need help? We’re here to assist you.",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontFamily = poppinsRegular,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+                    fontSize = 15.sp
+                )
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             Column {
                 Text(
-                    text = "Role",
+                    text = "Contact",
                     style = MaterialTheme.typography.bodySmall.copy(
                         color = MaterialTheme.colorScheme.onTertiaryContainer,
                         fontFamily = poppinsRegular,
@@ -58,23 +68,25 @@ fun AccountStatusCard(
                     )
                 )
                 Text(
-                    text = "ADMINISTRATOR",
+                    text = "demy@contact.com",
                     style = MaterialTheme.typography.headlineSmall.copy(
                         color = MaterialTheme.colorScheme.onTertiaryContainer,
                         fontFamily = poppinsBold,
-                        fontWeight = FontWeight.ExtraBold,
+                        fontWeight = FontWeight.Bold,
                         fontSize = 22.sp
                     )
                 )
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Column {
                     Text(
-                        text = "Status",
+                        text = "WhatsApp",
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsRegular,
@@ -82,11 +94,11 @@ fun AccountStatusCard(
                         )
                     )
                     Text(
-                        text = accountStatus.uppercase(),
+                        text = "+51 999 999 999",
                         style = MaterialTheme.typography.headlineSmall.copy(
                             color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsBold,
-                            fontWeight = FontWeight.ExtraBold,
+                            fontWeight = FontWeight.Bold,
                             fontSize = 22.sp
                         )
                     )
@@ -94,7 +106,7 @@ fun AccountStatusCard(
 
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
-                        text = "Verification",
+                        text = "Schedule",
                         style = MaterialTheme.typography.bodySmall.copy(
                             color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsRegular,
@@ -102,35 +114,14 @@ fun AccountStatusCard(
                         )
                     )
                     Text(
-                        text = "VERIFIED",
-                        style = MaterialTheme.typography.headlineSmall.copy(
+                        text = "Mon–Fri, 9am–6pm",
+                        style = MaterialTheme.typography.bodyMedium.copy(
                             color = MaterialTheme.colorScheme.onTertiaryContainer,
-                            fontFamily = poppinsBold,
-                            fontWeight = FontWeight.ExtraBold,
-                            fontSize = 22.sp
+                            fontFamily = poppinsRegular,
+                            fontSize = 14.sp
                         )
                     )
                 }
-            }
-
-            Column {
-                Text(
-                    text = "Academies",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
-                        fontFamily = poppinsRegular,
-                        fontSize = 13.sp
-                    )
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.headlineSmall.copy(
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
-                        fontFamily = poppinsBold,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 22.sp
-                    )
-                )
             }
         }
     }

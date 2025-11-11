@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="students_screen_title">Gestionar Información de Estudiantes</string>
+    <string name="students_screen_description">Registra, edita y organiza todos los registros de estudiantes de tu academia.</string>
+
     <!-- Student List -->
     <string name="students_search_label">Buscar estudiantes</string>
     <string name="students_search_placeholder">Buscar</string>

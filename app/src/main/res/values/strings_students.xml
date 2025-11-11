@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="students_screen_title">Manage Student Information</string>
+    <string name="students_screen_description">Register, edit, and organize all the student records in your academy.</string>
+
     <!-- Student List -->
     <string name="students_search_label">Search students</string>
     <string name="students_search_placeholder">Search</string>

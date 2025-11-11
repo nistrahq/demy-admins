@@ -11,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCard
@@ -36,12 +35,14 @@ fun SettingsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp)
-            .verticalScroll(rememberScrollState())
     ) {
         val isWideScreen = maxWidth >= 900.dp
 
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            //Intro card
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Intro card
             InfoCard(
                 title = "Adjust your preferences",
                 containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
@@ -56,21 +57,32 @@ fun SettingsScreen(
 
             if (isWideScreen) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(IntrinsicSize.Max),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Column(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         AccessibilityTestCard()
                         ThemeConfigurationCard(viewModel, uiState, themeText, isDarkTheme)
                     }
                     Column(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        GeneralSettingsCard(viewModel, uiState, languageText)
+                        GeneralSettingsCard(
+                            viewModel,
+                            uiState,
+                            languageText,
+                            modifier = Modifier.fillMaxHeight()
+                        )
                     }
                 }
             } else {

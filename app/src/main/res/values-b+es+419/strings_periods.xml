@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="periods_screen_title">Gestionar Periodos Académicos</string>
+    <string name="periods_screen_description">Administra el registro de nuevos períodos y consulta el listado completo.</string>
     <!-- Panel de Búsqueda de Períodos Académicos -->
     <string name="periods_search_title">Buscar Períodos Académicos</string>
     <string name="periods_search_description">Encuentra y gestiona los períodos académicos registrados</string>
@@ -24,8 +26,6 @@
     <string name="periods_cancel_button">Cancelar</string>
 
     <!-- Pantalla de Períodos Académicos -->
-    <string name="periods_screen_title">Gestiona la información de los períodos académicos</string>
-    <string name="periods_screen_description">Administra el registro de nuevos períodos y consulta el listado completo de períodos académicos</string>
     <string name="periods_register_success">¡Período académico registrado exitosamente!</string>
 
     <!-- Mensajes de Validación -->
