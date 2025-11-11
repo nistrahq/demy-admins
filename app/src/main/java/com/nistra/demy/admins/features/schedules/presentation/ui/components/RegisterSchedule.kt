@@ -88,7 +88,7 @@ fun RegisterSchedule(
             ) {
                 Button(
                     onClick = onSaveScheduleName,
-                    modifier = Modifier.weight(if (isEditing) 1f else 2f).height(48.dp),
+                    modifier = Modifier.weight(1f).height(48.dp),
                     enabled = uiState.nameForm.isFormValid && !isScheduleFormLoading
                 ) {
                     if (isScheduleFormLoading) {
