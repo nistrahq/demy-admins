@@ -13,8 +13,7 @@ fun NavGraphBuilder.helpGraph(navController: NavHostController) {
         route = MainDestination.Help.route
     ) {
         composable(HelpDestination.Help.toRoute()) {
-            HelpScreen()
+            HelpScreen(navController = navController)
         }
     }
 }
-
