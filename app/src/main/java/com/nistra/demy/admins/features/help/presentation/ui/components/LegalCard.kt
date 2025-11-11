@@ -51,14 +51,12 @@ fun LegalCard(
                             fontFamily = poppinsBold,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     )
                     Text(
                         text = "By using our services, you agree to our Terms and Conditions. Tap to read the complete version.",
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontFamily = poppinsRegular,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     )
                 }
@@ -81,14 +79,12 @@ fun LegalCard(
                             fontFamily = poppinsBold,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     )
                     Text(
                         text = "Learn how we handle and protect your personal information. Tap to read our privacy policy.",
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontFamily = poppinsRegular,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     )
                 }
