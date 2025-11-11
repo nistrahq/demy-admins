@@ -2,15 +2,14 @@ package com.nistra.demy.admins.features.settings.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.core.designsystem.components.cards.InfoCard
 import com.nistra.demy.admins.core.designsystem.components.cards.ListItemCard
-import com.nistra.demy.admins.core.designsystem.theme.extendedColors
 import com.nistra.demy.admins.features.settings.domain.model.SettingsUiState
 import com.nistra.demy.admins.features.settings.presentation.ui.components.SettingsItem
 import com.nistra.demy.admins.features.settings.presentation.viewmodel.SettingsViewModel
@@ -19,32 +18,37 @@ import com.nistra.demy.admins.features.settings.presentation.viewmodel.SettingsV
 fun GeneralSettingsCard(
     viewModel: SettingsViewModel,
     uiState: SettingsUiState,
-    languageText: String
+    languageText: String,
+    modifier: Modifier = Modifier
 ) {
     InfoCard(
         title = "General",
-        containerColor = MaterialTheme.extendedColors.info.colorContainer.copy(alpha = 0.3f)
+        containerColor = MaterialTheme.colorScheme.surface,
+        modifier = modifier
+            .fillMaxHeight()
     ) {
         SettingsItem(
             title = "Notifications",
             description = "Receive updates and alerts.",
             isChecked = uiState.notificationsEnabled,
-            onCheckedChange = viewModel::toggleNotifications
+            onCheckedChange = viewModel::toggleNotifications,
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f),
+            switchColor = MaterialTheme.colorScheme.tertiary
         )
 
         SettingsItem(
             title = "Marketing",
             description = "Allow promotional messages and emails.",
             isChecked = uiState.marketingEnabled,
-            onCheckedChange = viewModel::toggleMarketing
+            onCheckedChange = viewModel::toggleMarketing,
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f),
+            switchColor = MaterialTheme.colorScheme.tertiary
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
-
         ListItemCard(
-            onClick = { /* Change password */ },
+            onClick = { /**/ },
             modifier = Modifier.fillMaxWidth(),
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f),
             mainContent = {
                 Column {
                     Text("Change password", style = MaterialTheme.typography.titleSmall)
@@ -58,9 +62,9 @@ fun GeneralSettingsCard(
         )
 
         ListItemCard(
-            onClick = { /* Change language */ },
+            onClick = { /**/ },
             modifier = Modifier.fillMaxWidth(),
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f),
             mainContent = {
                 Column {
                     Text("Language", style = MaterialTheme.typography.titleSmall)
@@ -74,19 +78,26 @@ fun GeneralSettingsCard(
             actions = {
                 AssistChip(
                     onClick = {},
-                    label = { Text(languageText) },
+                    label = { Text("System") },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Language,
+                            contentDescription = "System icon",
+                            tint = MaterialTheme.colorScheme.onTertiary
+                        )
+                    },
                     colors = AssistChipDefaults.assistChipColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        labelColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        labelColor = MaterialTheme.colorScheme.onTertiary
                     )
                 )
             }
         )
 
         ListItemCard(
-            onClick = { /* Report bug */ },
+            onClick = { /**/ },
             modifier = Modifier.fillMaxWidth(),
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.3f),
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f),
             mainContent = {
                 Column {
                     Text("Report a bug", style = MaterialTheme.typography.titleSmall)
