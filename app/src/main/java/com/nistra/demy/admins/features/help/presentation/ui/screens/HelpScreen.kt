@@ -25,7 +25,6 @@ fun HelpScreen(navController: NavController) {
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // 🟢 Encabezado
         InfoCard(
             title = "Do you need help?",
             modifier = Modifier.fillMaxWidth(),
@@ -38,14 +37,12 @@ fun HelpScreen(navController: NavController) {
             )
         }
 
-        // 🟦 Contenido principal dividido en dos columnas
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min), // 👈 iguala la altura entre columnas
+                .height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Columna izquierda: WeAreHereToHelp + Legal
             Column(
                 modifier = Modifier
                     .weight(1.4f)
@@ -61,7 +58,6 @@ fun HelpScreen(navController: NavController) {
                 LegalCard(navController)
             }
 
-            // Columna derecha: Help
             Column(
                 modifier = Modifier
                     .weight(1.8f)

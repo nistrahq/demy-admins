@@ -19,9 +19,7 @@ class HelpViewModel @Inject constructor() : ViewModel() {
     init {
         loadHelpInfo()
     }
-
     private fun loadHelpInfo() = viewModelScope.launch {
-        // Simula pequeña carga
         kotlinx.coroutines.delay(300)
         _uiState.value = HelpUiState.Success(
             email = "demy@contact.com",

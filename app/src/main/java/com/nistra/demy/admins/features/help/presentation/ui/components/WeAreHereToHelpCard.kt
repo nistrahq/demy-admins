@@ -38,7 +38,6 @@ fun WeAreHereToHelpCard(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            // 🔹 Título principal
             Text(
                 text = "We are here to help you",
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -48,7 +47,6 @@ fun WeAreHereToHelpCard(
                 )
             )
 
-            // 🔹 Subtítulo
             Text(
                 text = "Have questions or need help? We’re here to assist you.",
                 style = MaterialTheme.typography.bodyMedium.copy(
@@ -60,7 +58,6 @@ fun WeAreHereToHelpCard(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // 🔹 Contact section
             Column {
                 Text(
                     text = "Contact",
@@ -84,7 +81,7 @@ fun WeAreHereToHelpCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(IntrinsicSize.Min), // 👈 esto iguala la altura de ambas columnas
+                    .height(IntrinsicSize.Min),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Column {
