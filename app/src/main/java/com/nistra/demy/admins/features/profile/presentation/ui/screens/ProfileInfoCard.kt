@@ -80,7 +80,7 @@ fun ProfileInfoCard(
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(
-                            onClick = { /* */ },
+                            onClick = { /*button*/ },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer

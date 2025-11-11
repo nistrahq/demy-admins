@@ -44,7 +44,7 @@ fun AccountStatusCard(
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontFamily = poppinsRegular,
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
-                    fontSize = 18.sp
+                    fontSize = 17.sp
                 )
             )
 

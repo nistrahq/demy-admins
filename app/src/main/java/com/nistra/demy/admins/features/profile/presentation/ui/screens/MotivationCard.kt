@@ -22,7 +22,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nistra.demy.admins.R
-
 @Composable
 fun MotivationCard(modifier: Modifier = Modifier) {
     val poppinsBold = FontFamily(Font(R.font.poppins_bold))
@@ -61,7 +60,7 @@ fun MotivationCard(modifier: Modifier = Modifier) {
                         color = MaterialTheme.colorScheme.secondaryContainer
                     )
                 ) {
-                    append("GREAT DAY")
+                    append(" GREAT DAY ")
                 }
             }
 
