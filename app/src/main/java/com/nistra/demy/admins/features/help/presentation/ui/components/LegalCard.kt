@@ -48,7 +48,7 @@ fun LegalCard(
                     Text(
                         text = "Terms & Conditions",
                         style = MaterialTheme.typography.titleSmall.copy(
-                            fontFamily = poppinsBold,
+                            fontFamily = poppinsRegular,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
                         )
@@ -76,7 +76,7 @@ fun LegalCard(
                     Text(
                         text = "Privacy Policy",
                         style = MaterialTheme.typography.titleSmall.copy(
-                            fontFamily = poppinsBold,
+                            fontFamily = poppinsRegular,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp,
                         )
