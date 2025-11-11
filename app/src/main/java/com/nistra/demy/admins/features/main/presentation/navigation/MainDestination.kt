@@ -48,6 +48,11 @@ sealed interface MainDestination {
         fun toRoute() = route
     }
 
+    data object Enrollments : MainDestination {
+        override val route = "main/enrollments"
+        fun toRoute() = route
+    }
+
     data object Settings : MainDestination {
         override val route = "main/settings"
         fun toRoute() = route
@@ -57,4 +62,28 @@ sealed interface MainDestination {
         override val route = "main/help"
         fun toRoute() = route
     }
+
+    data object Classrooms: MainDestination {
+        override val route = "main/classrooms"
+        fun toRoute() = route
+    }
+
+
+
+    data object Schedules : MainDestination {
+        override val route = "main/schedules"
+        fun toRoute() = route
+    }
+
+    data object Scheduling : MainDestination {
+        override val route = "main/scheduling"
+        fun toRoute() = route
+    }
+
+
+    data object Courses : MainDestination {
+        override val route = "main/courses"
+        fun toRoute() = route
+    }
+
 }
