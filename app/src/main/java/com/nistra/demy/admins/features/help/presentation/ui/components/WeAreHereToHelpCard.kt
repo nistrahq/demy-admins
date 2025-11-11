@@ -42,9 +42,9 @@ fun WeAreHereToHelpCard(
             Text(
                 text = "We are here to help you",
                 style = MaterialTheme.typography.titleMedium.copy(
-                    fontFamily = poppinsBold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    fontSize = 20.sp
+                    fontFamily = poppinsRegular,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+                    fontSize = 18.sp
                 )
             )
 
@@ -53,7 +53,7 @@ fun WeAreHereToHelpCard(
                 text = "Have questions or need help? We’re here to assist you.",
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontFamily = poppinsRegular,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                     fontSize = 15.sp
                 )
             )
@@ -65,7 +65,7 @@ fun WeAreHereToHelpCard(
                 Text(
                     text = "Contact",
                     style = MaterialTheme.typography.bodySmall.copy(
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
                         fontFamily = poppinsRegular,
                         fontSize = 13.sp
                     )
@@ -73,7 +73,7 @@ fun WeAreHereToHelpCard(
                 Text(
                     text = "demy@contact.com",
                     style = MaterialTheme.typography.headlineSmall.copy(
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
                         fontFamily = poppinsBold,
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp
@@ -82,14 +82,16 @@ fun WeAreHereToHelpCard(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min), // 👈 esto iguala la altura de ambas columnas
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Column {
                     Text(
                         text = "WhatsApp",
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsRegular,
                             fontSize = 13.sp
                         )
@@ -97,7 +99,7 @@ fun WeAreHereToHelpCard(
                     Text(
                         text = "+51 999 999 999",
                         style = MaterialTheme.typography.headlineSmall.copy(
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsBold,
                             fontWeight = FontWeight.Bold,
                             fontSize = 22.sp
@@ -109,7 +111,7 @@ fun WeAreHereToHelpCard(
                     Text(
                         text = "Schedule",
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsRegular,
                             fontSize = 13.sp
                         )
@@ -117,7 +119,7 @@ fun WeAreHereToHelpCard(
                     Text(
                         text = "Mon–Fri, 9am–6pm",
                         style = MaterialTheme.typography.bodyMedium.copy(
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            color = MaterialTheme.colorScheme.onTertiaryContainer,
                             fontFamily = poppinsRegular,
                             fontSize = 14.sp
                         )
