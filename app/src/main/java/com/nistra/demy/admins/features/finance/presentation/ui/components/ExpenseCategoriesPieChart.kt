@@ -1,8 +1,6 @@
 package com.nistra.demy.admins.features.finance.presentation.ui.components
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,13 +16,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nistra.demy.admins.features.finance.presentation.model.PieChartData
+import ir.ehsannarmani.compose_charts.PieChart
+import ir.ehsannarmani.compose_charts.models.Pie
+
+/**
+ * Formats category name from backend format to readable format.
+ * Converts "Student enrollment" or "STUDENT_ENROLLMENT" to "Student Enrollment"
+ */
+private fun formatCategoryName(name: String): String {
+    return name
+        .replace("_", " ")
+        .split(" ")
+        .joinToString(" ") { word ->
+            word.lowercase().replaceFirstChar { it.uppercase() }
+        }
+}
 
 /**
  * Expense categories chart component showing distribution as pie chart.
@@ -39,11 +49,14 @@ fun ExpenseCategoriesPieChart(
     modifier: Modifier = Modifier
 ) {
     val categoryColors = listOf(
-        Color(0xFFE91E63), // Pink
-        Color(0xFF9C27B0), // Purple
-        Color(0xFF673AB7), // Deep Purple
-        Color(0xFF3F51B5), // Indigo
-        Color(0xFF2196F3)  // Blue
+        Color(0xFFFFB74D), // Light Red (pastel)
+        Color(0xFF9575CD), // Light Cyan (pastel)
+        Color(0xFFDCE775), // Light Blue (pastel)
+        Color(0xFF4FC3F7), // Light Green (pastel)
+        Color(0xFFE57373), // Light Orange (pastel)
+        Color(0xFF81C784), // Light Purple (pastel)
+        Color(0xFFFFF176), // Light Yellow (pastel)
+        Color(0xFF7986CB)  // Light Teal (pastel)
     )
 
     if (data.categories.isEmpty()) {
@@ -68,47 +81,24 @@ fun ExpenseCategoriesPieChart(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Simple Pie Chart using Canvas
-        Box(
+        // Pie Chart using ehsannarmani-charts
+        PieChart(
             modifier = Modifier
                 .size(220.dp)
                 .padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Canvas(modifier = Modifier.size(180.dp)) {
-                val canvasSize = size.minDimension
-                val radius = canvasSize / 2f
-                val center = Offset(size.width / 2f, size.height / 2f)
-
-                var startAngle = -90f
-                data.categories.forEachIndexed { index, category ->
-                    val sweepAngle = (category.percentage / 100f) * 360f
-                    val color = categoryColors.getOrElse(index) { categoryColors.last() }
-
-                    drawArc(
-                        color = color,
-                        startAngle = startAngle,
-                        sweepAngle = sweepAngle,
-                        useCenter = true,
-                        topLeft = Offset(center.x - radius, center.y - radius),
-                        size = Size(radius * 2, radius * 2)
-                    )
-
-                    // Draw border between slices
-                    drawArc(
-                        color = Color.White,
-                        startAngle = startAngle,
-                        sweepAngle = sweepAngle,
-                        useCenter = true,
-                        style = Stroke(width = 2f),
-                        topLeft = Offset(center.x - radius, center.y - radius),
-                        size = Size(radius * 2, radius * 2)
-                    )
-
-                    startAngle += sweepAngle
-                }
-            }
-        }
+            data = data.categories.mapIndexed { index, category ->
+                Pie(
+                    label = formatCategoryName(category.category),
+                    data = category.amount.toDouble(),
+                    color = categoryColors.getOrElse(index) { categoryColors.last() },
+                    selectedColor = categoryColors.getOrElse(index) { categoryColors.last() }
+                )
+            },
+            onPieClick = { /* Handle click if needed */ },
+            selectedScale = 1.2f,
+            spaceDegree = 3f,
+            style = Pie.Style.Fill
+        )
 
         // Legend
         Column(
@@ -134,7 +124,7 @@ fun ExpenseCategoriesPieChart(
                         Spacer(modifier = Modifier.width(8.dp))
 
                         Text(
-                            text = category.category,
+                            text = formatCategoryName(category.category),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
