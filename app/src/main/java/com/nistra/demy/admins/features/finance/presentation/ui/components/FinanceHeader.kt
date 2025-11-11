@@ -25,7 +25,7 @@ fun FinanceHeader(
     ImageHeaderSection(
         title = title,
         description = description,
-        backgroundImage = R.drawable.teachers_management_header_photo,
+        backgroundImage = R.drawable.finance_management_header_photo,
         modifier = modifier
     )
 }
