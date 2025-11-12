@@ -85,11 +85,11 @@ private fun BillingListItem(
             )
 
 
-            IconLabelRow(
+            /*IconLabelRow(
                 icon = Icons.Default.AccountBalanceWallet,
                 text = stringResource(id = R.string.billing_academy_id_label, account.academyId),
                 iconColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
-            )
+            ) */
         },
         actions = {
             IconButton(onClick = onEdit) {

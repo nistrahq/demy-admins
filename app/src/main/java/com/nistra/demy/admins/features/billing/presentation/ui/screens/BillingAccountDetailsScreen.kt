@@ -96,7 +96,7 @@ fun BillingAccountDetailsScreen(
                             style = MaterialTheme.typography.headlineSmall
                         )
 
-                        // Aquí iría una lista (LazyColumn) de las facturas
+
                         if (account.invoices.isEmpty()) {
                             Text(stringResource(R.string.billing_details_no_invoices))
                         } else {
@@ -108,7 +108,11 @@ fun BillingAccountDetailsScreen(
                                 items(account.invoices) { invoice ->
                                     InvoiceListItemCard(
                                         invoice = invoice,
-                                        onClick = { /* TODO: invoices details? */ }
+                                        onClick = { /* TODO: invoices details? */ },
+                                        onDelete = { clickedInvoice ->
+                                            viewModel.deleteInvoice(clickedInvoice.id)
+                                        }
+
                                     )
                                 }
                             }
