@@ -13,14 +13,25 @@ class InvoiceRepositoryImpl @Inject constructor(
 ) : InvoiceRepository {
 
 
-    override suspend fun getAllInvoicesByBillingAccountId(billingAccountId: String): List<Invoice> {
-        val billingAccountDto = remoteDataSource.fetchBillingAccountById(billingAccountId)
-        return billingAccountDto.invoices.map { it.toDomain(billingAccountId = billingAccountId) }
+    override suspend fun getAllInvoicesByStudentDni(dni: String): List<Invoice> {
+        val invoiceDtos = remoteDataSource.fetchInvoicesByStudentDni(dni)
+
+
+        return invoiceDtos.map { dto ->
+            dto.toDomain(billingAccountId = dto.billingAccountId)
+        }
     }
+
 
 
     override suspend fun markInvoiceAsPaid(billingAccountId: String, invoiceId: String): Invoice {
         val updatedInvoiceDto = remoteDataSource.markInvoiceAsPaid(billingAccountId, invoiceId)
-        return updatedInvoiceDto.toDomain(billingAccountId = billingAccountId)
+
+
+        return updatedInvoiceDto.toDomain(billingAccountId = updatedInvoiceDto.billingAccountId)
+    }
+
+    override suspend fun deleteInvoice(billingAccountId: String, invoiceId: String) {
+        remoteDataSource.deleteInvoice(billingAccountId, invoiceId)
     }
 }
