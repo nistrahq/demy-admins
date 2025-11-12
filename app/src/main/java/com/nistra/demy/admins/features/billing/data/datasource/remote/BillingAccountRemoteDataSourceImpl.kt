@@ -32,4 +32,16 @@ class BillingAccountRemoteDataSourceImpl @Inject constructor(
             api.markInvoiceAsPaid(billingAccountId, invoiceId)
         }
     }
+
+    override suspend fun fetchInvoicesByStudentDni(dni: String): List<InvoiceResourceDto> {
+        return safeApiCall(endpoint = "billing-accounts/invoices/by-student-dni/{dniNumber}") {
+            api.getInvoicesByStudentDni(dni)
+        }
+    }
+
+    override suspend fun deleteInvoice(billingAccountId: String, invoiceId: String) {
+        safeApiCall(endpoint = "billing-accounts/{billingAccountId}/invoices/{invoiceId}") {
+            api.deleteInvoice(billingAccountId, invoiceId)
+        }
+    }
 }

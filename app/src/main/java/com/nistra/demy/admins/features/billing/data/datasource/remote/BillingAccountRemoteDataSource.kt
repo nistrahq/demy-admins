@@ -16,5 +16,9 @@ interface BillingAccountRemoteDataSource {
 
     suspend fun markInvoiceAsPaid(billingAccountId: String, invoiceId: String): InvoiceResourceDto
 
+    suspend fun fetchInvoicesByStudentDni(dni: String): List<InvoiceResourceDto>
+
+    suspend fun deleteInvoice(billingAccountId: String, invoiceId: String)
+
 
 }
