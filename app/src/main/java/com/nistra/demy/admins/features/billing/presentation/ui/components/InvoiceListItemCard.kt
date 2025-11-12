@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.EuroSymbol
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +27,8 @@ import com.nistra.demy.admins.features.invoicing.domain.model.Invoice
 fun InvoiceListItemCard(
     invoice: Invoice,
     modifier: Modifier = Modifier,
-    onClick: (Invoice) -> Unit = {}
+    onClick: (Invoice) -> Unit = {},
+    onDelete: (Invoice) -> Unit = {}
 ) {
     ListItemCard(
         onClick = { onClick(invoice) },
@@ -83,6 +87,16 @@ fun InvoiceListItemCard(
                 )
             }
         }
-    }
+    },
+        actions = {
+            IconButton(onClick = { onDelete(invoice) }) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete invoice",
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
+        }
+
     )
 }
