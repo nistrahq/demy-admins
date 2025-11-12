@@ -24,12 +24,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import com.nistra.demy.admins.core.common.LocalizedString
+import com.nistra.demy.admins.features.invoicing.domain.usecase.DeleteInvoiceUseCase
 
 @HiltViewModel
 class BillingAccountDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getBillingAccountByIdUseCase: GetBillingAccountByIdUseCase,
-    private val addInvoiceToBillingAccountUseCase: AddInvoiceToBillingAccountUseCase
+    private val addInvoiceToBillingAccountUseCase: AddInvoiceToBillingAccountUseCase,
+    private val deleteInvoiceUseCase: DeleteInvoiceUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(BillingAccountDetailsUiState())
@@ -139,6 +141,28 @@ class BillingAccountDetailsViewModel @Inject constructor(
                             error = error.message,
                             snackbarMessage = SnackbarMessage(message = LocalizedString.Resource(R.string.billing_details_error_message))
                         )
+                    }
+                }
+        }
+    }
+
+    fun deleteInvoice(invoiceId: String) {
+
+        viewModelScope.launch {
+            deleteInvoiceUseCase(billingAccountId, invoiceId)
+                .onSuccess {
+                    loadAccountDetails()
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_delete_success)
+                        ))
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_delete_error)
+                        ))
                     }
                 }
         }
