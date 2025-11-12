@@ -5,6 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class InvoiceResourceDto(
     val id: String,
+    val billingAccountId: String,
     val invoiceType: String,
     val amount: String,
     val currency: String,
