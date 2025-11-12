@@ -21,6 +21,7 @@ fun InvoiceResourceDto.toDomain(billingAccountId: String ): Invoice {
 fun Invoice.toResourceDto(): InvoiceResourceDto {
     return InvoiceResourceDto(
         id = this.id,
+        billingAccountId = this.billingAccountId,
         invoiceType = this.invoiceType,
         amount = this.amount,
         currency = this.currency,
