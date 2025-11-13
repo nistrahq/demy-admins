@@ -6,4 +6,9 @@
     <string name="dashboard_total_expenses_label">Gastos Totales</string>
     <string name="dashboard_total_balance_label">Balance Total</string>
     <string name="dashboard_loading">Cargando…</string>
+    <string name="dashboard_income_expense_trend">Tendencia de Ingresos vs Gastos</string>
+    <string name="dashboard_expense_categories">Categorías de Gastos</string>
+    <string name="dashboard_no_data">No hay datos disponibles</string>
+    <string name="dashboard_no_expense_data">No hay datos de gastos disponibles</string>
+    <string name="dashboard_error_loading">Error al cargar el dashboard</string>
 </resources>
