@@ -41,7 +41,7 @@ sealed class DrawerDestination(val id: String, @param:StringRes val labelResId: 
     data object Enrollments : DrawerDestination(MainDestination.Enrollments.route, R.string.drawer_destination_enrollments, Icons.Filled.AppRegistration)
     data object Scheduling : DrawerDestination(MainDestination.Scheduling.route, R.string.drawer_destination_scheduling, Icons.Filled.CalendarToday)
     data object Billing : DrawerDestination(MainDestination.Billing.route, R.string.drawer_destination_billing, Icons.Filled.Payment)
-    data object Invoices : DrawerDestination(MainDestination.Invoices.route, R.string.drawer_destination_invoices, Icons.Filled.Description)
+   // data object Invoices : DrawerDestination(MainDestination.Invoices.route, R.string.drawer_destination_invoices, Icons.Filled.Description)
     data object Finance : DrawerDestination(MainDestination.Finance.route, R.string.drawer_destination_finance, Icons.Filled.AccountBalance)
     data object Accounting : DrawerDestination(MainDestination.Accounting.route, R.string.drawer_destination_accounting, Icons.Filled.AccountBalanceWallet)
     data object Settings : DrawerDestination(MainDestination.Settings.route, R.string.drawer_destination_settings, Icons.Filled.Settings)

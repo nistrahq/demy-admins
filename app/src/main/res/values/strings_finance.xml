@@ -54,4 +54,8 @@
     <string name="finance_expense_categories">Top Expense Categories</string>
     <string name="finance_loading_data">Loading financial data…</string>
     <string name="finance_no_data">No data available to display</string>
+
+    <!-- Chart Legends -->
+    <string name="finance_legend_income">Income</string>
+    <string name="finance_legend_expense">Expense</string>
 </resources>

@@ -6,16 +6,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.EuroSymbol
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.designsystem.components.cards.ListItemCard
 import com.nistra.demy.admins.core.designsystem.components.text.IconLabelRow
 import com.nistra.demy.admins.features.invoicing.domain.model.Invoice
@@ -24,7 +28,8 @@ import com.nistra.demy.admins.features.invoicing.domain.model.Invoice
 fun InvoiceListItemCard(
     invoice: Invoice,
     modifier: Modifier = Modifier,
-    onClick: (Invoice) -> Unit = {}
+    onClick: (Invoice) -> Unit = {},
+    onDelete: (Invoice) -> Unit = {}
 ) {
     ListItemCard(
         onClick = { onClick(invoice) },
@@ -52,11 +57,17 @@ fun InvoiceListItemCard(
                     textStyle = MaterialTheme.typography.titleMedium,
                     textColor = MaterialTheme.colorScheme.onSurface
                 )
-                IconLabelRow(
-                    icon = Icons.Default.EuroSymbol,
-                    text = "${invoice.amount} ${invoice.currency}",
-                    textStyle = MaterialTheme.typography.titleMedium,
-                    textColor = MaterialTheme.colorScheme.onSurface
+
+                val currencySymbol = when (invoice.currency.uppercase()) {
+                    "PEN" -> "S/"
+                    "USD" -> "$"
+                    else -> invoice.currency
+                }
+
+                Text(
+                    text = "$currencySymbol ${invoice.amount}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -68,7 +79,7 @@ fun InvoiceListItemCard(
             ) {
                 IconLabelRow(
                     icon = Icons.Default.CalendarMonth,
-                    text = "Vence: ${invoice.dueDate}",
+                    text = "${stringResource(R.string.invoice_due_date_label)} ${invoice.dueDate}",
                     iconColor = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 IconLabelRow(
@@ -83,6 +94,16 @@ fun InvoiceListItemCard(
                 )
             }
         }
-    }
+    },
+        actions = {
+            IconButton(onClick = { onDelete(invoice) }) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete invoice",
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
+        }
+
     )
 }

@@ -75,7 +75,8 @@ fun InvoicesScreen(
                     invoices = uiState.invoices,
                     isLoading = uiState.isLoading,
                     onMarkAsPaid = viewModel::markAsPaid,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onDeleteInvoice = viewModel::deleteInvoice,
                 )
             }
         }
