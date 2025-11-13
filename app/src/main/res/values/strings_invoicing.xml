@@ -47,5 +47,8 @@
     <string name="invoices_delete_success">Invoice deleted successfully.</string>
     <string name="invoices_delete_error">Error deleting invoice, cannot delete paid invoice</string>
 
+    <!-- Invoice Card -->
+    <string name="invoice_due_date_label">Due:</string>
+
 </resources>
 

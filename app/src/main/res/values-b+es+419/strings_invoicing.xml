@@ -46,4 +46,7 @@
     <string name="invoices_delete_success">Factura eliminada exitosamente.</string>
     <string name="invoices_delete_error">Error al eliminar, no se puede eliminar una factura pagada</string>
 
+    <!-- Invoice Card -->
+    <string name="invoice_due_date_label">Vence:</string>
+
 </resources>
