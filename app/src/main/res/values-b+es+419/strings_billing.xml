@@ -3,7 +3,7 @@
     <!-- Billing Search Panel -->
     <string name="billing_search_title">Buscar Cuentas</string>
     <string name="billing_search_description">Encuentre y gestione las cuentas de facturación</string>
-    <string name="billing_search_placeholder">Buscar por ID de estudiante o academia</string>
+    <string name="billing_search_placeholder">Buscar por DNI</string>
     <string name="billing_not_found">No se encontraron cuentas</string>
     <string name="billing_found_count">%1$d cuenta(s) encontrada(s)</string>
     <string name="billing_edit_action_description">Editar cuenta de facturación</string>
@@ -35,7 +35,7 @@
     <string name="billing_details_back_button_description">Volver</string>
     <string name="billing_details_error_message">Error: %1$s</string>
     <string name="billing_details_account_id">ID de Cuenta: %1$s</string>
-    <string name="billing_details_student_id">ID de Estudiante: %1$s</string>
+    <string name="billing_dni_number_label">DNI: %1$s</string>
     <string name="billing_details_invoices_title">Facturas (%1$d)</string>
     <string name="billing_details_no_invoices">Esta cuenta aún no tiene facturas.</string>
     <string name="billing_details_invoice_item_label">- Factura #%1$s: %2$s %3$s (%4$s)</string>
