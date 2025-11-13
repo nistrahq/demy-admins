@@ -84,7 +84,7 @@ fun BillingAccountDetailsScreen(
                             style = MaterialTheme.typography.headlineSmall
                         )
                         Text(
-                            text = stringResource(R.string.billing_details_student_id, account.studentId),
+                            text = stringResource(R.string.billing_dni_number_label, account.dniNumber),
                             style = MaterialTheme.typography.titleMedium
                         )
 
@@ -108,7 +108,11 @@ fun BillingAccountDetailsScreen(
                                 items(account.invoices) { invoice ->
                                     InvoiceListItemCard(
                                         invoice = invoice,
-                                        onClick = { /* TODO: invoices details? */ },
+                                        onClick = { clickedInvoice ->
+                                            if (clickedInvoice.status.uppercase() != "PAID") {
+                                                viewModel.markInvoiceAsPaid(clickedInvoice.id)
+                                            }
+                                        },
                                         onDelete = { clickedInvoice ->
                                             viewModel.deleteInvoice(clickedInvoice.id)
                                         }
