@@ -6,27 +6,27 @@ package com.nistra.demy.admins.features.dashboard.domain.model
  * This model contains all the key metrics displayed on the dashboard.
  * It's part of the domain layer and represents pure business data.
  *
- * @property balance Current financial balance.
- * @property currentAcademicPeriod Current academic period number.
- * @property schedules Total number of active schedules.
+ * @property academyName Name of the current academy.
+ * @property totalIncome Total income amount.
  * @property totalExpense Total expenses amount.
+ * @property balance Current financial balance (income - expense).
  * @property totalStudents Total number of students in current period.
- * @property academicPeriodStartDate Start date of the current academic period.
- * @property academicPeriodEndDate End date of the current academic period.
+ * @property totalTeachers Total number of teachers.
  * @property totalCourses Total number of courses.
  * @property totalClassrooms Total number of classrooms.
- * @property mostOverloadedTeacher Name of the teacher with most workload.
+ * @property totalEnrollments Total number of enrollments.
+ * @property totalSchedules Total number of active schedules.
  * @author Salim Ramirez
  */
 data class DashboardStats(
-    val balance: Int,
-    val currentAcademicPeriod: Int,
-    val schedules: Int,
-    val totalExpense: Int,
+    val academyName: String = "",
+    val totalIncome: Double = 0.0,
+    val totalExpense: Double = 0.0,
+    val balance: Double = 0.0,
     val totalStudents: Int = 0,
-    val academicPeriodStartDate: String = "",
-    val academicPeriodEndDate: String = "",
+    val totalTeachers: Int = 0,
     val totalCourses: Int = 0,
     val totalClassrooms: Int = 0,
-    val mostOverloadedTeacher: String = "N/A"
+    val totalEnrollments: Int = 0,
+    val totalSchedules: Int = 0
 )

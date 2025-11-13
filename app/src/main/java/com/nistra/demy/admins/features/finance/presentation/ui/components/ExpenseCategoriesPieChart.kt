@@ -76,10 +76,10 @@ fun ExpenseCategoriesPieChart(
         return
     }
 
-    Column(
+    Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         // Pie Chart using ehsannarmani-charts
         PieChart(
@@ -100,9 +100,9 @@ fun ExpenseCategoriesPieChart(
             style = Pie.Style.Fill
         )
 
-        // Legend
+        // Legend - now positioned on the right side
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             data.categories.forEachIndexed { index, category ->

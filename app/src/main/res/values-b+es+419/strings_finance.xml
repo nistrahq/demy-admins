@@ -54,6 +54,10 @@
     <string name="finance_expense_categories">Principales Categorías de Egresos</string>
     <string name="finance_loading_data">Cargando datos financieros…</string>
     <string name="finance_no_data">No hay datos disponibles para mostrar</string>
+
+    <!-- Chart Legends -->
+    <string name="finance_legend_income">Ingresos</string>
+    <string name="finance_legend_expense">Gastos</string>
 </resources>
 
 

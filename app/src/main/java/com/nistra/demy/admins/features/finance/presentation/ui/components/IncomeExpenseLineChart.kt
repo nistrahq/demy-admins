@@ -17,7 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nistra.demy.admins.R
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
@@ -140,7 +142,7 @@ fun IncomeExpenseLineChart(
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)
+                    .height(196.dp)
             )
         }
 
@@ -164,7 +166,7 @@ fun IncomeExpenseLineChart(
                 Spacer(modifier = Modifier.width(4.dp))
 
                 Text(
-                    text = "Income",
+                    text = stringResource(R.string.finance_legend_income),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -184,7 +186,7 @@ fun IncomeExpenseLineChart(
                 Spacer(modifier = Modifier.width(4.dp))
 
                 Text(
-                    text = "Expense",
+                    text = stringResource(R.string.finance_legend_expense),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )

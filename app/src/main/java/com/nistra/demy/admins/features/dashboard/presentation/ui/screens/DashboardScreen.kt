@@ -3,7 +3,10 @@ package com.nistra.demy.admins.features.dashboard.presentation.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,7 +23,8 @@ import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
 import com.nistra.demy.admins.features.dashboard.domain.model.DashboardStats
 import com.nistra.demy.admins.features.dashboard.presentation.model.DashboardUiState
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardAcademicRow
-import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardFinancialRow
+import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardExpenseCategoriesCard
+import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardIncomeExpenseCard
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardStatsRow
 import com.nistra.demy.admins.features.dashboard.presentation.viewmodel.DashboardViewModel
 
@@ -63,7 +67,7 @@ private fun DashboardScreenContent(
         }
         is DashboardUiState.Error -> {
             ErrorState(
-                message = state.message ?: "An error occurred",
+                message = state.message,
                 modifier = modifier
             )
         }
@@ -121,27 +125,40 @@ private fun DashboardContent(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Top stats row
+        // Top stats row - Academy, Income, Expense, Balance
         DashboardStatsRow(
             stats = state.stats,
             formatMoney = ::formatMoney
         )
 
-        // Financial comparison row
-        DashboardFinancialRow(
-            incomes = state.stats.balance,
-            expenses = state.stats.totalExpense,
-            formatMoney = ::formatMoney
-        )
+        // Charts row - Income/Expense trend and Expense categories
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            DashboardIncomeExpenseCard(
+                data = state.chartData?.lineChartData,
+                isLoading = false,
+                modifier = Modifier.weight(1f)
+            )
 
-        // Academic details row
+            DashboardExpenseCategoriesCard(
+                data = state.chartData?.pieChartData,
+                isLoading = false,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        // Academic details row (keeping the last row)
         DashboardAcademicRow(
+            totalTeachers = state.stats.totalTeachers,
             totalStudents = state.stats.totalStudents,
-            startDate = state.stats.academicPeriodStartDate,
-            endDate = state.stats.academicPeriodEndDate,
+            totalEnrollments = state.stats.totalEnrollments,
+            totalSchedules = state.stats.totalSchedules,
             totalCourses = state.stats.totalCourses,
-            totalClassrooms = state.stats.totalClassrooms,
-            mostOverloadedTeacher = state.stats.mostOverloadedTeacher
+            totalClassrooms = state.stats.totalClassrooms
         )
     }
 }
@@ -152,8 +169,8 @@ private fun DashboardContent(
  * @param amount The amount to format.
  * @return Formatted string with currency symbol.
  */
-private fun formatMoney(amount: Int): String {
-    return "S/ %,d".format(amount)
+private fun formatMoney(amount: Double): String {
+    return "S/ %,.2f".format(amount)
 }
 
 // ================================
@@ -168,16 +185,16 @@ private fun DashboardScreenPreview() {
             DashboardScreenContent(
                 state = DashboardUiState.Success(
                     stats = DashboardStats(
-                        balance = 15000,
-                        currentAcademicPeriod = 3,
-                        schedules = 25,
-                        totalExpense = 8500,
+                        academyName = "Academia de Programación",
+                        totalIncome = 25000.50,
+                        totalExpense = 15000.00,
+                        balance = 10000.50,
                         totalStudents = 200,
-                        academicPeriodStartDate = "2025-08-01",
-                        academicPeriodEndDate = "2025-12-15",
+                        totalTeachers = 15,
                         totalCourses = 38,
                         totalClassrooms = 22,
-                        mostOverloadedTeacher = "Dr. Jane Smith"
+                        totalEnrollments = 450,
+                        totalSchedules = 25
                     )
                 ),
                 modifier = Modifier.fillMaxSize()
