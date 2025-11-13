@@ -14,11 +14,14 @@ fun NavHostController.currentTitle(): String {
         MainDestination.Dashboard.route -> stringResource(R.string.nav_title_dashboard)
         MainDestination.Teachers.route -> stringResource(R.string.nav_title_teachers)
         MainDestination.Students.route -> stringResource(R.string.nav_title_students)
+        MainDestination.Billing.route -> stringResource(R.string.nav_title_billing)
+        //MainDestination.Invoices.route -> stringResource(R.string.nav_title_invoices)
+        MainDestination.Scheduling.route -> stringResource(R.string.drawer_destination_scheduling)
+        MainDestination.Finance.route -> stringResource(R.string.nav_title_finance)
+        MainDestination.Accounting.route -> stringResource(R.string.nav_title_accounting)
         MainDestination.Profile.route -> stringResource(R.string.nav_title_profile)
         MainDestination.Settings.route -> stringResource(R.string.nav_title_settings)
         MainDestination.Help.route -> stringResource(R.string.nav_title_help)
-        MainDestination.Billing.route -> stringResource(R.string.nav_title_billing)
-        //MainDestination.Invoices.route -> stringResource(R.string.nav_title_invoices)
         else -> stringResource(R.string.nav_title_default)
     }
 }
@@ -85,11 +88,17 @@ private val moduleToParentRouteMap = mapOf(
     "dashboard" to MainDestination.Dashboard.route,
     "teachers" to MainDestination.Teachers.route,
     "students" to MainDestination.Students.route,
+    "billing" to MainDestination.Billing.route,
+    //"invoices" to MainDestination.Invoices.route,
+    "finance" to MainDestination.Finance.route,
+    "accounting" to MainDestination.Accounting.route,
     "profile" to MainDestination.Profile.route,
     "settings" to MainDestination.Settings.route,
     "help" to MainDestination.Help.route,
-    "billing" to MainDestination.Billing.route,
-    //"invoices" to MainDestination.Invoices.route
+    "classrooms" to MainDestination.Classrooms.route,
+    "schedules" to MainDestination.Schedules.route,
+    "scheduling" to MainDestination.Scheduling.route,
+    "courses" to MainDestination.Courses.route
     // Add new modules here
 )
 

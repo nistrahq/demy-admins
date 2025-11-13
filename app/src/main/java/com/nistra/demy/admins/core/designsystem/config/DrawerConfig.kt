@@ -41,7 +41,8 @@ object DrawerConfig {
                 DrawerDestination.Scheduling,
                 DrawerDestination.Billing,
                // DrawerDestination.Invoices,
-                DrawerDestination.Finance
+                DrawerDestination.Finance,
+                DrawerDestination.Accounting
             )
         ),
         DrawerSection(
@@ -60,11 +61,19 @@ object DrawerConfig {
     val implementedRoutes: Set<String> = setOf(
         DrawerDestination.Dashboard.id,
         DrawerDestination.Teachers.id,
+        DrawerDestination.Periods.id,
         DrawerDestination.Students.id,
         DrawerDestination.Settings.id,
         DrawerDestination.Help.id,
         DrawerDestination.Billing.id,
         //DrawerDestination.Invoices.id
+        DrawerDestination.Enrollments.id,
+        DrawerDestination.Finance.id,
+        DrawerDestination.Accounting.id,
+        DrawerDestination.Classrooms.id,
+        DrawerDestination.Schedules.id,
+        DrawerDestination.Scheduling.id,
+        DrawerDestination.Courses.id
     )
 }
 

@@ -33,4 +33,11 @@ sealed interface RootDestination {
         override val route = "main-graph"
         fun toRoute() = route
     }
+
+    data object Courses : RootDestination {
+        override val route = "courses"
+        fun toRoute() = route
+    }
+
+
 }

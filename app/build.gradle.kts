@@ -109,4 +109,12 @@ dependencies {
     // DataStore + Coroutines
     implementation(libs.datastore)
     implementation(libs.coroutines)
+
+    // Vico Charts
+    implementation(libs.vico.core)
+    implementation(libs.vico.compose)
+    implementation(libs.vico.views)
+
+    // Ehsan Narmani Charts
+    implementation(libs.ehsannarmani.charts)
 }

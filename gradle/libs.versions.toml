@@ -23,6 +23,8 @@ moshi = "1.15.2"
 room = "2.8.1"
 datastore = "1.1.7"
 coroutines = "1.10.2"
+vico = "1.15.0"
+ehsannarmaniCharts = "0.0.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +65,10 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vico" }
+vico-compose = { module = "com.patrykandpatrick.vico:compose", version.ref = "vico" }
+vico-views = { module = "com.patrykandpatrick.vico:views", version.ref = "vico" }
+ehsannarmani-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "ehsannarmaniCharts" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
