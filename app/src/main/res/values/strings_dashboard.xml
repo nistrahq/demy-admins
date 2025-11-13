@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dashboard Screen -->
+    <string name="dashboard_academy_label">Academy</string>
+    <string name="dashboard_total_income_label">Total Income</string>
+    <string name="dashboard_total_expenses_label">Total Expenses</string>
+    <string name="dashboard_total_balance_label">Total Balance</string>
+    <string name="dashboard_loading">Loading…</string>
+</resources>
+
