@@ -153,12 +153,12 @@ private fun DashboardContent(
 
         // Academic details row (keeping the last row)
         DashboardAcademicRow(
+            totalTeachers = state.stats.totalTeachers,
             totalStudents = state.stats.totalStudents,
-            startDate = "",
-            endDate = "",
+            totalEnrollments = state.stats.totalEnrollments,
+            totalSchedules = state.stats.totalSchedules,
             totalCourses = state.stats.totalCourses,
-            totalClassrooms = state.stats.totalClassrooms,
-            mostOverloadedTeacher = ""
+            totalClassrooms = state.stats.totalClassrooms
         )
     }
 }
