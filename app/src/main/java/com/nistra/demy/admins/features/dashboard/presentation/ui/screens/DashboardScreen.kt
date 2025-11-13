@@ -63,7 +63,7 @@ private fun DashboardScreenContent(
         }
         is DashboardUiState.Error -> {
             ErrorState(
-                message = state.message ?: "An error occurred",
+                message = state.message,
                 modifier = modifier
             )
         }
@@ -121,7 +121,7 @@ private fun DashboardContent(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Top stats row
+        // Top stats row - Academy, Income, Expense, Balance
         DashboardStatsRow(
             stats = state.stats,
             formatMoney = ::formatMoney
@@ -129,19 +129,19 @@ private fun DashboardContent(
 
         // Financial comparison row
         DashboardFinancialRow(
-            incomes = state.stats.balance,
-            expenses = state.stats.totalExpense,
-            formatMoney = ::formatMoney
+            incomes = state.stats.totalIncome.toInt(),
+            expenses = state.stats.totalExpense.toInt(),
+            formatMoney = { amount -> formatMoney(amount.toDouble()) }
         )
 
         // Academic details row
         DashboardAcademicRow(
             totalStudents = state.stats.totalStudents,
-            startDate = state.stats.academicPeriodStartDate,
-            endDate = state.stats.academicPeriodEndDate,
+            startDate = "",
+            endDate = "",
             totalCourses = state.stats.totalCourses,
             totalClassrooms = state.stats.totalClassrooms,
-            mostOverloadedTeacher = state.stats.mostOverloadedTeacher
+            mostOverloadedTeacher = ""
         )
     }
 }
@@ -152,8 +152,8 @@ private fun DashboardContent(
  * @param amount The amount to format.
  * @return Formatted string with currency symbol.
  */
-private fun formatMoney(amount: Int): String {
-    return "S/ %,d".format(amount)
+private fun formatMoney(amount: Double): String {
+    return "S/ %,.2f".format(amount)
 }
 
 // ================================
@@ -168,16 +168,16 @@ private fun DashboardScreenPreview() {
             DashboardScreenContent(
                 state = DashboardUiState.Success(
                     stats = DashboardStats(
-                        balance = 15000,
-                        currentAcademicPeriod = 3,
-                        schedules = 25,
-                        totalExpense = 8500,
+                        academyName = "Academia de Programación",
+                        totalIncome = 25000.50,
+                        totalExpense = 15000.00,
+                        balance = 10000.50,
                         totalStudents = 200,
-                        academicPeriodStartDate = "2025-08-01",
-                        academicPeriodEndDate = "2025-12-15",
+                        totalTeachers = 15,
                         totalCourses = 38,
                         totalClassrooms = 22,
-                        mostOverloadedTeacher = "Dr. Jane Smith"
+                        totalEnrollments = 450,
+                        totalSchedules = 25
                     )
                 ),
                 modifier = Modifier.fillMaxSize()
