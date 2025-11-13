@@ -14,7 +14,8 @@ fun InvoicesListPanel(
     invoices: List<Invoice>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
-    onMarkAsPaid: (invoiceId: String, billingAccountId: String) -> Unit
+    onMarkAsPaid: (invoiceId: String, billingAccountId: String) -> Unit,
+    onDeleteInvoice: (invoiceId: String, billingAccountId: String) -> Unit
 ) {
     ListingCard(
         title = stringResource(R.string.invoices_list_title),
@@ -32,6 +33,9 @@ fun InvoicesListPanel(
                     if (clickedInvoice.status.uppercase() != "PAID") {
                         onMarkAsPaid(clickedInvoice.id, clickedInvoice.billingAccountId)
                     }
+                },
+                onDelete = { clickedInvoice ->
+                    onDeleteInvoice(clickedInvoice.id, clickedInvoice.billingAccountId)
                 }
             )
         }

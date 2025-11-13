@@ -77,7 +77,7 @@ private fun BillingListItem(
         mainContent = {
             IconLabelRow(
                 icon = Icons.Default.Person,
-                text = stringResource(id = R.string.billing_student_id_label, account.studentId),
+                text = stringResource(id = R.string.billing_dni_number_label, account.dniNumber),
                 iconSize = 20.dp,
                 iconColor = MaterialTheme.colorScheme.secondary,
                 textStyle = MaterialTheme.typography.titleMedium,
@@ -85,28 +85,28 @@ private fun BillingListItem(
             )
 
 
-            IconLabelRow(
+            /*IconLabelRow(
                 icon = Icons.Default.AccountBalanceWallet,
                 text = stringResource(id = R.string.billing_academy_id_label, account.academyId),
                 iconColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
-            )
+            ) */
         },
         actions = {
-            IconButton(onClick = onEdit) {
+            /*IconButton(onClick = onEdit) {
                 Icon(
                     Icons.Default.Edit,
                     contentDescription = stringResource(R.string.billing_edit_action_description),
                     tint = MaterialTheme.colorScheme.secondary
                 )
-            }
+            } */
 
-            IconButton(onClick = onDelete) {
+           /* IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.Delete,
                     contentDescription = stringResource(R.string.billing_delete_action_description),
                     tint = MaterialTheme.colorScheme.error
                 )
-            }
+            } */
         }
     )
 }

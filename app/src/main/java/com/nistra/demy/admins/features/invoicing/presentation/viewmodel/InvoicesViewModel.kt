@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.nistra.demy.admins.R
 import com.nistra.demy.admins.core.common.LocalizedString
 import com.nistra.demy.admins.core.common.SnackbarMessage
-import com.nistra.demy.admins.features.invoicing.domain.usecase.GetInvoicesByBillingAccountIdUseCase
+import com.nistra.demy.admins.features.invoicing.domain.usecase.DeleteInvoiceUseCase
+import com.nistra.demy.admins.features.invoicing.domain.usecase.GetInvoicesByStudentDniUseCase
 import com.nistra.demy.admins.features.invoicing.domain.usecase.MarkInvoiceAsPaidUseCase
 import com.nistra.demy.admins.features.invoicing.presentation.state.InvoicesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InvoicesViewModel @Inject constructor(
-    private val getInvoicesByBillingAccountIdUseCase: GetInvoicesByBillingAccountIdUseCase,
-    private val markInvoiceAsPaidUseCase: MarkInvoiceAsPaidUseCase
+    private val getInvoicesByStudentDniUseCase: GetInvoicesByStudentDniUseCase,
+    private val markInvoiceAsPaidUseCase: MarkInvoiceAsPaidUseCase,
+    private val deleteInvoiceUseCase: DeleteInvoiceUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(InvoicesUiState())
@@ -47,7 +49,7 @@ class InvoicesViewModel @Inject constructor(
 
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            getInvoicesByBillingAccountIdUseCase(billingAccountId)
+            getInvoicesByStudentDniUseCase(billingAccountId)
                 .onSuccess { invoices ->
                     _uiState.update { it.copy(isLoading = false, invoices = invoices) }
                 }
@@ -85,6 +87,30 @@ class InvoicesViewModel @Inject constructor(
                                 message = LocalizedString.Resource(R.string.invoices_mark_as_paid_error)
                             )
                         )
+                    }
+                }
+        }
+    }
+
+
+    fun deleteInvoice(invoiceId: String, billingAccountId: String) {
+        if (billingAccountId.isBlank()) return
+
+        viewModelScope.launch {
+            deleteInvoiceUseCase(billingAccountId, invoiceId)
+                .onSuccess {
+                    searchInvoices()
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_delete_success)
+                        ))
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_delete_error)
+                        ))
                     }
                 }
         }

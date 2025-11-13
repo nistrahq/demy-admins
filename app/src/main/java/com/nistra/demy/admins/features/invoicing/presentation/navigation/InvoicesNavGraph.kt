@@ -7,7 +7,7 @@ import androidx.navigation.navigation
 import com.nistra.demy.admins.features.invoicing.presentation.ui.screens.InvoicesScreen
 import com.nistra.demy.admins.features.main.presentation.navigation.MainDestination
 
-fun NavGraphBuilder.invoicesGraph(navController: NavHostController) {
+/*fun NavGraphBuilder.invoicesGraph(navController: NavHostController) {
     navigation(
         startDestination = InvoicesDestination.Invoices.route,
         route = MainDestination.Invoices.route
@@ -16,5 +16,5 @@ fun NavGraphBuilder.invoicesGraph(navController: NavHostController) {
             InvoicesScreen()
         }
     }
-}
+} */
 

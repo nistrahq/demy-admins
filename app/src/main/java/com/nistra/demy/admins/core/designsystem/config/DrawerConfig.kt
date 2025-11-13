@@ -40,7 +40,7 @@ object DrawerConfig {
                 DrawerDestination.Enrollments,
                 DrawerDestination.Scheduling,
                 DrawerDestination.Billing,
-                DrawerDestination.Invoices,
+               // DrawerDestination.Invoices,
                 DrawerDestination.Finance,
                 DrawerDestination.Accounting
             )
@@ -66,7 +66,7 @@ object DrawerConfig {
         DrawerDestination.Settings.id,
         DrawerDestination.Help.id,
         DrawerDestination.Billing.id,
-        DrawerDestination.Invoices.id,
+        //DrawerDestination.Invoices.id
         DrawerDestination.Enrollments.id,
         DrawerDestination.Finance.id,
         DrawerDestination.Accounting.id,

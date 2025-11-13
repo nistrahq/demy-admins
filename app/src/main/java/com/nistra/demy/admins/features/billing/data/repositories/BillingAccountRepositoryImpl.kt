@@ -7,6 +7,7 @@ import com.nistra.demy.admins.features.billing.data.mapper.toRequestDto
 import com.nistra.demy.admins.features.billing.domain.model.BillingAccount
 import com.nistra.demy.admins.features.billing.domain.repository.BillingAccountRepository
 import com.nistra.demy.admins.features.invoicing.data.mapper.toResourceDto
+import com.nistra.demy.admins.features.invoicing.data.remote.dto.CreateInvoiceRequestDto
 import com.nistra.demy.admins.features.invoicing.domain.model.Invoice
 
 import javax.inject.Inject
@@ -31,11 +32,18 @@ class BillingAccountRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addInvoiceToBillingAccount(billingAccountId: String, invoice: Invoice): BillingAccount {
-        val invoiceRequestDto = invoice.toResourceDto()
+        val requestDto = CreateInvoiceRequestDto(
+            invoiceType = invoice.invoiceType,
+            amount = invoice.amount,
+            currency = invoice.currency,
+            description = invoice.description,
+            issueDate = invoice.issueDate,
+            dueDate = invoice.dueDate,
+            status = "PENDING"
+        )
 
-        val updatedBillingAccountDto = billingAccountsRemoteDataSource.addInvoiceToBillingAccount(billingAccountId, invoiceRequestDto)
-
-        return updatedBillingAccountDto.toBillingAccountDomain()
+        val updatedAccountDto = billingAccountsRemoteDataSource.addInvoiceToBillingAccount(billingAccountId, requestDto)
+        return updatedAccountDto.toBillingAccountDomain()
 
     }
 }

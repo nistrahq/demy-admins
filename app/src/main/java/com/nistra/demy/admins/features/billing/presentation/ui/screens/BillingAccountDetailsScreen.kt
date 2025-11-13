@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nistra.demy.admins.core.designsystem.components.feedback.DemySnackbarHost
+import com.nistra.demy.admins.core.designsystem.components.feedback.SnackbarEffect
+import com.nistra.demy.admins.core.designsystem.components.feedback.rememberDemySnackbarState
 import com.nistra.demy.admins.features.billing.presentation.ui.components.AddInvoiceDialog
 import com.nistra.demy.admins.features.billing.presentation.viewmodel.BillingAccountDetailsViewModel
 import com.nistra.demy.admins.R
@@ -28,6 +31,14 @@ fun BillingAccountDetailsScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     val invoiceFormData by viewModel.invoiceFormData.collectAsState()
+
+    val snackbarState = rememberDemySnackbarState()
+
+    SnackbarEffect(
+        message = uiState.snackbarMessage,
+        snackbarState = snackbarState,
+        onMessageShown = viewModel::clearSnackbarMessage
+    )
 
 
     if (uiState.isAddInvoiceDialogVisible) {
@@ -54,77 +65,88 @@ fun BillingAccountDetailsScreen(
             )
         }
     ) { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            when {
-                uiState.isLoading -> {
-                    CircularProgressIndicator()
-                }
-                uiState.error != null -> {
-                    Text(
-                        text = stringResource(R.string.billing_details_error_message, uiState.error!!),
-                        color = MaterialTheme.colorScheme.error
-                    )
-
-                }
-                uiState.billingAccount != null -> {
-                    val account = uiState.billingAccount!!
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-
+        Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                when {
+                    uiState.isLoading -> {
+                        CircularProgressIndicator()
+                    }
+                    uiState.error != null -> {
                         Text(
-                            text = stringResource(R.string.billing_details_account_id, account.id),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                        Text(
-                            text = stringResource(R.string.billing_details_student_id, account.studentId),
-                            style = MaterialTheme.typography.titleMedium
+                            text = stringResource(R.string.billing_details_error_message, uiState.error!!),
+                            color = MaterialTheme.colorScheme.error
                         )
 
-                        Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    }
+                    uiState.billingAccount != null -> {
+                        val account = uiState.billingAccount!!
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+
+                            Text(
+                                text = stringResource(R.string.billing_dni_number_label, account.dniNumber),
+                                style = MaterialTheme.typography.headlineSmall
+                            )
+
+                            Divider(modifier = Modifier.padding(vertical = 8.dp))
 
 
-                        Text(
-                            text = stringResource(R.string.billing_details_invoices_title, account.invoices.size),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
+                            Text(
+                                text = stringResource(R.string.billing_details_invoices_title, account.invoices.size),
+                                style = MaterialTheme.typography.headlineSmall
+                            )
 
-                        // Aquí iría una lista (LazyColumn) de las facturas
-                        if (account.invoices.isEmpty()) {
-                            Text(stringResource(R.string.billing_details_no_invoices))
-                        } else {
-                            LazyColumn(
-                                modifier = Modifier.weight(1f),
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
-                                contentPadding = PaddingValues(vertical = 8.dp)
-                            ) {
-                                items(account.invoices) { invoice ->
-                                    InvoiceListItemCard(
-                                        invoice = invoice,
-                                        onClick = { /* TODO: invoices details? */ }
-                                    )
+
+                            if (account.invoices.isEmpty()) {
+                                Text(stringResource(R.string.billing_details_no_invoices))
+                            } else {
+                                LazyColumn(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                    contentPadding = PaddingValues(vertical = 8.dp)
+                                ) {
+                                    items(account.invoices) { invoice ->
+                                        InvoiceListItemCard(
+                                            invoice = invoice,
+                                            onClick = { clickedInvoice ->
+                                                if (clickedInvoice.status.uppercase() != "PAID") {
+                                                    viewModel.markInvoiceAsPaid(clickedInvoice.id)
+                                                }
+                                            },
+                                            onDelete = { clickedInvoice ->
+                                                viewModel.deleteInvoice(clickedInvoice.id)
+                                            }
+
+                                        )
+                                    }
                                 }
                             }
-                        }
 
 
 
-                        Button(
-                            onClick = { viewModel.onShowAddInvoiceDialog(true) },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(stringResource(R.string.billing_details_add_invoice_button))
+                            Button(
+                                onClick = { viewModel.onShowAddInvoiceDialog(true) },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(stringResource(R.string.billing_details_add_invoice_button))
+                            }
                         }
                     }
                 }
             }
+
+            DemySnackbarHost(
+                snackbarState = snackbarState,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
     }
 }
