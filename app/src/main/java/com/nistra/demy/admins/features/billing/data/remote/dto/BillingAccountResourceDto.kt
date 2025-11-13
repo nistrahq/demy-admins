@@ -5,6 +5,7 @@ import com.nistra.demy.admins.features.invoicing.data.remote.dto.InvoiceResource
 data class BillingAccountResourceDto(
     val id: String,
     val studentId: String,
+    val dniNumber: String,
     val academyId: String,
     val invoices: List<InvoiceResourceDto>
 )
