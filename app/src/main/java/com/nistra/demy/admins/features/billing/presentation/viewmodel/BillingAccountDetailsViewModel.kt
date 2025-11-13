@@ -25,13 +25,15 @@ import java.util.Calendar
 import java.util.Locale
 import com.nistra.demy.admins.core.common.LocalizedString
 import com.nistra.demy.admins.features.invoicing.domain.usecase.DeleteInvoiceUseCase
+import com.nistra.demy.admins.features.invoicing.domain.usecase.MarkInvoiceAsPaidUseCase
 
 @HiltViewModel
 class BillingAccountDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getBillingAccountByIdUseCase: GetBillingAccountByIdUseCase,
     private val addInvoiceToBillingAccountUseCase: AddInvoiceToBillingAccountUseCase,
-    private val deleteInvoiceUseCase: DeleteInvoiceUseCase
+    private val deleteInvoiceUseCase: DeleteInvoiceUseCase,
+    private val markInvoiceAsPaidUseCase: MarkInvoiceAsPaidUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(BillingAccountDetailsUiState())
@@ -147,6 +149,17 @@ class BillingAccountDetailsViewModel @Inject constructor(
     }
 
     fun deleteInvoice(invoiceId: String) {
+        val invoiceToDelete = _uiState.value.billingAccount?.invoices?.find { it.id == invoiceId }
+
+
+        if (invoiceToDelete?.status?.uppercase() == "PAID") {
+            _uiState.update {
+                it.copy(snackbarMessage = SnackbarMessage(
+                    message = LocalizedString.Resource(R.string.invoices_delete_error)
+                ))
+            }
+            return
+        }
 
         viewModelScope.launch {
             deleteInvoiceUseCase(billingAccountId, invoiceId)
@@ -163,6 +176,27 @@ class BillingAccountDetailsViewModel @Inject constructor(
                         it.copy(snackbarMessage = SnackbarMessage(
                             message = LocalizedString.Resource(R.string.invoices_delete_error)
                         ))
+                    }
+                }
+        }
+    }
+
+    fun markInvoiceAsPaid(invoiceId: String) {
+        viewModelScope.launch {
+            markInvoiceAsPaidUseCase(billingAccountId, invoiceId)
+                .onSuccess {
+                    loadAccountDetails()
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_mark_as_paid_success))
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(snackbarMessage = SnackbarMessage(
+                            message = LocalizedString.Resource(R.string.invoices_mark_as_paid_error))
+                        )
                     }
                 }
         }
