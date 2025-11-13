@@ -3,6 +3,7 @@ package com.nistra.demy.admins.features.dashboard.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nistra.demy.admins.features.dashboard.domain.usecase.GetDashboardStatsUseCase
+import com.nistra.demy.admins.features.dashboard.presentation.model.DashboardChartProcessor
 import com.nistra.demy.admins.features.dashboard.presentation.model.DashboardUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,12 +40,21 @@ class DashboardViewModel @Inject constructor(
         _uiState.value = DashboardUiState.Loading
 
         getDashboardStatsUseCase()
-            .onSuccess { stats ->
-                _uiState.value = DashboardUiState.Success(stats)
+            .onSuccess { (stats, transactions) ->
+                val chartData = if (transactions.isNotEmpty()) {
+                    DashboardChartProcessor.processTransactions(transactions)
+                } else {
+                    null
+                }
+
+                _uiState.value = DashboardUiState.Success(
+                    stats = stats,
+                    chartData = chartData
+                )
             }
             .onFailure { error ->
                 _uiState.value = DashboardUiState.Error(
-                    error.message ?: "Error desconocido al cargar el dashboard"
+                    message = error.message ?: "Error loading dashboard"
                 )
             }
     }

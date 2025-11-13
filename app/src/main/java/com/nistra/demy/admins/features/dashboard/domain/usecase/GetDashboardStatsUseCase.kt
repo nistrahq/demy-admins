@@ -1,5 +1,6 @@
 package com.nistra.demy.admins.features.dashboard.domain.usecase
 
+import com.nistra.demy.admins.features.dashboard.data.remote.dto.TransactionResourceDto
 import com.nistra.demy.admins.features.dashboard.domain.model.DashboardStats
 import com.nistra.demy.admins.features.dashboard.domain.repository.DashboardRepository
 import javax.inject.Inject
@@ -16,8 +17,8 @@ import javax.inject.Inject
 class GetDashboardStatsUseCase @Inject constructor(
     private val repository: DashboardRepository
 ) {
-    suspend operator fun invoke(): Result<DashboardStats> {
-        return runCatching { repository.fetchStats() }
+    suspend operator fun invoke(): Result<Pair<DashboardStats, List<TransactionResourceDto>>> {
+        return runCatching { repository.fetchStatsAndTransactions() }
     }
 }
 

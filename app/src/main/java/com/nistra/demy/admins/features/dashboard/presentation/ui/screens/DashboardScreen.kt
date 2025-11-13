@@ -3,7 +3,10 @@ package com.nistra.demy.admins.features.dashboard.presentation.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,7 +23,8 @@ import com.nistra.demy.admins.core.designsystem.theme.DemyTheme
 import com.nistra.demy.admins.features.dashboard.domain.model.DashboardStats
 import com.nistra.demy.admins.features.dashboard.presentation.model.DashboardUiState
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardAcademicRow
-import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardFinancialRow
+import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardExpenseCategoriesCard
+import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardIncomeExpenseCard
 import com.nistra.demy.admins.features.dashboard.presentation.ui.components.DashboardStatsRow
 import com.nistra.demy.admins.features.dashboard.presentation.viewmodel.DashboardViewModel
 
@@ -127,14 +131,27 @@ private fun DashboardContent(
             formatMoney = ::formatMoney
         )
 
-        // Financial comparison row
-        DashboardFinancialRow(
-            incomes = state.stats.totalIncome.toInt(),
-            expenses = state.stats.totalExpense.toInt(),
-            formatMoney = { amount -> formatMoney(amount.toDouble()) }
-        )
+        // Charts row - Income/Expense trend and Expense categories
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            DashboardIncomeExpenseCard(
+                data = state.chartData?.lineChartData,
+                isLoading = false,
+                modifier = Modifier.weight(1f)
+            )
 
-        // Academic details row
+            DashboardExpenseCategoriesCard(
+                data = state.chartData?.pieChartData,
+                isLoading = false,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        // Academic details row (keeping the last row)
         DashboardAcademicRow(
             totalStudents = state.stats.totalStudents,
             startDate = "",
