@@ -5,15 +5,19 @@ import com.nistra.demy.admins.features.billing.data.remote.dto.CreateBillingAcco
 import com.nistra.demy.admins.features.billing.domain.model.BillingAccount
 import com.nistra.demy.admins.features.invoicing.data.mapper.toDomain
 
+
 fun BillingAccountResourceDto.toDomain(): BillingAccount {
-    val accountId = this.id
+    // Obtenemos el ID de la cuenta "padre" que estamos procesando.
+    val parentAccountId = this.id
 
     return BillingAccount (
         id = this.id,
         studentId = this.studentId,
-        invoices = this.invoices.map { it.toDomain(billingAccountId = accountId) },
-        academyId = this.academyId
-
+        dniNumber = this.dniNumber,
+        academyId = this.academyId,
+        invoices = this.invoices.map { invoiceDto ->
+            invoiceDto.toDomain(billingAccountId = parentAccountId)
+        }
     )
 }
 
