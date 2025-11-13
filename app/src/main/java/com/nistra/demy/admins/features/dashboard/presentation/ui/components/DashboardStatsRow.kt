@@ -49,8 +49,8 @@ fun DashboardStatsRow(
             value = stats.academyName.ifEmpty { stringResource(R.string.dashboard_loading) },
             icon = Icons.Default.School,
             modifier = Modifier.weight(1f),
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            contentColor = MaterialTheme.colorScheme.primaryContainer
         )
 
         // Total Income Card
@@ -59,8 +59,8 @@ fun DashboardStatsRow(
             value = formatMoney(stats.totalIncome),
             icon = Icons.AutoMirrored.Filled.TrendingUp,
             modifier = Modifier.weight(1f),
-            containerColor = MaterialTheme.extendedColors.success.colorContainer,
-            contentColor = MaterialTheme.extendedColors.success.onColorContainer
+            containerColor = MaterialTheme.extendedColors.success.onColorContainer,
+            contentColor = MaterialTheme.extendedColors.success.colorContainer
         )
 
         // Total Expense Card
@@ -69,8 +69,8 @@ fun DashboardStatsRow(
             value = formatMoney(stats.totalExpense),
             icon = Icons.AutoMirrored.Filled.TrendingDown,
             modifier = Modifier.weight(1f),
-            containerColor = MaterialTheme.colorScheme.errorContainer,
-            contentColor = MaterialTheme.colorScheme.onErrorContainer
+            containerColor = MaterialTheme.colorScheme.onErrorContainer,
+            contentColor = MaterialTheme.colorScheme.errorContainer
         )
 
         // Balance Card
@@ -79,8 +79,8 @@ fun DashboardStatsRow(
             value = formatMoney(stats.balance),
             icon = Icons.Default.AccountBalance,
             modifier = Modifier.weight(1f),
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            containerColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.tertiaryContainer
         )
     }
 }
