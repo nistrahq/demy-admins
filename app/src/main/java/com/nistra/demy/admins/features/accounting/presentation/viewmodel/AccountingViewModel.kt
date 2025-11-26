@@ -2,8 +2,14 @@ package com.nistra.demy.admins.features.accounting.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nistra.demy.admins.R
+import com.nistra.demy.admins.core.common.LocalizedString
+import com.nistra.demy.admins.core.common.SnackbarMessage
+import com.nistra.demy.admins.core.common.SnackbarType
 import com.nistra.demy.admins.features.accounting.domain.model.Transaction
 import com.nistra.demy.admins.features.accounting.domain.usecase.DeleteTransactionUseCase
+import com.nistra.demy.admins.features.accounting.domain.usecase.ExportTransactionsToExcelUseCase
+import com.nistra.demy.admins.features.accounting.domain.usecase.ExportTransactionsToPdfUseCase
 import com.nistra.demy.admins.features.accounting.domain.usecase.GetAllTransactionsUseCase
 import com.nistra.demy.admins.features.accounting.domain.usecase.UpdateTransactionUseCase
 import com.nistra.demy.admins.features.accounting.presentation.state.AccountingUiState
@@ -26,7 +32,9 @@ import javax.inject.Inject
 class AccountingViewModel @Inject constructor(
     private val getAllTransactionsUseCase: GetAllTransactionsUseCase,
     private val updateTransactionUseCase: UpdateTransactionUseCase,
-    private val deleteTransactionUseCase: DeleteTransactionUseCase
+    private val deleteTransactionUseCase: DeleteTransactionUseCase,
+    private val exportTransactionsToPdfUseCase: ExportTransactionsToPdfUseCase,
+    private val exportTransactionsToExcelUseCase: ExportTransactionsToExcelUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AccountingUiState())
@@ -212,6 +220,79 @@ class AccountingViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    /**
+     * Exports transactions to PDF format.
+     */
+    fun onExportToPdf() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isExportingPdf = true, snackbarMessage = null) }
+
+            exportTransactionsToPdfUseCase()
+                .onSuccess { _ ->
+                    _uiState.update {
+                        it.copy(
+                            isExportingPdf = false,
+                            snackbarMessage = SnackbarMessage(
+                                message = LocalizedString.Resource(R.string.accounting_export_success_pdf),
+                                type = SnackbarType.SUCCESS
+                            )
+                        )
+                    }
+                }
+                .onFailure { _ ->
+                    _uiState.update {
+                        it.copy(
+                            isExportingPdf = false,
+                            snackbarMessage = SnackbarMessage(
+                                message = LocalizedString.Resource(R.string.accounting_export_error),
+                                type = SnackbarType.ERROR
+                            )
+                        )
+                    }
+                }
+        }
+    }
+
+    /**
+     * Exports transactions to Excel format.
+     */
+    fun onExportToExcel() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isExportingExcel = true, snackbarMessage = null) }
+
+            exportTransactionsToExcelUseCase()
+                .onSuccess { _ ->
+                    _uiState.update {
+                        it.copy(
+                            isExportingExcel = false,
+                            snackbarMessage = SnackbarMessage(
+                                message = LocalizedString.Resource(R.string.accounting_export_success_excel),
+                                type = SnackbarType.SUCCESS
+                            )
+                        )
+                    }
+                }
+                .onFailure { _ ->
+                    _uiState.update {
+                        it.copy(
+                            isExportingExcel = false,
+                            snackbarMessage = SnackbarMessage(
+                                message = LocalizedString.Resource(R.string.accounting_export_error),
+                                type = SnackbarType.ERROR
+                            )
+                        )
+                    }
+                }
+        }
+    }
+
+    /**
+     * Clears the snackbar message after it has been shown.
+     */
+    fun clearSnackbarMessage() {
+        _uiState.update { it.copy(snackbarMessage = null) }
     }
 }
 
