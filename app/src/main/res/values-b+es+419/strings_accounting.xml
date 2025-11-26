@@ -6,7 +6,14 @@
 
     <!-- Search Section -->
     <string name="accounting_search_title">Buscar transacciones</string>
-    <string name="accounting_search_placeholder">Buscar por tipo, categoría, método o descripción…</string>
+    <string name="accounting_search_description">Filtra transacciones por tipo, categoría, método o descripción</string>
+    <string name="accounting_search_placeholder">Buscar…</string>
+
+    <!-- Export Section -->
+    <string name="accounting_export_title">Exportar registros</string>
+    <string name="accounting_export_description">Descarga los datos de transacciones</string>
+    <string name="accounting_export_pdf">Exportar a PDF</string>
+    <string name="accounting_export_excel">Exportar a Excel</string>
 
     <!-- Table Headers -->
     <string name="accounting_table_number">N°</string>
