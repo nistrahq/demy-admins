@@ -17,6 +17,8 @@ import com.nistra.demy.admins.features.accounting.domain.model.Transaction
  * @property isDeleteDialogOpen Whether the delete confirmation dialog is open.
  * @property transactionToDelete The ID of the transaction to delete.
  * @property isDeletingTransaction Whether a delete operation is in progress.
+ * @property isExportPdfDialogOpen Whether the PDF export confirmation dialog is open.
+ * @property isExportExcelDialogOpen Whether the Excel export confirmation dialog is open.
  * @property isExportingPdf Whether PDF export is in progress.
  * @property isExportingExcel Whether Excel export is in progress.
  * @property snackbarMessage Message to display in snackbar.
@@ -34,6 +36,8 @@ data class AccountingUiState(
     val isDeleteDialogOpen: Boolean = false,
     val transactionToDelete: String? = null,
     val isDeletingTransaction: Boolean = false,
+    val isExportPdfDialogOpen: Boolean = false,
+    val isExportExcelDialogOpen: Boolean = false,
     val isExportingPdf: Boolean = false,
     val isExportingExcel: Boolean = false,
     val snackbarMessage: SnackbarMessage? = null

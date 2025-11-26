@@ -24,7 +24,9 @@ import com.nistra.demy.admins.core.designsystem.components.feedback.rememberDemy
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.AccountingHeader
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.DeleteConfirmationDialog
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.EditTransactionDialog
+import com.nistra.demy.admins.features.accounting.presentation.ui.components.ExportConfirmationDialog
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.ExportSection
+import com.nistra.demy.admins.features.accounting.presentation.ui.components.ExportType
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.TransactionSearchSection
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.TransactionsTable
 import com.nistra.demy.admins.features.accounting.presentation.viewmodel.AccountingViewModel
@@ -77,8 +79,8 @@ fun AccountingScreen(
                 )
 
                 ExportSection(
-                    onExportPdf = viewModel::onExportToPdf,
-                    onExportExcel = viewModel::onExportToExcel,
+                    onExportPdf = viewModel::onRequestExportPdf,
+                    onExportExcel = viewModel::onRequestExportExcel,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
@@ -117,6 +119,26 @@ fun AccountingScreen(
             onDismiss = viewModel::onCloseDeleteDialog,
             onConfirm = viewModel::onConfirmDelete,
             isDeleting = uiState.isDeletingTransaction
+        )
+    }
+
+    // Export PDF Confirmation Dialog
+    if (uiState.isExportPdfDialogOpen) {
+        ExportConfirmationDialog(
+            exportType = ExportType.PDF,
+            isExporting = uiState.isExportingPdf,
+            onDismiss = viewModel::onCloseExportPdfDialog,
+            onConfirm = viewModel::onConfirmExportPdf
+        )
+    }
+
+    // Export Excel Confirmation Dialog
+    if (uiState.isExportExcelDialogOpen) {
+        ExportConfirmationDialog(
+            exportType = ExportType.EXCEL,
+            isExporting = uiState.isExportingExcel,
+            onDismiss = viewModel::onCloseExportExcelDialog,
+            onConfirm = viewModel::onConfirmExportExcel
         )
     }
 }

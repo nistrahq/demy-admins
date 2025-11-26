@@ -223,9 +223,47 @@ class AccountingViewModel @Inject constructor(
     }
 
     /**
-     * Exports transactions to PDF format.
+     * Opens the PDF export confirmation dialog.
      */
-    fun onExportToPdf() {
+    fun onRequestExportPdf() {
+        _uiState.update { it.copy(isExportPdfDialogOpen = true) }
+    }
+
+    /**
+     * Opens the Excel export confirmation dialog.
+     */
+    fun onRequestExportExcel() {
+        _uiState.update { it.copy(isExportExcelDialogOpen = true) }
+    }
+
+    /**
+     * Closes the PDF export confirmation dialog.
+     */
+    fun onCloseExportPdfDialog() {
+        _uiState.update {
+            it.copy(
+                isExportPdfDialogOpen = false,
+                isExportingPdf = false
+            )
+        }
+    }
+
+    /**
+     * Closes the Excel export confirmation dialog.
+     */
+    fun onCloseExportExcelDialog() {
+        _uiState.update {
+            it.copy(
+                isExportExcelDialogOpen = false,
+                isExportingExcel = false
+            )
+        }
+    }
+
+    /**
+     * Confirms and executes PDF export.
+     */
+    fun onConfirmExportPdf() {
         viewModelScope.launch {
             _uiState.update { it.copy(isExportingPdf = true, snackbarMessage = null) }
 
@@ -234,6 +272,7 @@ class AccountingViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isExportingPdf = false,
+                            isExportPdfDialogOpen = false,
                             snackbarMessage = SnackbarMessage(
                                 message = LocalizedString.Resource(R.string.accounting_export_success_pdf),
                                 type = SnackbarType.SUCCESS
@@ -245,6 +284,7 @@ class AccountingViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isExportingPdf = false,
+                            isExportPdfDialogOpen = false,
                             snackbarMessage = SnackbarMessage(
                                 message = LocalizedString.Resource(R.string.accounting_export_error),
                                 type = SnackbarType.ERROR
@@ -256,9 +296,9 @@ class AccountingViewModel @Inject constructor(
     }
 
     /**
-     * Exports transactions to Excel format.
+     * Confirms and executes Excel export.
      */
-    fun onExportToExcel() {
+    fun onConfirmExportExcel() {
         viewModelScope.launch {
             _uiState.update { it.copy(isExportingExcel = true, snackbarMessage = null) }
 
@@ -267,6 +307,7 @@ class AccountingViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isExportingExcel = false,
+                            isExportExcelDialogOpen = false,
                             snackbarMessage = SnackbarMessage(
                                 message = LocalizedString.Resource(R.string.accounting_export_success_excel),
                                 type = SnackbarType.SUCCESS
@@ -278,6 +319,7 @@ class AccountingViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isExportingExcel = false,
+                            isExportExcelDialogOpen = false,
                             snackbarMessage = SnackbarMessage(
                                 message = LocalizedString.Resource(R.string.accounting_export_error),
                                 type = SnackbarType.ERROR

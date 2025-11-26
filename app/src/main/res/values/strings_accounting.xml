@@ -18,6 +18,14 @@
     <string name="accounting_export_success_excel">Excel exported successfully to Downloads</string>
     <string name="accounting_export_error">Error exporting file</string>
 
+    <!-- Export Confirmation Dialog -->
+    <string name="accounting_export_confirm_title">Export Transactions</string>
+    <string name="accounting_export_confirm_message_pdf">Do you want to export all transactions to PDF? The file will be saved in Downloads.</string>
+    <string name="accounting_export_confirm_message_excel">Do you want to export all transactions to Excel? The file will be saved in Downloads.</string>
+    <string name="accounting_export_action_confirm">Export</string>
+    <string name="accounting_export_action_cancel">Cancel</string>
+    <string name="accounting_export_loading">Exporting…</string>
+
     <!-- Table Headers -->
     <string name="accounting_table_number">#</string>
     <string name="accounting_table_type">Type</string>
