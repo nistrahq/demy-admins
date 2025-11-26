@@ -1,6 +1,7 @@
 package com.nistra.demy.admins.features.accounting.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -11,11 +12,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.nistra.demy.admins.R
+import com.nistra.demy.admins.core.designsystem.components.feedback.DemySnackbarHost
+import com.nistra.demy.admins.core.designsystem.components.feedback.SnackbarEffect
+import com.nistra.demy.admins.core.designsystem.components.feedback.rememberDemySnackbarState
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.AccountingHeader
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.DeleteConfirmationDialog
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.EditTransactionDialog
@@ -37,46 +42,62 @@ fun AccountingScreen(
     viewModel: AccountingViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val snackbarState = rememberDemySnackbarState()
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+    SnackbarEffect(
+        message = uiState.snackbarMessage,
+        snackbarState = snackbarState,
+        onMessageShown = viewModel::clearSnackbarMessage
+    )
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        AccountingHeader(
-            title = stringResource(R.string.accounting_screen_title),
-            description = stringResource(R.string.accounting_screen_description)
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            TransactionSearchSection(
-                searchQuery = uiState.searchQuery,
-                onSearchQueryChange = viewModel::onSearchQueryChange,
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
+            AccountingHeader(
+                title = stringResource(R.string.accounting_screen_title),
+                description = stringResource(R.string.accounting_screen_description)
             )
 
-            ExportSection(
-                onExportPdf = { /* TODO: Implement PDF export */ },
-                onExportExcel = { /* TODO: Implement Excel export */ },
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Max),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                TransactionSearchSection(
+                    searchQuery = uiState.searchQuery,
+                    onSearchQueryChange = viewModel::onSearchQueryChange,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                )
+
+                ExportSection(
+                    onExportPdf = viewModel::onExportToPdf,
+                    onExportExcel = viewModel::onExportToExcel,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                )
+            }
+
+            TransactionsTable(
+                transactions = uiState.filteredTransactions,
+                isLoading = uiState.isLoading,
+                searchQuery = uiState.searchQuery,
+                onEditClick = viewModel::onEditTransaction,
+                onDeleteClick = viewModel::onDeleteTransaction,
+                modifier = Modifier.weight(1f)
             )
         }
 
-        TransactionsTable(
-            transactions = uiState.filteredTransactions,
-            isLoading = uiState.isLoading,
-            searchQuery = uiState.searchQuery,
-            onEditClick = viewModel::onEditTransaction,
-            onDeleteClick = viewModel::onDeleteTransaction,
-            modifier = Modifier.weight(1f)
+        DemySnackbarHost(
+            snackbarState = snackbarState,
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 

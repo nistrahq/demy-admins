@@ -14,6 +14,9 @@
     <string name="accounting_export_description">Descarga los datos de transacciones</string>
     <string name="accounting_export_pdf">Exportar a PDF</string>
     <string name="accounting_export_excel">Exportar a Excel</string>
+    <string name="accounting_export_success_pdf">PDF exportado exitosamente a Descargas</string>
+    <string name="accounting_export_success_excel">Excel exportado exitosamente a Descargas</string>
+    <string name="accounting_export_error">Error al exportar archivo</string>
 
     <!-- Table Headers -->
     <string name="accounting_table_number">N°</string>
