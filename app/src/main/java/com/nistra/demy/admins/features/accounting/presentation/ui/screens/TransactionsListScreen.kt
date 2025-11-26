@@ -2,8 +2,12 @@ package com.nistra.demy.admins.features.accounting.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,6 +19,7 @@ import com.nistra.demy.admins.R
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.AccountingHeader
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.DeleteConfirmationDialog
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.EditTransactionDialog
+import com.nistra.demy.admins.features.accounting.presentation.ui.components.ExportSection
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.TransactionSearchSection
 import com.nistra.demy.admins.features.accounting.presentation.ui.components.TransactionsTable
 import com.nistra.demy.admins.features.accounting.presentation.viewmodel.AccountingViewModel
@@ -42,27 +47,37 @@ fun AccountingScreen(
             description = stringResource(R.string.accounting_screen_description)
         )
 
-        Column(
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxWidth()
+                .height(IntrinsicSize.Max),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             TransactionSearchSection(
                 searchQuery = uiState.searchQuery,
-                onSearchQueryChange = viewModel::onSearchQueryChange
+                onSearchQueryChange = viewModel::onSearchQueryChange,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
             )
 
-            TransactionsTable(
-                transactions = uiState.filteredTransactions,
-                isLoading = uiState.isLoading,
-                searchQuery = uiState.searchQuery,
-                onEditClick = viewModel::onEditTransaction,
-                onDeleteClick = viewModel::onDeleteTransaction,
-                modifier = Modifier.weight(1f)
+            ExportSection(
+                onExportPdf = { /* TODO: Implement PDF export */ },
+                onExportExcel = { /* TODO: Implement Excel export */ },
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
             )
         }
+
+        TransactionsTable(
+            transactions = uiState.filteredTransactions,
+            isLoading = uiState.isLoading,
+            searchQuery = uiState.searchQuery,
+            onEditClick = viewModel::onEditTransaction,
+            onDeleteClick = viewModel::onDeleteTransaction,
+            modifier = Modifier.weight(1f)
+        )
     }
 
     // Edit Transaction Dialog
