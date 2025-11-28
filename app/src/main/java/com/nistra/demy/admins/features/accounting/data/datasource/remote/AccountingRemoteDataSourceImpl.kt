@@ -4,6 +4,7 @@ import com.nistra.demy.admins.core.common.safeApiCall
 import com.nistra.demy.admins.features.accounting.data.remote.api.AccountingApi
 import com.nistra.demy.admins.features.accounting.data.remote.dto.TransactionResourceDto
 import com.nistra.demy.admins.features.accounting.data.remote.dto.UpdateTransactionRequestDto
+import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class AccountingRemoteDataSourceImpl @Inject constructor(
@@ -32,6 +33,18 @@ class AccountingRemoteDataSourceImpl @Inject constructor(
     override suspend fun deleteTransaction(transactionId: Long) {
         return safeApiCall(endpoint = "transactions/$transactionId") {
             api.deleteTransaction(transactionId)
+        }
+    }
+
+    override suspend fun exportTransactionsToPdf(): ResponseBody {
+        return safeApiCall(endpoint = "reports/transactions/pdf") {
+            api.exportTransactionsToPdf()
+        }
+    }
+
+    override suspend fun exportTransactionsToExcel(): ResponseBody {
+        return safeApiCall(endpoint = "reports/transactions/excel") {
+            api.exportTransactionsToExcel()
         }
     }
 }

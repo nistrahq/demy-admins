@@ -6,7 +6,25 @@
 
     <!-- Search Section -->
     <string name="accounting_search_title">Buscar transacciones</string>
-    <string name="accounting_search_placeholder">Buscar por tipo, categoría, método o descripción…</string>
+    <string name="accounting_search_description">Filtra transacciones por tipo, categoría, método o descripción</string>
+    <string name="accounting_search_placeholder">Buscar…</string>
+
+    <!-- Export Section -->
+    <string name="accounting_export_title">Exportar registros</string>
+    <string name="accounting_export_description">Descarga los datos de transacciones</string>
+    <string name="accounting_export_pdf">Exportar a PDF</string>
+    <string name="accounting_export_excel">Exportar a Excel</string>
+    <string name="accounting_export_success_pdf">PDF exportado exitosamente a Descargas</string>
+    <string name="accounting_export_success_excel">Excel exportado exitosamente a Descargas</string>
+    <string name="accounting_export_error">Error al exportar archivo</string>
+
+    <!-- Export Confirmation Dialog -->
+    <string name="accounting_export_confirm_title">Exportar Transacciones</string>
+    <string name="accounting_export_confirm_message_pdf">¿Deseas exportar todas las transacciones a PDF? El archivo se guardará en Descargas.</string>
+    <string name="accounting_export_confirm_message_excel">¿Deseas exportar todas las transacciones a Excel? El archivo se guardará en Descargas.</string>
+    <string name="accounting_export_action_confirm">Exportar</string>
+    <string name="accounting_export_action_cancel">Cancelar</string>
+    <string name="accounting_export_loading">Exportando…</string>
 
     <!-- Table Headers -->
     <string name="accounting_table_number">N°</string>
